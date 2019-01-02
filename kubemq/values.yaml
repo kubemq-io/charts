@@ -1,0 +1,19 @@
+replicaCount: 3
+env:
+cluster:
+  enable: 'true'
+image:
+  repository: kubemq/kubemq
+  tag: latest
+  pullPolicy: IfNotPresent
+
+nameOverride: "kubemq"
+fullnameOverride: "kubemq"
+
+service:
+  type: NodePort
+  apiPort: 8080
+  restPort: 9090
+  grpcPort: 50000
+  clusterPort: 5228
+

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: {{ include "kubemq.fullname" . }}
+spec:
+    selector:
+        matchLabels:
+            app: {{ include "kubemq.name" . }}
+    replicas: {{ .Values.replicaCount }}
+    serviceName: {{ include "kubemq.name" . }}
+    template:
+        metadata:
+            labels:
+                app: {{ include "kubemq.name" . }}
+        spec:
+            containers:
+                - env:
+                      - name: KUBEMQ_TOKEN
+                        value: a360b224-4455-44b5-8850-dbcd0fb561e1
+                      - name: CLUSTER_ROUTES
+                        value: {{ include "kubemq.name" .}}:{{ .Values.service.clusterPort }}
+                      - name: CLUSTER_PORT
+                        value: {{ .Values.service.clusterPort | quote}}
+                      - name: CLUSTER_ENABLE
+                        value: {{ .Values.cluster.enable}}
+                      - name: GRPC_PORT
+                        value: {{ .Values.service.grpcPort | quote}}
+                      - name: REST_PORT
+                        value: {{ .Values.service.restPort | quote}}
+                      - name: KUBEMQ_PORT
+                        value: {{ .Values.service.apiPort | quote}}
+                  image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+                  imagePullPolicy: {{ .Values.image.pullPolicy }}
+                  name: {{ .Chart.Name }}
+                  ports:
+                      - containerPort: {{ .Values.service.grpcPort }}
+                        name: grpc-port
+                        protocol: TCP
+                      - containerPort: {{ .Values.service.apiPort }}
+                        name: api-port
+                        protocol: TCP
+                      - containerPort: {{ .Values.service.restPort }}
+                        name: rest-port
+                        protocol: TCP
+                      - containerPort: {{ .Values.service.clusterPort }}
+                        name: cluster-port
+                        protocol: TCP
+            restartPolicy: Always

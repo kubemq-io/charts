@@ -6,7 +6,7 @@ cluster:
 image:
   repository: kubemq/kubemq
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 service:
   type: ClusterIP
   apiPort: 8080
@@ -21,14 +21,14 @@ env:
   clusterPort: 5228
 
 livenessProbe:
-  enabled: false
+  enabled: true
   initialDelaySeconds: 4
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
 readinessProbe:
-  enabled: false
+  enabled: true
   initialDelaySeconds: 1
   periodSeconds: 10
   timeoutSeconds: 5

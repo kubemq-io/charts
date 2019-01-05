@@ -1,19 +1,45 @@
+nameOverride: "kubemq-cluster"
+token: ""
 replicaCount: 3
-env:
 cluster:
   enable: 'true'
 image:
   repository: kubemq/kubemq
   tag: latest
   pullPolicy: IfNotPresent
-
-nameOverride: "kubemq"
-fullnameOverride: "kubemq"
-
 service:
-  type: NodePort
+  type: ClusterIP
   apiPort: 8080
   restPort: 9090
   grpcPort: 50000
   clusterPort: 5228
 
+env:
+  apiPort: 8080
+  restPort: 9090
+  grpcPort: 50000
+  clusterPort: 5228
+
+livenessProbe:
+  enabled: false
+  initialDelaySeconds: 4
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: false
+  initialDelaySeconds: 1
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+statefulset:
+  updateStrategy: RollingUpdate
+
+volume:
+  enabled: false
+  size: 1Gi
+  mountPath: '/store'
+  accessMode: "ReadWriteOnce"

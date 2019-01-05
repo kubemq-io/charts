@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  kubemq:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2019-01-05T13:06:56.5898618+02:00
+    description: A Helm chart for KubeMQ
+    digest: 8d056ef93e15e937a56d797f4d17cd8de46b080656031d3f39b93c50d93ff773
+    name: kubemq
+    urls:
+    - kubemq-0.1.0.tgz
+    version: 0.1.0
+generated: 2019-01-05T13:06:56.5888611+02:00

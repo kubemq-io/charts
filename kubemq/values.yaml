@@ -43,3 +43,7 @@ volume:
   size: 1Gi
   mountPath: '/store'
   accessMode: "ReadWriteOnce"
+
+nodeSelector: {}
+affinity: {}
+tolerations: []

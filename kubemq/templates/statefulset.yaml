@@ -1,87 +1,101 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-    name: {{ include "kubemq.name" . }}
+  name: {{ include "kubemq.name" . }}
 spec:
-    selector:
-        matchLabels:
-            app: {{ include "kubemq.name" . }}
-    replicas: {{ .Values.replicaCount }}
-    serviceName: {{ include "kubemq.name" . }}
-    updateStrategy:
-        type: {{ .Values.statefulset.updateStrategy }}
-    template:
-        metadata:
-            labels:
-                app: {{ include "kubemq.name" . }}
-        spec:
-            containers:
-                  - env:
-                      - name: KUBEMQ_TOKEN
-                        value: {{ .Values.token }}
-                      - name: CLUSTER_ROUTES
-                        value: {{ include "kubemq.name" .}}:{{ .Values.service.clusterPort }}
-                      - name: CLUSTER_PORT
-                        value: {{ .Values.env.clusterPort | quote}}
-                      - name: CLUSTER_ENABLE
-                        value: {{ .Values.cluster.enable | quote}}
-                      - name: GRPC_PORT
-                        value: {{ .Values.env.grpcPort | quote}}
-                      - name: REST_PORT
-                        value: {{ .Values.env.restPort | quote}}
-                      - name: KUBEMQ_PORT
-                        value: {{ .Values.env.apiPort | quote}}
-                    image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-                    imagePullPolicy: {{ .Values.image.pullPolicy }}
-                    name: {{ .Chart.Name }}
-                  {{- if .Values.livenessProbe.enabled }}
-                    livenessProbe:
-                        httpGet:
-                            path: /health
-                            port: {{ .Values.env.apiPort }}
-                        initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-                        periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
-                        timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
-                        successThreshold: {{ .Values.livenessProbe.successThreshold }}
-                        failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
-                  {{- end }}
-                  {{- if .Values.readinessProbe.enabled }}
-                    readinessProbe:
-                        httpGet:
-                            path: /health
-                            port: {{ .Values.env.apiPort }}
-                        initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
-                        periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-                        timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
-                        successThreshold: {{ .Values.readinessProbe.successThreshold }}
-                        failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
-                  {{- end }}
-                    ports:
-                      - containerPort: {{ .Values.env.grpcPort }}
-                        name: grpc-port
-                        protocol: TCP
-                      - containerPort: {{ .Values.env.apiPort }}
-                        name: api-port
-                        protocol: TCP
-                      - containerPort: {{ .Values.env.restPort }}
-                        name: rest-port
-                        protocol: TCP
-                      - containerPort: {{ .Values.env.clusterPort }}
-                        name: cluster-port
-                        protocol: TCP
-                    {{- if .Values.volume.enabled }}
-                    volumeMounts:
-                      - mountPath: {{ .Values.volume.mountPath }}
-                        name: {{ include "kubemq.name" . }}-vol
-                    {{- end }}
-            restartPolicy: Always
-    {{- if .Values.volume.enabled }}
-    volumeClaimTemplates:
-        - metadata:
-            name: {{ include "kubemq.name" . }}-vol
-          spec:
-              accessModes: [ {{ .Values.volume.accessMode }} ]
-              resources:
-                  requests:
-                      storage: {{ .Values.volume.size }}
-    {{- end }}
+  selector:
+    matchLabels:
+      app: {{ include "kubemq.name" . }}
+  replicas: {{ .Values.replicaCount }}
+  serviceName: {{ include "kubemq.name" . }}
+  updateStrategy:
+    type: {{ .Values.statefulset.updateStrategy }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "kubemq.name" . }}
+    spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      containers:
+        - env:
+            - name: KUBEMQ_TOKEN
+              value: {{ .Values.token }}
+            - name: CLUSTER_ROUTES
+              value: {{ include "kubemq.name" .}}:{{ .Values.service.clusterPort }}
+            - name: CLUSTER_PORT
+              value: {{ .Values.env.clusterPort | quote}}
+            - name: CLUSTER_ENABLE
+              value: {{ .Values.cluster.enable | quote}}
+            - name: GRPC_PORT
+              value: {{ .Values.env.grpcPort | quote}}
+            - name: REST_PORT
+              value: {{ .Values.env.restPort | quote}}
+            - name: KUBEMQ_PORT
+              value: {{ .Values.env.apiPort | quote}}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          name: {{ .Chart.Name }}
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.env.apiPort }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.env.apiPort }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.env.grpcPort }}
+              name: grpc-port
+              protocol: TCP
+            - containerPort: {{ .Values.env.apiPort }}
+              name: api-port
+              protocol: TCP
+            - containerPort: {{ .Values.env.restPort }}
+              name: rest-port
+              protocol: TCP
+            - containerPort: {{ .Values.env.clusterPort }}
+              name: cluster-port
+              protocol: TCP
+          {{- if .Values.volume.enabled }}
+          volumeMounts:
+            - mountPath: {{ .Values.volume.mountPath }}
+              name: {{ include "kubemq.name" . }}-vol
+          {{- end }}
+      restartPolicy: Always
+
+  {{- if .Values.volume.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ include "kubemq.name" . }}-vol
+      spec:
+        accessModes: [ {{ .Values.volume.accessMode }} ]
+        resources:
+          requests:
+            storage: {{ .Values.volume.size }}
+  {{- end }}

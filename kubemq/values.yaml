@@ -1,12 +1,18 @@
 nameOverride: "kubemq-cluster"
+
+existingSecret: ""
 token: ""
+licenseData: ""
+
 replicaCount: 3
 cluster:
   enable: 'true'
+
 image:
   repository: kubemq/kubemq
   tag: latest
   pullPolicy: Always
+
 service:
   type: ClusterIP
   apiPort: 8080
@@ -27,6 +33,7 @@ livenessProbe:
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
+
 readinessProbe:
   enabled: true
   initialDelaySeconds: 1

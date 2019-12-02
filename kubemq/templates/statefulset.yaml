@@ -2,6 +2,10 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "kubemq.name" . }}
+  app: {{ include "kubemq.name" . }}
+  chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+  heritage: {{ .Release.Service }}
+  release: {{ .Release.Name }}
 spec:
   selector:
     matchLabels:
@@ -30,8 +34,20 @@ spec:
 
       containers:
         - env:
+            {{- if .Values.token }}
             - name: KUBEMQ_TOKEN
-              value: {{ .Values.token }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "kubemq.secretName" . }}
+                  key: licenseToken
+            {{ end }}
+            {{- if .Values.licenseData }}
+            - name: KUBEMQ_LICENSE_DATA
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "kubemq.secretName" . }}
+                  key: licenseData
+            {{ end }}
             - name: CLUSTER_ROUTES
               value: {{ include "kubemq.name" .}}:{{ .Values.service.clusterPort }}
             - name: CLUSTER_PORT

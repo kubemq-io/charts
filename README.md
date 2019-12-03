@@ -36,10 +36,13 @@ $ helm delete kubemq-release
 The following table lists the configurable parameters of the KubeMQ chart and their default values.
 
 
-| Parameter                           | Default           | Description                                                                                 |
+| Parameter                          | Default           | Description                                                                                 |
 |:-----------------------------------|:------------------|:--------------------------------------------------------------------------------------------|
-| nameOverride                       | `kubemq-cluster`  | Sets deployment name                                                                        |
+| nameOverride                       | `kubemq-cluster`  | Overrides deployment uses of name                                                           |
+| fullnameOverride                   | `kubemq-cluster`  | Overrides deployment uses of fullname                                                       |
+| existingSecret                     | ``                | Defines the name of a secret created outside of this chart                                  |
 | token                              | ``                | Sets KubeMQ token                                                                           |
+| licenseData                        | ``                | Sets KubeMQ license data for offline validation (optional)                                  |
 | replicaCount                       | `3`               | Number of KubeMQ nodes                                                                      |
 | cluster.enable                     | `true`            | Enable/Disable cluster mode                                                                 |
 | image.repository                   | `kubemq/kubemq`   | KubeMQ image name                                                                           |
@@ -50,6 +53,11 @@ The following table lists the configurable parameters of the KubeMQ chart and th
 | service.restPort                   | `9090`            | Sets KubeMQ service Rest Port                                                               |
 | service.grpcPort                   | `5000`            | Sets KubeMQ service gRPC Port                                                               |
 | service.clusterPort                | `5228`            | Sets KubeMQ service Cluster Port                                                            |
+| env.apiPort                        | `8080`            | Sets KubeMQ Api Port                                                                        |
+| env.restPort                       | `9090`            | Sets KubeMQ Rest Port                                                                       |
+| env.grpcPort                       | `5000`            | Sets KubeMQ gRPC Port                                                                       |
+| env.clusterPort                    | `5228`            | Sets KubeMQ Cluster Port                                                                    |
+| env.extra_env_vars                 | `{}`              | Dictionary defining arbitrary environment variables.                                        |
 | livenessProbe.enabled              | `true`            | Enable/Disable liveness prob                                                                |
 | livenessProbe.initialDelaySeconds  | `4`               | Delay before liveness probe is initiated                                                    |
 | livenessProbe.periodSeconds        | `10`              | How often to perform the probe                                                              |
@@ -67,6 +75,9 @@ The following table lists the configurable parameters of the KubeMQ chart and th
 | volume.size                        | `1Gi`             | Set volume size                                                                             |
 | volume.mountPath                   | ` "/store" `      | Sets container mounting point                                                               |
 | volume.accessMode                  | `"ReadWriteOnce"` | Sets Persistence access mode                                                                |
+| affinity                           | `{}`              | Affinity settings for the statefulset                                                       |
+| nodeSelector                       | `{}`              | Node selector settings for the statefulset                                                  |
+| tolerations                        | `[]`              | Toleration settings for the statefulset                                                     |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to helm install. For example,
 ```

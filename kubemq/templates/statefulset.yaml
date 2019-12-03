@@ -20,6 +20,11 @@ spec:
       labels:
         app: {{ include "kubemq.name" . }}
         release: {{ .Release.Name }}
+      {{- with .Values.statefulset.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
     spec:
       {{- with .Values.nodeSelector }}
       nodeSelector:

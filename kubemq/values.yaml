@@ -49,6 +49,7 @@ readinessProbe:
 
 statefulset:
   updateStrategy: RollingUpdate
+  annotations: {}
 
 volume:
   enabled: false

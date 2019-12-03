@@ -71,6 +71,7 @@ The following table lists the configurable parameters of the KubeMQ chart and th
 | readinessProbe.failureThreshold    | `6`               | Minimum consecutive failures for the probe to be considered failed after having succeeded   |
 | readinessProbe.successThreshold    | `1`               | Minimum consecutive successes for the probe to be considered successful after having failed |
 | statefulset.updateStrategy         | `RollingUpdate`   | Statefulsets Update strategy                                                                |
+| statefulset.annotations            | `{}`              | Statefulsets annotations                                                                    |
 | volume.enabled                     | `false`           | Enable/Disable Persistence Volume Claim template                                            |
 | volume.size                        | `1Gi`             | Set volume size                                                                             |
 | volume.mountPath                   | ` "/store" `      | Sets container mounting point                                                               |

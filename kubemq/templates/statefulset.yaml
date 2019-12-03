@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "kubemq.name" . }}
+  name: {{ include "kubemq.fullname" . }}
   app: {{ include "kubemq.name" . }}
   chart: {{ .Chart.Name }}-{{ .Chart.Version }}
   heritage: {{ .Release.Service }}
@@ -10,14 +10,16 @@ spec:
   selector:
     matchLabels:
       app: {{ include "kubemq.name" . }}
+      release: {{ .Release.Name }}
   replicas: {{ .Values.replicaCount }}
-  serviceName: {{ include "kubemq.name" . }}
+  serviceName: {{ include "kubemq.fullname" . }}
   updateStrategy:
     type: {{ .Values.statefulset.updateStrategy }}
   template:
     metadata:
       labels:
         app: {{ include "kubemq.name" . }}
+        release: {{ .Release.Name }}
     spec:
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -60,6 +62,7 @@ spec:
               value: {{ .Values.env.restPort | quote}}
             - name: KUBEMQ_PORT
               value: {{ .Values.env.apiPort | quote}}
+
           envFrom:
             - configMapRef:
                 name: "{{ template "kubemq.fullname" . }}-environment"
@@ -105,14 +108,14 @@ spec:
           {{- if .Values.volume.enabled }}
           volumeMounts:
             - mountPath: {{ .Values.volume.mountPath }}
-              name: {{ include "kubemq.name" . }}-vol
+              name: {{ include "kubemq.fullname" . }}-vol
           {{- end }}
       restartPolicy: Always
 
   {{- if .Values.volume.enabled }}
   volumeClaimTemplates:
     - metadata:
-        name: {{ include "kubemq.name" . }}-vol
+        name: {{ include "kubemq.fullname" . }}-vol
       spec:
         accessModes: [ {{ .Values.volume.accessMode }} ]
         resources:

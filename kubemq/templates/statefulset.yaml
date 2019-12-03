@@ -36,20 +36,6 @@ spec:
 
       containers:
         - env:
-            {{- if .Values.token }}
-            - name: KUBEMQ_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "kubemq.secretName" . }}
-                  key: licenseToken
-            {{ end }}
-            {{- if .Values.licenseData }}
-            - name: KUBEMQ_LICENSE_DATA
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "kubemq.secretName" . }}
-                  key: licenseData
-            {{ end }}
             - name: CLUSTER_ROUTES
               value: {{ include "kubemq.name" .}}:{{ .Values.service.clusterPort }}
             - name: CLUSTER_PORT
@@ -64,6 +50,8 @@ spec:
               value: {{ .Values.env.apiPort | quote}}
 
           envFrom:
+            - secretRef:
+                name: {{ template "kubemq.secretName" . }}
             - configMapRef:
                 name: "{{ template "kubemq.fullname" . }}-environment"
 

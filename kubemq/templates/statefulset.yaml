@@ -60,6 +60,10 @@ spec:
               value: {{ .Values.env.restPort | quote}}
             - name: KUBEMQ_PORT
               value: {{ .Values.env.apiPort | quote}}
+          envFrom:
+            - configMapRef:
+                name: "{{ template "kubemq.fullname" . }}-environment"
+
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: {{ .Chart.Name }}

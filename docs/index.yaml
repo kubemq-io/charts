@@ -8,6 +8,6 @@ entries:
     digest: e814674e7b2854f61870b485f0e8ec70d79b360cc9839292cbaf0c31da13c5c4
     name: kubemq
     urls:
-    - https://kubemq-io.github/charts/kubemq-0.2.2.tgz
-    version: 0.2.2
+    - https://kubemq-io.github/charts/kubemq-0.2.3.tgz
+    version: 0.2.3
 generated: "2020-01-12T14:39:28.1437947+02:00"

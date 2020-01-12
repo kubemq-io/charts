@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "kubemq.fullname" . }}-environment
+  name: {{ include "kubemq.fullname" . }}-environment
   labels:
-    app.kubernetes.io/name: {{ include "kubemq.name" . }}
+    app.kubernetes.io/name: {{ include "kubemq.fullname" . }}
     helm.sh/chart: {{ include "kubemq.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}

@@ -3,14 +3,14 @@ kind: StatefulSet
 metadata:
   name: {{ include "kubemq.fullname" . }}
   labels:
-    app: {{ include "kubemq.name" . }}
+    app: {{ include "kubemq.fullname" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
 spec:
   selector:
     matchLabels:
-      app: {{ include "kubemq.name" . }}
+      app: {{ include "kubemq.fullname" . }}
       release: {{ .Release.Name }}
   replicas: {{ .Values.replicaCount }}
   serviceName: {{ include "kubemq.fullname" . }}
@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ include "kubemq.name" . }}
+        app: {{ include "kubemq.fullname" . }}
         release: {{ .Release.Name }}
       {{- with .Values.statefulset.annotations }}
       annotations:
@@ -43,7 +43,7 @@ spec:
       containers:
         - env:
             - name: CLUSTER_ROUTES
-              value: {{ include "kubemq.name" .}}:{{ .Values.service.clusterPort }}
+              value: {{ include "kubemq.fullname" .}}:{{ .Values.service.clusterPort }}
             - name: CLUSTER_PORT
               value: {{ .Values.env.clusterPort | quote}}
             - name: CLUSTER_ENABLE

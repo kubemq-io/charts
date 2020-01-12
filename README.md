@@ -1,8 +1,10 @@
 # KubeMQ Charts
-KubeMQ is a Cloud Native, enterprise grade message broker for distributed services architecture.
+KubeMQ is a Cloud Native, enterprise grade message queue broker for distributed services architecture.
 
 KubeMQ is delivered as a small, lightweight Docker container, designed for any type of workload and architecture running in Kubernetes or any other containers orchestration system which support Docker.
 
+## HELM
+KubeMQ Helm charts required Helm v3. Please download/upgrade from [https://github.com/helm/helm](https://github.com/helm/helm)
 
 ## Add KubeMQ Helm Repository
 
@@ -20,7 +22,7 @@ $ helm repo list
 To install KubeMQ chart with the release name kubemq-release:
 
 ``` 
-$ helm install --name kubemq-release --set token={your kubemq token} kubemq-charts/kubemq 
+$ helm install kubemq-cluster --set token={your kubemq token} kubemq-charts/kubemq 
 ```
 
 ## Uninstall KubeMQ Chart
@@ -28,7 +30,7 @@ $ helm install --name kubemq-release --set token={your kubemq token} kubemq-char
 To uninstall/delete the kubemq-release deployment:
 
 ``` 
-$ helm delete kubemq-release
+$ helm delete kubemq-cluster
 ```
 
 ## Configuration
@@ -38,8 +40,6 @@ The following table lists the configurable parameters of the KubeMQ chart and th
 
 | Parameter                          | Default           | Description                                                                                 |
 |:-----------------------------------|:------------------|:--------------------------------------------------------------------------------------------|
-| nameOverride                       | `kubemq-cluster`  | Overrides deployment uses of name                                                           |
-| fullnameOverride                   | `kubemq-cluster`  | Overrides deployment uses of fullname                                                       |
 | existingSecret                     | ``                | Defines the name of a secret created outside of this chart                                  |
 | token                              | ``                | Sets KubeMQ token                                                                           |
 | licenseData                        | ``                | Sets KubeMQ license data for offline validation (optional)                                  |
@@ -82,10 +82,10 @@ The following table lists the configurable parameters of the KubeMQ chart and th
 
 Specify each parameter using the `--set key=value[,key=value]` argument to helm install. For example,
 ```
-helm install --name kubemq-release --set token={your kubemq token},nameOverride=my-kubemq-cluster kubemq-charts/kubemq 
+helm install --name kubemq-cluster --set token={your kubemq token},replicaCount=5 kubemq-charts/kubemq 
 ```
 
-Will install KubeMQ cluster with application name set to `my-kubemq-cluster` .
+Will install KubeMQ cluster with 5 nodes replications.
 
 
 

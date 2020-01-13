@@ -1,0 +1,6 @@
+license:
+  key:
+    data: |-
+      -----BEGIN KUBEMQ KEY-----eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJMYWJlbHMiOnsidGFnMSI6InRhZzEifSwiYXVkIjoiYSIsImV4
+      cCI6MTAwMDAwMDAwMDAsImp0aSI6InMiLCJpYXQiOjEsImlzcyI6InMiLCJuYmYiOjEsInN1YiI6ImEifQ.PZHLJcgsTaATx1kEvYXitV-2ccbUNrIOhPiNt0qttgjYrcyDzUOGzZv6LLVhqiF1TRnk7j7qdHRA-agyv02sToYkS1sJyQvN6mqMGsNvsad8_JM8WAFJVQNx8Fn673tZGytFM-kwg2bDywX3ex2L3hG6PKcwDhgxyKjOm8Rk52KqU_I5uGXK5kbrVsM3uP78Jc-Ed4cKa2AauPc9vSbXHJ4XCtZIlcw1ks2h8n2Tu8W__eOx_mdkxmT9wwyaY8CdCCkomFI1-xsT_FhC_CivolhTBWDOvQQU-U9BuFK-KwpgBdjwuy1a2OrCEGD9Xol0T5eY22lEKys4__nSGX1S8A
+      -----END KUBEMQ KEY-----

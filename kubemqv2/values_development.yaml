@@ -1,0 +1,91 @@
+configFile: ""
+existingConfiguration: ""
+existingSecret: ""
+#licenseData: |-
+#  -----BEGIN KUBEMQ KEY-----eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJMYWJlbHMiOnsidGFnMSI6InRhZzEifSwiYXVkIjoiYSIsImV4
+#    cCI6MTAwMDAw
+#      MDAwMDAsImp0aSI6InMiLCJpYXQiOjEsImlzcyI6InMiLCJuYmYiOjEsInN1YiI6ImEifQ.PZHLJcgsTaATx1kEvYXitV-2ccbUNrIOhPiNt0qttgjYrcyDzUOGzZv6LLVhqiF1TRnk7j7qdHRA-agyv02sToYkS1sJyQvN6mqMGsNvsad8_JM8WAFJVQNx8Fn673tZGytFM-kwg2bDywX3ex2L3hG6PKcwDhgxyKjOm8Rk52KqU_I5uGXK5kbrVsM3uP78Jc-Ed4cKa2AauPc9vSbXHJ4XCtZIlcw1ks2h8n2Tu8W__eOx_mdkxmT9wwyaY8CdCCkomFI1-xsT_FhC_CivolhTBWDOvQQU-U9BuFK-KwpgBdjwuy1a2OrCEGD9Xol0T5eY22lEKys4__nSG
+#  X1
+#  S8A-----END KUBEMQ KEY-----
+
+replicaCount: 3
+
+image:
+  repository: kubemq/kubemq
+  tag: dev-v2.0.0.1
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  apiPort: 8080
+  restPort: 9090
+  grpcPort: 50000
+  clusterPort: 5228
+
+security:
+  enable: false
+  cert: ""
+  key: ""
+  cacert: ""
+
+authentication:
+  enable: false
+  key: ""
+  type: ""
+
+authorization:
+  enable: true
+  policyData: ""
+  url: ""
+  autoReload: 0
+
+env:
+  apiPort: 8080
+  restPort: 9090
+  grpcPort: 50000
+  clusterPort: 5228
+  extra_env_vars: {}
+    # Add arbitrary environment variables here:
+  # <KEY>: VALUE
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 4
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 1
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+statefulset:
+  updateStrategy: RollingUpdate
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9102'
+    prometheus.io/path: '/metrics'
+
+volume:
+  enabled: false
+  size: 1Gi
+  mountPath: './store'
+  accessMode: "ReadWriteOnce"
+
+resources: {}
+ limits:
+   cpu: 500m
+   memory: 512Mi
+ requests:
+   cpu: 100m
+   memory: 256Mi
+
+
+nodeSelector: {}
+affinity: {}
+tolerations: []

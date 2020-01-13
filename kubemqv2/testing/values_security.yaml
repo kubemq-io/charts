@@ -1,0 +1,77 @@
+
+
+## Secretes
+existingSecret: ""
+
+licenseData: ""
+replicaCount: 3
+
+cluster:
+  enable: 'true'
+
+image:
+  repository: kubemq/kubemq
+  tag: dev-v2.0.0.1
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  apiPort: 8080
+  restPort: 9090
+  grpcPort: 50000
+  clusterPort: 5228
+
+security:
+  enable: false
+  cert:
+  key:
+  cacert:
+
+
+env:
+  apiPort: 8080
+  restPort: 9090
+  grpcPort: 50000
+  clusterPort: 5228
+  extra_env_vars: {}
+    # Add arbitrary environment variables here:
+    # <KEY>: VALUE
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 4
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 1
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+statefulset:
+  updateStrategy: RollingUpdate
+  annotations: {}
+
+volume:
+  enabled: false
+  size: 1Gi
+  mountPath: './store'
+  accessMode: "ReadWriteOnce"
+
+resources: {}
+# limits:
+#   cpu: 500m
+#   memory: 512Mi
+# requests:
+#   cpu: 100m
+#   memory: 256Mi
+
+
+nodeSelector: {}
+affinity: {}
+tolerations: []

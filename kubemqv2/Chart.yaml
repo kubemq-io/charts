@@ -1,0 +1,12 @@
+apiVersion: v2
+appVersion: 1.7.3
+description: A Helm chart for KubeMQ, Kubernetes Message Queue Broker
+type: application
+name: kubemq
+version: 0.3.0
+maintainers:
+  - name: KubeMQ
+    email: info@kubemq.io
+    url: https://kubemq.io
+
+

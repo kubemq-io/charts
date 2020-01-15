@@ -11,18 +11,23 @@ metadata:
 data:
         {{- if .Values.configFile }}
   CONFIG: {{ .Values.configFile | quote}}
-        {{- end }}
+          {{ else}}
+  CLUSTER_ENABLE: "true"
         {{- if .Values.authorization.enable }}
   AUTHORIZATION_ENABLE: {{ .Values.authorization.enable | quote }}
   AUTHORIZATION_POLICY_DATA: {{ .Values.authorization.policyData  | quote}}
   AUTHORIZATION_URL: {{ .Values.authorization.url | quote }}
   AUTHORIZATION_AUTO_RELOAD: {{ .Values.authorization.autoReload | quote }}
         {{- end }}
+        {{- if .Values.gateway.enable}}
+  BROKER_GATEWAYS: {{.Values.gateway.gateways | quote}}
+  BROKER_GATEWAY_PORT: {{.Values.gateway.port | quote}}
+        {{- end}}
 
-        {{- if .Values.env.extra_env_vars }}
-        {{- with .Values.env.extra_env_vars }}
+        {{- if .Values.extra_env_vars }}
+        {{- with .Values.extra_env_vars }}
         {{- toYaml . | nindent 2 }}
         {{- end }}
         {{- end }}
-
+  {{- end }}
 {{- end }}

@@ -1,17 +1,12 @@
-
-
-## Secretes
+configFile: ""
+existingConfiguration: ""
 existingSecret: ""
-
 licenseData: ""
 replicaCount: 3
 
-cluster:
-  enable: 'true'
-
 image:
   repository: kubemq/kubemq
-  tag: dev-v2.0.0.1
+  tag: latest
   pullPolicy: Always
 
 service:
@@ -20,22 +15,35 @@ service:
   restPort: 9090
   grpcPort: 50000
   clusterPort: 5228
+  gatewayPort: 7000
 
 security:
   enable: false
-  cert:
-  key:
-  cacert:
+  cert: ""
+  key: ""
+  cacert: ""
 
+authentication:
+  enable: true
+  key: "some-jwt-key"
+  type: "HS256"
 
-env:
-  apiPort: 8080
-  restPort: 9090
-  grpcPort: 50000
-  clusterPort: 5228
-  extra_env_vars: {}
+authorization:
+  enable: false
+  policyData: ""
+  url: ""
+  autoReload: 0
+
+gateway:
+  enable: false
+  gateways: ""
+  port: 7000
+  cert: ""
+  key: ""
+  cacert: ""
+extra_env_vars: {}
     # Add arbitrary environment variables here:
-    # <KEY>: VALUE
+  # <KEY>: VALUE
 
 livenessProbe:
   enabled: true
@@ -55,7 +63,10 @@ readinessProbe:
 
 statefulset:
   updateStrategy: RollingUpdate
-  annotations: {}
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9102'
+    prometheus.io/path: '/metrics'
 
 volume:
   enabled: false
@@ -64,13 +75,12 @@ volume:
   accessMode: "ReadWriteOnce"
 
 resources: {}
-# limits:
-#   cpu: 500m
-#   memory: 512Mi
-# requests:
-#   cpu: 100m
-#   memory: 256Mi
-
+#  limits:
+#    cpu: 500m
+#    memory: 512Mi
+#  requests:
+#    cpu: 100m
+#    memory: 256Mi
 
 nodeSelector: {}
 affinity: {}

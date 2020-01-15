@@ -41,6 +41,8 @@ spec:
       {{- end }}
       containers:
         - env:
+            - name: CLUSTER_ENABLE
+              value: "true"
             - name: CLUSTER_NAME
               value: {{ include "kubemq.fullname" .}}
           envFrom:
@@ -55,7 +57,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.env.apiPort }}
+              port: {{ .Values.service.apiPort }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
@@ -66,7 +68,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.env.apiPort }}
+              port: {{ .Values.service.apiPort }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
@@ -74,16 +76,16 @@ spec:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
           {{- end }}
           ports:
-            - containerPort: {{ .Values.env.grpcPort }}
+            - containerPort: {{ .Values.service.grpcPort }}
               name: grpc-port
               protocol: TCP
-            - containerPort: {{ .Values.env.apiPort }}
+            - containerPort: {{ .Values.service.apiPort }}
               name: api-port
               protocol: TCP
-            - containerPort: {{ .Values.env.restPort }}
+            - containerPort: {{ .Values.service.restPort }}
               name: rest-port
               protocol: TCP
-            - containerPort: {{ .Values.env.clusterPort }}
+            - containerPort: {{ .Values.service.clusterPort }}
               name: cluster-port
               protocol: TCP
                   {{- if .Values.gateway.enable}}

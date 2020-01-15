@@ -41,12 +41,7 @@ gateway:
   cert: ""
   key: ""
   cacert: ""
-env:
-  apiPort: 8080
-  restPort: 9090
-  grpcPort: 50000
-  clusterPort: 5228
-  extra_env_vars: {}
+extra_env_vars: {}
     # Add arbitrary environment variables here:
     # <KEY>: VALUE
 

@@ -13,15 +13,15 @@ spec:
   - name: api-port
     port: {{ .Values.service.apiPort }}
     protocol: TCP
-    targetPort: {{ .Values.env.apiPort }}
+    targetPort: {{ .Values.service.apiPort }}
   - name: grpc-port
     port: {{ .Values.service.grpcPort }}
     protocol: TCP
-    targetPort: {{ .Values.env.grpcPort }}
+    targetPort: {{ .Values.service.grpcPort }}
   - name: rest-port
     port: {{ .Values.service.restPort }}
     protocol: TCP
-    targetPort: {{ .Values.env.restPort }}
+    targetPort: {{ .Values.service.restPort }}
   sessionAffinity: None
   selector:
     app: {{ include "kubemq.fullname" . }}
@@ -42,8 +42,8 @@ spec:
     - name: cluster-port
       port: {{ .Values.service.clusterPort }}
       protocol: TCP
-      targetPort: {{ .Values.env.clusterPort }}
-        {{-if .Values.gateway.enable}}
+      targetPort: {{ .Values.service.clusterPort }}
+        {{- if .Values.gateway.enable}}
     - name: gateway-port
       port: {{ .Values.service.gatewayPort }}
       protocol: TCP

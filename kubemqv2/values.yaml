@@ -1,87 +1,94 @@
-configFile: ""
-existingConfiguration: ""
-existingSecret: ""
-licenseData: ""
-replicaCount: 3
-
+configData: ""
+replicas: 3
+volume:
+  size: ""
+license:
+  data: ""
+  token: ""
 image:
+  registry: docker.io
   repository: kubemq/kubemq
   tag: latest
   pullPolicy: Always
-
-service:
-  type: ClusterIP
-  apiPort: 8080
-  restPort: 9090
-  grpcPort: 50000
-  clusterPort: 5228
-  gatewayPort: 7000
-
-security:
-  enable: false
+api:
+  disabled: false
+  port: 8080
+  expose: ClusterIP
+  nodePort: 0
+grpc:
+  disabled: false
+  port: 50000
+  expose: ClusterIP
+  nodePort: 0
+  bodyLimit: 0
+  bufferSize: 0
+rest:
+  disabled: false
+  port: 9090
+  expose: ClusterIP
+  nodePort: 0
+  bodyLimit: 0
+  bufferSize: 0
+tls:
   cert: ""
   key: ""
-  cacert: ""
-
-authentication:
+  ca: ""
+resources:
   enable: false
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+nodeSelectors:
+  keys: {}
+authentication:
   key: ""
   type: ""
-
 authorization:
-  enable: false
   policyData: ""
   url: ""
   autoReload: 0
-
-gateway:
-  enable: false
-  gateways: ""
-  port: 7000
-  cert: ""
-  key: ""
-  cacert: ""
-extra_env_vars: {}
-    # Add arbitrary environment variables here:
-    # <KEY>: VALUE
-
-livenessProbe:
-  enabled: true
+health:
+  enabled: false
   initialDelaySeconds: 4
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
-
-readinessProbe:
-  enabled: true
-  initialDelaySeconds: 1
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 6
-  successThreshold: 1
-
-statefulset:
-  updateStrategy: RollingUpdate
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/port: '9102'
-    prometheus.io/path: '/metrics'
-
-volume:
+routing:
+  data: ""
+  url: ""
+  autoReload: 0
+log:
+  level: 2
+  file: ""
+notification:
   enabled: false
-  size: 1Gi
-  mountPath: './store'
-  accessMode: "ReadWriteOnce"
-
-resources: {}
-#  limits:
-#    cpu: 500m
-#    memory: 512Mi
-#  requests:
-#    cpu: 100m
-#    memory: 256Mi
-
-nodeSelector: {}
-affinity: {}
-tolerations: []
+  prefix: ""
+  log: false
+store:
+  clean: false
+  path: "./store"
+  maxChannels: 0
+  maxSubscribers: 0
+  maxMessages: 0
+  maxChannelSize: 0
+  messagesRetentionMinutes: 1440
+  purgeInactiveMinutes: 1440
+queue:
+  maxReceiveMessagesRequest: 1024
+  maxWaitTimeoutSeconds: 3600
+  maxExpirationSeconds: 43200
+  maxDelaySeconds: 43200
+  maxReQueues: 1024
+  maxVisibilitySeconds: 43200
+  defaultVisibilitySeconds: 60
+  defaultWaitTimeoutSeconds: 1
+gateways:
+  remotes: []
+  port: 7000
+  cert: ""
+  key: ""
+  ca: ""

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubemq-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: kubemq-operator
+  template:
+    metadata:
+      labels:
+        name: kubemq-operator
+    spec:
+      serviceAccountName: kubemq-operator
+      containers:
+        - name: kubemq-operator
+          # Replace this with the built image name
+          image: docker.io/kubemq/kubemq-operator:latest
+          command:
+          - kubemq-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "kubemq-operator"
+            - name: KUBEMQ_REGISTRY
+              value: "docker.io"
+            - name: KUBEMQ_REPOSITORY
+              value: "kubemq/kubemq"
+            - name: KUBEMQ_IMAGE_TAG
+              value: "latest"
+

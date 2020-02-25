@@ -1,0 +1,14 @@
+apiVersion: core.k8s.kubemq.io/v1alpha1
+kind: KubemqCluster
+metadata:
+  name: {{ include "kubemq.fullname" . }}
+  labels:
+    app: {{ include "kubemq.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+spec:
+{{ toYaml .Values | indent 2 }}
+
+
+

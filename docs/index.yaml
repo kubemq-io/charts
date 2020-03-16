@@ -13,7 +13,7 @@ entries:
     name: dashboard
     type: application
     urls:
-    - https://kubemq-io.github.io/charts/docs/dashboard-0.1.0.tgz
+    - https://kubemq-io.github.io/charts/dashboard-0.1.0.tgz
     version: 0.1.0
   kubemq:
   - apiVersion: v2
@@ -28,6 +28,6 @@ entries:
     name: kubemq
     type: application
     urls:
-    - https://kubemq-io.github.io/charts/docs/kubemq-0.4.0.tgz
+    - https://kubemq-io.github.io/charts/kubemq-0.4.0.tgz
     version: 0.4.0
 generated: "2020-03-16T16:36:03.204252+02:00"

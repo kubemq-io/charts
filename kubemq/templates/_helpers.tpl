@@ -33,3 +33,4 @@ Generate chart secret name
 {{- define "kubemq.secretName" -}}
 {{ default (include "kubemq.fullname" .) .Values.existingSecret }}
 {{- end -}}
+

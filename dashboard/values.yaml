@@ -1,0 +1,7 @@
+port: 32000
+prometheus:
+  nodePort: 0
+  image: prom/prometheus:latest
+grafana:
+  image: grafana/grafana:latest
+  dashboardUrl: "https://raw.githubusercontent.com/kubemq-io/kubemq-dashboard/master/dashboard.json"

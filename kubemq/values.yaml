@@ -1,61 +1,92 @@
-nameOverride: ""
-fullnameOverride: ""
-
-existingSecret: ""
-token: ""
-licenseData: ""
-
-replicaCount: 3
-cluster:
-  enable: 'true'
-
+configData: ""
+replicas: 3
+volume:
+  size: ""
+license:
+  data: ""
+  token: ""
 image:
-  repository: kubemq/kubemq
-  tag: latest
+  image: "docker.io/kubemq/kubemq:v2.0.1"
   pullPolicy: Always
-
-service:
-  type: ClusterIP
-  apiPort: 8080
-  restPort: 9090
-  grpcPort: 50000
-  clusterPort: 5228
-
-env:
-  apiPort: 8080
-  restPort: 9090
-  grpcPort: 50000
-  clusterPort: 5228
-  extra_env_vars: {}
-    # Add arbitrary environment variables here:
-    # <KEY>: VALUE
-
-livenessProbe:
-  enabled: true
+api:
+  disabled: false
+  port: 8080
+  expose: ClusterIP
+  nodePort: 0
+grpc:
+  disabled: false
+  port: 50000
+  expose: ClusterIP
+  nodePort: 0
+  bodyLimit: 0
+  bufferSize: 0
+rest:
+  disabled: false
+  port: 9090
+  expose: ClusterIP
+  nodePort: 0
+  bodyLimit: 0
+  bufferSize: 0
+tls:
+  cert: ""
+  key: ""
+  ca: ""
+resources:
+  enable: false
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+nodeSelectors:
+  keys: {}
+authentication:
+  key: ""
+  type: ""
+authorization:
+  policyData: ""
+  url: ""
+  autoReload: 0
+health:
+  enabled: false
   initialDelaySeconds: 4
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
-
-readinessProbe:
-  enabled: true
-  initialDelaySeconds: 1
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 6
-  successThreshold: 1
-
-statefulset:
-  updateStrategy: RollingUpdate
-  annotations: {}
-
-volume:
+routing:
+  data: ""
+  url: ""
+  autoReload: 0
+log:
+  level: 2
+  file: ""
+notification:
   enabled: false
-  size: 1Gi
-  mountPath: './store'
-  accessMode: "ReadWriteOnce"
-
-nodeSelector: {}
-affinity: {}
-tolerations: []
+  prefix: ""
+  log: false
+store:
+  clean: false
+  path: "./store"
+  maxChannels: 0
+  maxSubscribers: 0
+  maxMessages: 0
+  maxChannelSize: 0
+  messagesRetentionMinutes: 1440
+  purgeInactiveMinutes: 1440
+queue:
+  maxReceiveMessagesRequest: 1024
+  maxWaitTimeoutSeconds: 3600
+  maxExpirationSeconds: 43200
+  maxDelaySeconds: 43200
+  maxReQueues: 1024
+  maxVisibilitySeconds: 43200
+  defaultVisibilitySeconds: 60
+  defaultWaitTimeoutSeconds: 1
+gateways:
+  remotes: []
+  port: 7000
+  cert: ""
+  key: ""
+  ca: ""

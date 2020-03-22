@@ -41,14 +41,3 @@ spec:
               value: "kubemq-operator"
             - name: KUBEMQ_LICENSE_MODE
               value: "COMMUNITY"
-            - name: KUBEMQ_LICENSE_PUBLIC_KEY
-              value: |-
-                -----BEGIN PUBLIC KEY-----
-                MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBqvjlOIla0J4msYElkdRxo
-                pO7AX1hipbSh9ZXvePzyY80aUsSZuM7UaGnVz7ajy5HqkUWkOh3h2/IkqSUKcwNH
-                OR2G9jVOjGRbhNdM1SiE7QAIB1NEquCKZHsM6mveYRQJv/JWM7mqjFtV5XFdL1vm
-                oLMcfKvmyDbyMUCbXj6KiyL+/CKlZAo6G/qIkLx/qNxlBYrok5MmlU423B5vL3Mi
-                SKXbmrzY7EjVuJJxVgsXN6krfsUhLw+nW+veU6zJvwhHrtOjZZK2kN18rmkxAbZJ
-                8+ZbFB6HBp3hQVmNhgwJeXhtMEKJfwFYRaq5yNJs9oa1PejE3zhXGFWtdDq7fmJr
-                AgMBAAE=
-                -----END PUBLIC KEY-----

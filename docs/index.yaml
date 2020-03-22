@@ -2,8 +2,8 @@ apiVersion: v1
 entries:
   dashboard:
   - apiVersion: v2
-    appVersion: 2.0.1
-    created: "2020-03-16T16:36:03.2082653+02:00"
+    appVersion: 2.0.0
+    created: "2020-03-22T14:04:12.9476561+02:00"
     description: A Helm chart for KubeMQ Dashbaord
     digest: a16bc3c5cc47270a4d05881f58b6895f41c4e8eb485f7b299d08ac47ca1ae8f5
     maintainers:
@@ -13,14 +13,14 @@ entries:
     name: dashboard
     type: application
     urls:
-    - https://kubemq-io.github.io/charts/dashboard-0.1.0.tgz
+    - dashboard-0.1.0.tgz
     version: 0.1.0
   kubemq:
   - apiVersion: v2
-    appVersion: 2.0.1
-    created: "2020-03-16T16:36:03.2102688+02:00"
+    appVersion: 2.0.0
+    created: "2020-03-22T14:04:12.9546613+02:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: eeda988eeb46bbd2f39650bac2f9b6dffe752fc2344ebcc95b00e72942311608
+    digest: 425a3c7f4d9860d50a5b84b1a149953df300d4b117f88d21d3f1deaa12e89647
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -28,6 +28,6 @@ entries:
     name: kubemq
     type: application
     urls:
-    - https://kubemq-io.github.io/charts/kubemq-0.4.0.tgz
-    version: 0.4.0
-generated: "2020-03-16T16:36:03.204252+02:00"
+    - kubemq-0.5.0.tgz
+    version: 0.5.0
+generated: "2020-03-22T14:04:12.938656+02:00"

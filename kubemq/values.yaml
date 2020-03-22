@@ -2,9 +2,7 @@ configData: ""
 replicas: 3
 volume:
   size: ""
-license:
-  data: ""
-  token: ""
+license: ""
 image:
   image: "docker.io/kubemq/kubemq:v2.0.1"
   pullPolicy: Always

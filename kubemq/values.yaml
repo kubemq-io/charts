@@ -2,9 +2,10 @@ configData: ""
 replicas: 3
 volume:
   size: ""
+  storageClass: ""
 license: ""
 image:
-  image: "docker.io/kubemq/kubemq:v2.0.1"
+  image: "docker.io/kubemq/kubemq:v2.0.2"
   pullPolicy: Always
 api:
   disabled: false

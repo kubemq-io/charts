@@ -1,0 +1,10 @@
+# https://taskfile.dev
+
+version: '2'
+
+tasks:
+  release:
+    cmds:
+      - helm package kubemq -d ./docs
+      - helm package dashboard -d ./docs
+      - helm repo index ./docs

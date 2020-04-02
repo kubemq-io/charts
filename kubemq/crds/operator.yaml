@@ -32,7 +32,7 @@ spec:
             - name: RELATED_IMAGE_KUBEMQ_CLUSTER
               value: "docker.io/kubemq/kubemq:latest"
             - name: RELATED_IMAGE_PROMETHEUS
-              value: "prom/prometheus"
+              value: "prom/prometheus:latest"
             - name: RELATED_IMAGE_GRAFANA
               value: "grafana/grafana:latest"
             - name: KUBEMQ_VIEW_DASHBOARD_SOURCE

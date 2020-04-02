@@ -312,6 +312,8 @@ spec:
               properties:
                 size:
                   type: string
+                storageClass:
+                  type: string
               type: object
           type: object
         status:

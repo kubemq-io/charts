@@ -5,7 +5,7 @@ volume:
   storageClass: ""
 license: ""
 image:
-  image: "docker.io/kubemq/kubemq:v2.0.2"
+  image: "docker.io/kubemq/kubemq:v2.0.3"
   pullPolicy: Always
 api:
   disabled: false

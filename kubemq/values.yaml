@@ -5,7 +5,7 @@ volume:
   storageClass: ""
 license: ""
 image:
-  image: "docker.io/kubemq/kubemq:v2.0.3"
+  image: "docker.io/kubemq/kubemq:v2.0.4"
   pullPolicy: Always
 api:
   disabled: false
@@ -33,11 +33,11 @@ tls:
 resources:
   enable: false
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 2
+    memory: 2Gi
   requests:
-    cpu: 100m
-    memory: 256Mi
+    cpu: 2
+    memory: 512Mi
 nodeSelectors:
   keys: {}
 authentication:
@@ -49,10 +49,10 @@ authorization:
   autoReload: 0
 health:
   enabled: false
-  initialDelaySeconds: 4
+  initialDelaySeconds: 5
   periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 6
+  timeoutSeconds: 10
+  failureThreshold: 12
   successThreshold: 1
 routing:
   data: ""

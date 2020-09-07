@@ -3,9 +3,9 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-09-07T14:46:48.5105741+03:00"
+    created: "2020-09-07T14:50:03.1817756+03:00"
     description: A Helm chart for KubeMQ Connectors
-    digest: f585ae2cdc026692d43cf7db84b6a11dd625bdd0cab2a6f19b8a8663c39c0f7c
+    digest: f353feec1dc73202a5633bda344d01e500f0a178687e9320759d893455df8328
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -18,9 +18,9 @@ entries:
   dashboard:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-09-07T14:46:48.5105741+03:00"
+    created: "2020-09-07T14:50:03.1827759+03:00"
     description: A Helm chart for KubeMQ Dashbaord
-    digest: a32083b430330c7eb6cd464f3aa23fc9a8051c086d82098cd13ad47da7e31523
+    digest: 30ff2c4ebca852c489e076e97b439f1802a2ab678fb336b8bf9b3fcf6b4e0182
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -33,9 +33,9 @@ entries:
   kubemq:
   - apiVersion: v2
     appVersion: 2.1.0
-    created: "2020-09-07T14:46:48.5115737+03:00"
+    created: "2020-09-07T14:50:03.1827759+03:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: 8d38ee37c83a4752e0f7db028d9d267d53197c5c7806722b0a6479b93c7737fb
+    digest: ccfe1cbaa129a3ceac035faf157b8c8c8e335df9a71543af2b5004c4ea00b543
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -45,4 +45,4 @@ entries:
     urls:
     - kubemq-1.0.2.tgz
     version: 1.0.2
-generated: "2020-09-07T14:46:48.5095652+03:00"
+generated: "2020-09-07T14:50:03.1807761+03:00"

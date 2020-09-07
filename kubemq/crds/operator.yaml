@@ -2,24 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kubemq-operator
+  namespace: kubemq
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: kubemq-operator
+      app: kubemq-operator
   template:
     metadata:
       labels:
-        name: kubemq-operator
+        app: kubemq-operator
     spec:
       serviceAccountName: kubemq-operator
       containers:
         - name: kubemq-operator
-          # Replace this with the built image name
           image: docker.io/kubemq/kubemq-operator:latest
           command:
-          - kubemq-operator
+            - kubemq-operator
           imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+            - containerPort: 8090
           env:
             - name: WATCH_NAMESPACE
               valueFrom:
@@ -29,6 +32,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: SOURCE
+              value: "helm"
+            - name: DEBUG_MODE
+              value: "false"
             - name: RELATED_IMAGE_KUBEMQ_CLUSTER
               value: "docker.io/kubemq/kubemq:latest"
             - name: RELATED_IMAGE_PROMETHEUS
@@ -41,3 +48,11 @@ spec:
               value: "kubemq-operator"
             - name: KUBEMQ_LICENSE_MODE
               value: "COMMUNITY"
+            - name: CONNECTOR_TARGETS_IMAGE
+              value: "kubemq/kubemq-targets:latest"
+            - name: CONNECTOR_SOURCES_IMAGE
+              value: "kubemq/kubemq-sources:latest"
+            - name: CONNECTOR_BRIDGES_IMAGE
+              value: "kubemq/kubemq-bridges:latest"
+            - name: CONNECTOR_TASKS_IMAGE
+              value: "kubemq/kubemq-tasks:latest"

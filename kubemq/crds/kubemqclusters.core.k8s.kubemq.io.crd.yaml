@@ -1,6 +1,8 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.3.0
   name: kubemqclusters.core.k8s.kubemq.io
 spec:
   additionalPrinterColumns:
@@ -49,7 +51,6 @@ spec:
     status: {}
   validation:
     openAPIV3Schema:
-      description: KubemqCluster is the Schema for the kubemqclusters API
       properties:
         apiVersion:
           description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
         metadata:
           type: object
         spec:
+          description: KubemqClusterSpec defines the desired state of KubemqCluster
           properties:
             api:
               properties:
@@ -98,22 +100,6 @@ spec:
               type: object
             configData:
               type: string
-            gateways:
-              properties:
-                ca:
-                  type: string
-                cert:
-                  type: string
-                key:
-                  type: string
-                port:
-                  format: int32
-                  type: integer
-                remotes:
-                  items:
-                    type: string
-                  type: array
-              type: object
             grpc:
               properties:
                 bodyLimit:

@@ -7,4 +7,5 @@ tasks:
     cmds:
       - helm package kubemq -d ./docs
       - helm package dashboard -d ./docs
+      - helm package connector -d ./docs
       - helm repo index ./docs

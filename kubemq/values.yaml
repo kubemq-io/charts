@@ -83,9 +83,3 @@ queue:
   maxVisibilitySeconds: 43200
   defaultVisibilitySeconds: 60
   defaultWaitTimeoutSeconds: 1
-gateways:
-  remotes: []
-  port: 7000
-  cert: ""
-  key: ""
-  ca: ""

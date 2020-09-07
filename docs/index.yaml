@@ -1,11 +1,26 @@
 apiVersion: v1
 entries:
+  connector:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2020-09-07T14:46:48.5105741+03:00"
+    description: A Helm chart for KubeMQ Connectors
+    digest: f585ae2cdc026692d43cf7db84b6a11dd625bdd0cab2a6f19b8a8663c39c0f7c
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: connector
+    type: application
+    urls:
+    - connector-0.1.0.tgz
+    version: 0.1.0
   dashboard:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-04-21T06:38:48.0050445+03:00"
+    created: "2020-09-07T14:46:48.5105741+03:00"
     description: A Helm chart for KubeMQ Dashbaord
-    digest: 37c576954918ce32f03e48d11d61f15fa2a5ca84dff2cbac59c91716c7cb0916
+    digest: a32083b430330c7eb6cd464f3aa23fc9a8051c086d82098cd13ad47da7e31523
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -17,10 +32,10 @@ entries:
     version: 0.1.0
   kubemq:
   - apiVersion: v2
-    appVersion: 2.0.4
-    created: "2020-04-21T06:38:48.0070442+03:00"
+    appVersion: 2.1.0
+    created: "2020-09-07T14:46:48.5115737+03:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: ae28f305f952e15f3d4bd5daa33f93cad433d15384884340956d6cf7ddb1a4ad
+    digest: 8d38ee37c83a4752e0f7db028d9d267d53197c5c7806722b0a6479b93c7737fb
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -28,20 +43,6 @@ entries:
     name: kubemq
     type: application
     urls:
-    - kubemq-0.5.3.tgz
-    version: 0.5.3
-  - apiVersion: v2
-    appVersion: 2.0.4
-    created: "2020-04-21T06:38:48.0060539+03:00"
-    description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: 1dd6f35af6f3ebef785bcac0e80d3cd9553c6913152cdb658379362f5d55870f
-    maintainers:
-    - email: info@kubemq.io
-      name: KubeMQ
-      url: https://kubemq.io
-    name: kubemq
-    type: application
-    urls:
-    - kubemq-0.5.2.tgz
-    version: 0.5.2
-generated: "2020-04-21T06:38:48.0040535+03:00"
+    - kubemq-1.0.2.tgz
+    version: 1.0.2
+generated: "2020-09-07T14:46:48.5095652+03:00"

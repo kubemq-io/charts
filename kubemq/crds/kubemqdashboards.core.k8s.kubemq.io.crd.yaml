@@ -1,21 +1,24 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.3.0
+  creationTimestamp: null
   name: kubemqdashboards.core.k8s.kubemq.io
 spec:
   additionalPrinterColumns:
-  - JSONPath: .status.status
-    name: Status
-    type: string
-  - JSONPath: .status.address
-    name: Address
-    type: string
-  - JSONPath: .status.prometheus_version
-    name: Prometheus-Version
-    type: string
-  - JSONPath: .status.grafana_version
-    name: Grafana-Version
-    type: string
+    - JSONPath: .status.status
+      name: Status
+      type: string
+    - JSONPath: .status.address
+      name: Address
+      type: string
+    - JSONPath: .status.prometheus_version
+      name: Prometheus-Version
+      type: string
+    - JSONPath: .status.grafana_version
+      name: Grafana-Version
+      type: string
   group: core.k8s.kubemq.io
   names:
     kind: KubemqDashboard
@@ -75,14 +78,14 @@ spec:
             status:
               type: string
           required:
-          - address
-          - grafana_version
-          - prometheus_version
-          - status
+            - address
+            - grafana_version
+            - prometheus_version
+            - status
           type: object
       type: object
   version: v1alpha1
   versions:
-  - name: v1alpha1
-    served: true
-    storage: true
+    - name: v1alpha1
+      served: true
+      storage: true

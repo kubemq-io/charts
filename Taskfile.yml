@@ -1,6 +1,7 @@
 version: '3'
 vars:
   NAMESPACE: kubemq1
+  SOURCE: kubemq-charts
 
 tasks:
   release:
@@ -11,15 +12,19 @@ tasks:
       - helm repo index ./docs
   install:
     cmds:
+      - cmd: helm repo add kubemq-charts https://kubemq-io.github.io/charts
+        ignore_error: true
+      - cmd: helm repo update
+        ignore_error: true
       - cmd: kubectl create ns {{.NAMESPACE}}
         ignore_error: true
-      - cmd: helm install kubemq-operator ./operator --namespace={{.NAMESPACE}}
+      - cmd: helm install kubemq-operator {{.SOURCE}}/operator --namespace={{.NAMESPACE}}
         ignore_error: true
-      - cmd: helm install kubemq-cluster ./kubemq --namespace={{.NAMESPACE}}
+      - cmd: helm install kubemq-cluster {{.SOURCE}}/kubemq --namespace={{.NAMESPACE}}
         ignore_error: true
-      - cmd: helm install kubemq-dashboard ./dashboard --namespace={{.NAMESPACE}}
+      - cmd: helm install kubemq-dashboard {{.SOURCE}}/dashboard --namespace={{.NAMESPACE}}
         ignore_error: true
-      - cmd: helm install kubemq-bridges ./connector --namespace={{.NAMESPACE}}
+      - cmd: helm install kubemq-bridges {{.SOURCE}}/connector --namespace={{.NAMESPACE}}
         ignore_error: true
   delete:
     cmds:

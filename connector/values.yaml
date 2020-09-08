@@ -1,5 +1,5 @@
 replicase: 1
-types: bridges
+type: bridges
 image: "kubemq/kubemq-bridges:latest"
 node_port: 0
 service_type: ClusterIP

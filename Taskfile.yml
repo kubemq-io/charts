@@ -1,6 +1,6 @@
-# https://taskfile.dev
-
-version: '2'
+version: '3'
+vars:
+  NAMESPACE: kubemq1
 
 tasks:
   release:
@@ -9,3 +9,25 @@ tasks:
       - helm package dashboard -d ./docs
       - helm package connector -d ./docs
       - helm repo index ./docs
+  install:
+    cmds:
+      - cmd: kubectl create ns {{.NAMESPACE}}
+        ignore_error: true
+      - cmd: helm install kubemq-operator ./operator --namespace={{.NAMESPACE}}
+        ignore_error: true
+      - cmd: helm install kubemq-cluster ./kubemq --namespace={{.NAMESPACE}}
+        ignore_error: true
+      - cmd: helm install kubemq-dashboard ./dashboard --namespace={{.NAMESPACE}}
+        ignore_error: true
+      - cmd: helm install kubemq-bridges ./connector --namespace={{.NAMESPACE}}
+        ignore_error: true
+  delete:
+    cmds:
+      - cmd: helm delete kubemq-cluster --namespace={{.NAMESPACE}}
+        ignore_error: true
+      - cmd: helm delete kubemq-dashboard --namespace={{.NAMESPACE}}
+        ignore_error: true
+      - cmd: helm delete kubemq-bridges --namespace={{.NAMESPACE}}
+        ignore_error: true
+      - cmd: helm delete kubemq-operator --namespace={{.NAMESPACE}}
+        ignore_error: true

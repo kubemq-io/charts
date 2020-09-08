@@ -5,6 +5,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: kubemq-operator
+    namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: kubemq-operator
@@ -17,6 +18,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: kubemq-cluster
+    namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role
   name: kubemq-cluster

@@ -1,6 +1,6 @@
 version: '3'
 vars:
-  NAMESPACE: kubemq1
+  NAMESPACE: kubemq3
   SOURCE: kubemq-charts
 
 tasks:
@@ -13,8 +13,8 @@ tasks:
       - helm repo index ./docs
   install:
     cmds:
-      - cmd: helm repo add kubemq-charts https://kubemq-io.github.io/charts
-        ignore_error: true
+#      - cmd: helm repo add kubemq-charts https://kubemq-io.github.io/charts
+#        ignore_error: true
       - cmd: helm repo update
         ignore_error: true
       - cmd: kubectl create ns {{.NAMESPACE}}

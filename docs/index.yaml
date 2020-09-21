@@ -3,9 +3,9 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-09-08T18:02:12.8941326+03:00"
+    created: "2020-09-21T14:25:54.9368407+03:00"
     description: A Helm chart for KubeMQ Connectors
-    digest: 38a72f6a6d362f5b9da72b1dd82e3f1d5a729aa6ae4a044a2d3dcbfa655990ab
+    digest: 28016013e2b55fd253b25df14fe0e687abc1c4c32e5237553255de93fe08f9b4
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -18,9 +18,9 @@ entries:
   dashboard:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-09-08T18:02:12.8941326+03:00"
+    created: "2020-09-21T14:25:54.9368407+03:00"
     description: A Helm chart for KubeMQ Dashbaord
-    digest: d698948b82d9d332b9cd735bc58e117195fc07dcb0af4ee75c894bba517016c7
+    digest: c87c4847257c55a039319579a4a0f767ad9c55f6cc494d24571cba295bf9af65
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -33,9 +33,9 @@ entries:
   kubemq:
   - apiVersion: v2
     appVersion: 2.1.0
-    created: "2020-09-08T18:02:12.8951307+03:00"
+    created: "2020-09-21T14:25:54.9378366+03:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: 8ce018f55307c0cbae576580bbd952aba2ab40b0e416bb3ea96f946ea57fe006
+    digest: 41a5024c2b407f42e979f65d1861438fc2169fa8d9d3c9b6b0ad6be9ab6c5007
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -48,9 +48,9 @@ entries:
   operator:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-09-08T18:02:12.8951307+03:00"
+    created: "2020-09-21T14:25:54.9378366+03:00"
     description: A Helm chart for KubeMQ Operator
-    digest: bfdc956d88686c51da4e45b8792ad21a5d3144d77070a8162bbe2878b0b1c8c6
+    digest: fc48d1c9c525bcd693f64147b6e0def81cb8208ee6b8510c67e67e6b07d1b6d6
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -58,6 +58,6 @@ entries:
     name: operator
     type: application
     urls:
-    - operator-1.0.2.tgz
-    version: 1.0.2
-generated: "2020-09-08T18:02:12.893131+03:00"
+    - operator-1.1.0.tgz
+    version: 1.1.0
+generated: "2020-09-21T14:25:54.9348466+03:00"

@@ -153,7 +153,7 @@ spec:
             statefulsetConfigData:
               type: string
             Standalone:
-              type: string
+              type: boolean
             log:
               properties:
                 file:

@@ -152,7 +152,7 @@ spec:
               type: string
             statefulsetConfigData:
               type: string
-            Standalone:
+            standalone:
               type: boolean
             log:
               properties:

@@ -3,9 +3,9 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-24T12:48:41.949581+02:00"
+    created: "2020-12-24T12:56:31.7938596+02:00"
     description: A Helm chart for KubeMQ Connectors
-    digest: b70e3739a8b4921a32878bc0b80290b3971915c75daaa88996f7454bdf2414f6
+    digest: 7252727ba327ba68e1f0cb21f0b36719022b4de1b8f336cbe328a345bda6af75
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -18,9 +18,9 @@ entries:
   dashboard:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-24T12:48:41.949581+02:00"
+    created: "2020-12-24T12:56:31.7938596+02:00"
     description: A Helm chart for KubeMQ Dashbaord
-    digest: 8b5091c9c238c4e6d4c09e1bc8cb7d2e84c1fc490e35e29e346aef6bbcf72188
+    digest: 919bf6d3d66ed749a80914b3fd51da097532d7507dc42e3a37d8542699840725
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -33,9 +33,9 @@ entries:
   kubemq:
   - apiVersion: v2
     appVersion: 2.1.1
-    created: "2020-12-24T12:48:41.95058+02:00"
+    created: "2020-12-24T12:56:31.7948636+02:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: 6fec95905edd392e0f5e291bf3ebd43821fcbe36b383175d875c21fadc7aa363
+    digest: 23bcd7282dba8d7c553279fc0871b3b0260f3a5c3b92e7522f9d22509c3dbad8
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -48,9 +48,9 @@ entries:
   operator:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-24T12:48:41.95058+02:00"
+    created: "2020-12-24T12:56:31.7948636+02:00"
     description: A Helm chart for KubeMQ Operator
-    digest: 1a2b0f11fe5bc9a1e1d1bf7006f9d8be1e13e6f7a118391490a509e89aa2c28a
+    digest: d5d8e87d02074e8882fced93c73cd60562a0ffc33236faa17e872f7ad1a25dec
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -58,6 +58,6 @@ entries:
     name: operator
     type: application
     urls:
-    - operator-1.1.1.tgz
-    version: 1.1.1
-generated: "2020-12-24T12:48:41.9485797+02:00"
+    - operator-1.3.0.tgz
+    version: 1.3.0
+generated: "2020-12-24T12:56:31.7928626+02:00"

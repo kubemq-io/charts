@@ -151,7 +151,7 @@ spec:
             key:
               type: string
             statefulsetConfigData:
-              type: boolean
+              type: string
             Standalone:
               type: string
             log:

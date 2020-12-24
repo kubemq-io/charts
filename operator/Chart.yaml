@@ -3,7 +3,7 @@ appVersion: 2.0.0
 description: A Helm chart for KubeMQ Operator
 type: application
 name: operator
-version: 1.1.0
+version: 1.1.1
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

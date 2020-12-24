@@ -3,9 +3,9 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-24T12:42:48.2150067+02:00"
+    created: "2020-12-24T12:45:59.3928712+02:00"
     description: A Helm chart for KubeMQ Connectors
-    digest: c5657e289155ac1f3f8faf1b40afafc679b26fa9a3ba7833be33c8a8232b9043
+    digest: a8a14849968f60787e3c0314b365cd054d90780181bf9f50fdf28e8d50cd17ac
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -18,9 +18,9 @@ entries:
   dashboard:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-24T12:42:48.2150067+02:00"
+    created: "2020-12-24T12:45:59.3938729+02:00"
     description: A Helm chart for KubeMQ Dashbaord
-    digest: 7cdf9494b5d837397f7934ac5bb01d4679086a0eb6142a8a2a550141908effd3
+    digest: 4e4830db407611f8d0de92357c54b53dff41e02b2e85be43ecdfb313cf4707a9
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -33,9 +33,9 @@ entries:
   kubemq:
   - apiVersion: v2
     appVersion: 2.1.1
-    created: "2020-12-24T12:42:48.2160068+02:00"
+    created: "2020-12-24T12:45:59.3938729+02:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: b80d8eb7d590d64d0a989e22fdef39d2ec22531cc0f3509887f73f3c5b0c669d
+    digest: c24ee96576efe04f1ba6b933d7cd2be5ebb1ed32bcdbb87808a1008a2c7727dd
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -48,7 +48,21 @@ entries:
   operator:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-24T12:42:48.2160068+02:00"
+    created: "2020-12-24T12:45:59.3948734+02:00"
+    description: A Helm chart for KubeMQ Operator
+    digest: d647ac95b3c0e31ef489d986d2226ba28889b39210011eb0569e1d576b1fee59
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: operator
+    type: application
+    urls:
+    - operator-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2020-12-24T12:45:59.3948734+02:00"
     description: A Helm chart for KubeMQ Operator
     digest: 111f7ba0af4eb9bd0d99f1d9a37c9b6fcefbbc94f37da0fddb725af685a9defa
     maintainers:
@@ -60,4 +74,4 @@ entries:
     urls:
     - operator-1.1.0.tgz
     version: 1.1.0
-generated: "2020-12-24T12:42:48.2140065+02:00"
+generated: "2020-12-24T12:45:59.3928712+02:00"

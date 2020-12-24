@@ -1,4 +1,6 @@
 configData: ""
+key: ""
+standalone: false
 replicas: 3
 volume:
   size: ""
@@ -35,9 +37,11 @@ resources:
   limits:
     cpu: 2
     memory: 2Gi
+    ephemeralStorage: ""
   requests:
     cpu: 2
     memory: 512Mi
+    ephemeralStorage: ""
 nodeSelectors:
   keys: {}
 authentication:
@@ -83,3 +87,4 @@ queue:
   maxVisibilitySeconds: 43200
   defaultVisibilitySeconds: 60
   defaultWaitTimeoutSeconds: 1
+statefulsetConfigData: ""

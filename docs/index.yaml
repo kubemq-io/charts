@@ -3,9 +3,9 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-09T14:05:02.0707626+02:00"
+    created: "2020-12-24T12:34:52.5245957+02:00"
     description: A Helm chart for KubeMQ Connectors
-    digest: 818a0428740c4af41780f0480af0d4e8b703487fdcfe7266044c37adfbc93a88
+    digest: d2846093956eb9ae75c8bef14d81020af49da3de6fc70d0a0b413673dff8f7fc
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -18,9 +18,9 @@ entries:
   dashboard:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-09T14:05:02.0718166+02:00"
+    created: "2020-12-24T12:34:52.5245957+02:00"
     description: A Helm chart for KubeMQ Dashbaord
-    digest: 069a8eee78e4596aac8f22a34a7a1068a7225c5a5d91417ce2f9550e30b00e7b
+    digest: 8c1ee9c53b7b4d18a3ae48554baa8acf8df9b05a00d234402b1439f03517f922
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -32,10 +32,10 @@ entries:
     version: 0.1.0
   kubemq:
   - apiVersion: v2
-    appVersion: 2.1.0
-    created: "2020-12-09T14:05:02.0718166+02:00"
+    appVersion: 2.1.1
+    created: "2020-12-24T12:34:52.5255841+02:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: dd5735ed43019bc8691ada3b605684096b8d65570a7be64bce2889f5f111cdaf
+    digest: 575b99f2722e7a9738262cfa02f7149128798874e9b4d74fb0ae93db54811bca
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -43,14 +43,14 @@ entries:
     name: kubemq
     type: application
     urls:
-    - kubemq-2.1.0.tgz
-    version: 2.1.0
+    - kubemq-2.1.1.tgz
+    version: 2.1.1
   operator:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2020-12-09T14:05:02.0727739+02:00"
+    created: "2020-12-24T12:34:52.5255841+02:00"
     description: A Helm chart for KubeMQ Operator
-    digest: d08f04dbb8f5985d15fe493372926abe8a690c5ba3917bf2818590db907a76e9
+    digest: 845ca0e34f11aaadb2d4dee05679d4b27dc43369872505cf9414afaafdfd0b78
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -60,4 +60,4 @@ entries:
     urls:
     - operator-1.1.0.tgz
     version: 1.1.0
-generated: "2020-12-09T14:05:02.069774+02:00"
+generated: "2020-12-24T12:34:52.5235952+02:00"

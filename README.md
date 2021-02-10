@@ -22,7 +22,7 @@ $ helm repo list
 To install KubeMQ chart with the release name kubemq-release:
 
 ``` 
-$ helm install kubemq-cluster --set token={your kubemq token} kubemq-charts/kubemq 
+$ helm install kubemq-cluster --set key={your kubemq token} kubemq-charts/kubemq 
 ```
 
 ## Uninstall KubeMQ Chart
@@ -41,7 +41,7 @@ The following table lists the configurable parameters of the KubeMQ chart and th
 | Parameter                          | Default           | Description                                                                                 |
 |:-----------------------------------|:------------------|:--------------------------------------------------------------------------------------------|
 | existingSecret                     | ``                | Defines the name of a secret created outside of this chart                                  |
-| token                              | ``                | Sets KubeMQ token                                                                           |
+| key                                | ``                | Sets KubeMQ license                                                                           |
 | licenseData                        | ``                | Sets KubeMQ license data for offline validation (optional)                                  |
 | replicaCount                       | `3`               | Number of KubeMQ nodes                                                                      |
 | cluster.enable                     | `true`            | Enable/Disable cluster mode                                                                 |
@@ -78,11 +78,10 @@ The following table lists the configurable parameters of the KubeMQ chart and th
 | volume.accessMode                  | `"ReadWriteOnce"` | Sets Persistence access mode                                                                |
 | affinity                           | `{}`              | Affinity settings for the statefulset                                                       |
 | nodeSelector                       | `{}`              | Node selector settings for the statefulset                                                  |
-| tolerations                        | `[]`              | Toleration settings for the statefulset                                                     |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to helm install. For example,
 ```
-helm install --name kubemq-cluster --set token={your kubemq token},replicaCount=5 kubemq-charts/kubemq 
+helm install --name kubemq-cluster --set key={your kubemq token},replicaCount=5 kubemq-charts/kubemq 
 ```
 
 Will install KubeMQ cluster with 5 nodes replications.

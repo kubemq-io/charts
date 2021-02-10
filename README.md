@@ -32,6 +32,7 @@ $ helm install kubemq-cluster --set key={your kubemq license key} kubemq-charts/
 ```
 
 **Note**
+
 [Register](https://account.kubemq.io/login/register) for free license key
 
 

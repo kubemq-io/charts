@@ -14,16 +14,26 @@ $ helm repo add kubemq-charts  https://kubemq-io.github.io/charts
 
 Verify kubemq helm repository charts is properly configured by:
 
+## Update KubeMQ Helm Repository
 ``` 
-$ helm repo list
+$ helm repo update
+```
+## Install KubeMQ Operator
+
+```
+helm install kubemq-operator kubemq-charts/operator -n kubemq
 ```
 
 ## Install KubeMQ Chart
 To install KubeMQ chart with the release name kubemq-release:
 
 ``` 
-$ helm install kubemq-cluster --set key={your kubemq token} kubemq-charts/kubemq 
+$ helm install kubemq-cluster --set key={your kubemq license key} kubemq-charts/kubemq -n kubemq 
 ```
+
+**Note**
+[Register](https://account.kubemq.io/login/register) for free license key
+
 
 ## Uninstall KubeMQ Chart
 

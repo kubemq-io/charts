@@ -33,22 +33,19 @@ tls:
   key: ""
   ca: ""
 resources:
-  enable: false
-  limits:
-    cpu: 2
-    memory: 2Gi
-    ephemeralStorage: ""
-  requests:
-    cpu: 2
-    memory: 512Mi
-    ephemeralStorage: ""
+  limitsCpu: "0"
+  limitsEphemeralStorage: 0
+  limitsMemory: 0
+  requestsCpu: "0"
+  requestsEphemeralStorage: 0
+  requestsMemory: 0
 nodeSelectors:
   keys: {}
 authentication:
   key: ""
   type: ""
 authorization:
-  policyData: ""
+  policy: ""
   url: ""
   autoReload: 0
 health:
@@ -62,13 +59,6 @@ routing:
   data: ""
   url: ""
   autoReload: 0
-log:
-  level: 2
-  file: ""
-notification:
-  enabled: false
-  prefix: ""
-  log: false
 store:
   clean: false
   path: "./store"

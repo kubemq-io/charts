@@ -33,12 +33,12 @@ tls:
   key: ""
   ca: ""
 resources:
-  limitsCpu: "0"
-  limitsEphemeralStorage: "0"
-  limitsMemory: "0"
-  requestsCpu: "0"
-  requestsEphemeralStorage: "0"
-  requestsMemory: "0"
+  limitsCpu: ""
+  limitsEphemeralStorage: ""
+  limitsMemory: ""
+  requestsCpu: ""
+  requestsEphemeralStorage: ""
+  requestsMemory: ""
 nodeSelectors:
   keys: {}
 authentication:

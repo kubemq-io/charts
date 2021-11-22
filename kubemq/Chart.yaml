@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 2.2.2
+appVersion: 2.2.11
 description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
 type: application
 name: kubemq
-version: 2.2.2
+version: 2.2.11
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

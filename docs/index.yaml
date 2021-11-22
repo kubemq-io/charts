@@ -3,9 +3,9 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2021-08-03T13:27:29.5793097+03:00"
+    created: "2021-11-22T14:31:14.6475162+02:00"
     description: A Helm chart for KubeMQ Connectors
-    digest: 83dc723af2bc92b426468e53876a7c48d033250e8b8406c1ca156dfbc0541503
+    digest: 5e123cf0e5ce73d8bbd734c72ce019032d4789b189a415f88f61d6e27693806d
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -18,9 +18,9 @@ entries:
   dashboard:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2021-08-03T13:27:29.5793097+03:00"
+    created: "2021-11-22T14:31:14.6480289+02:00"
     description: A Helm chart for KubeMQ Dashbaord
-    digest: 317f273f65aa40ba3c50233df9504f781a4a17deacbcca087203b168c23764e7
+    digest: 5f543d9347d912774a70c069538b6ee54ae9a6f08c1ed2fc3ac2a69b6e83bc01
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -32,10 +32,10 @@ entries:
     version: 0.1.0
   kubemq:
   - apiVersion: v2
-    appVersion: 2.2.2
-    created: "2021-08-03T13:27:29.5819816+03:00"
+    appVersion: 2.2.11
+    created: "2021-11-22T14:31:14.6485644+02:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: 65ac317812a1a8d58ab374ccb6249729e89b5fba13d5743d17ff83ffe3e9c3a3
+    digest: 06a2358d7f30595ca02d2578da9ab38b61fc611d1068ef450bc587c73641775a
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -43,56 +43,14 @@ entries:
     name: kubemq
     type: application
     urls:
-    - kubemq-2.2.2.tgz
-    version: 2.2.2
-  - apiVersion: v2
-    appVersion: 2.2.1
-    created: "2021-08-03T13:27:29.5814424+03:00"
-    description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: a231219e28e6c82d17d58ed69cb1a61cd3df51b412c4d38e241c6da712f96cac
-    maintainers:
-    - email: info@kubemq.io
-      name: KubeMQ
-      url: https://kubemq.io
-    name: kubemq
-    type: application
-    urls:
-    - kubemq-2.2.1.tgz
-    version: 2.2.1
-  - apiVersion: v2
-    appVersion: 2.2.0
-    created: "2021-08-03T13:27:29.5808978+03:00"
-    description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: e74b31261768495b8dbcab9fbf2b0322c2bdcb10cf16b085d5fb27152d2c3b47
-    maintainers:
-    - email: info@kubemq.io
-      name: KubeMQ
-      url: https://kubemq.io
-    name: kubemq
-    type: application
-    urls:
-    - kubemq-2.2.0.tgz
-    version: 2.2.0
-  - apiVersion: v2
-    appVersion: 2.1.1
-    created: "2021-08-03T13:27:29.5803678+03:00"
-    description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: 9d0e54518e1de0c5d49bbe6afa4b7746bc9a80afa2a3e6d8ee4c9e7c2dea2f31
-    maintainers:
-    - email: info@kubemq.io
-      name: KubeMQ
-      url: https://kubemq.io
-    name: kubemq
-    type: application
-    urls:
-    - kubemq-2.1.1.tgz
-    version: 2.1.1
+    - kubemq-2.2.11.tgz
+    version: 2.2.11
   operator:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2021-08-03T13:27:29.5835903+03:00"
+    created: "2021-11-22T14:31:14.6490939+02:00"
     description: A Helm chart for KubeMQ Operator
-    digest: b658b76d5e22b782d957e3eaaa9812639f51c950eed8cd7c3519380fe9c6b960
+    digest: 8260461a37709fa2c11642fc774ace7c0c443901a7b5559b0ffd47535d65bc8f
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -102,32 +60,4 @@ entries:
     urls:
     - operator-1.4.0.tgz
     version: 1.4.0
-  - apiVersion: v2
-    appVersion: 2.0.0
-    created: "2021-08-03T13:27:29.5830619+03:00"
-    description: A Helm chart for KubeMQ Operator
-    digest: d6275431f2a5d24fc1ff0addf8ed67c6665cd60180f6ae60d798bf7024f84264
-    maintainers:
-    - email: info@kubemq.io
-      name: KubeMQ
-      url: https://kubemq.io
-    name: operator
-    type: application
-    urls:
-    - operator-1.3.1.tgz
-    version: 1.3.1
-  - apiVersion: v2
-    appVersion: 2.0.0
-    created: "2021-08-03T13:27:29.5825294+03:00"
-    description: A Helm chart for KubeMQ Operator
-    digest: d5d8e87d02074e8882fced93c73cd60562a0ffc33236faa17e872f7ad1a25dec
-    maintainers:
-    - email: info@kubemq.io
-      name: KubeMQ
-      url: https://kubemq.io
-    name: operator
-    type: application
-    urls:
-    - operator-1.3.0.tgz
-    version: 1.3.0
-generated: "2021-08-03T13:27:29.5781924+03:00"
+generated: "2021-11-22T14:31:14.6463727+02:00"

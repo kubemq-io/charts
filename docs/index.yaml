@@ -1,0 +1,63 @@
+apiVersion: v1
+entries:
+  connector:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-08-12T15:49:14.6649153+03:00"
+    description: A Helm chart for KubeMQ Connectors
+    digest: 75ff9c1b8f7ca52dfa6292d99e4e3a22d826a45f71ef36addd70ecf503ec280b
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: connector
+    type: application
+    urls:
+    - connector-0.2.0.tgz
+    version: 0.2.0
+  dashboard:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-08-12T15:49:14.6649153+03:00"
+    description: A Helm chart for KubeMQ Dashbaord
+    digest: d196bf6ed30200f4e728833bdeb2790bc03fcd8d622b852760e6e0acb3351994
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: dashboard
+    type: application
+    urls:
+    - dashboard-0.1.0.tgz
+    version: 0.1.0
+  kubemq:
+  - apiVersion: v2
+    appVersion: 2.2.12
+    created: "2022-08-12T15:49:14.6654484+03:00"
+    description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
+    digest: f7f0a1f3a88a362df4b410c0cfdda96e1b1ee8de0d4fe128f92d79b333983936
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq
+    type: application
+    urls:
+    - kubemq-2.2.12.tgz
+    version: 2.2.12
+  operator:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-08-12T15:49:14.665966+03:00"
+    description: A Helm chart for KubeMQ Operator
+    digest: 3fb253fb304711f4f199ad592988f5de7aace408191675c6d8e4797bc6fe3674
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: operator
+    type: application
+    urls:
+    - operator-1.4.0.tgz
+    version: 1.4.0
+generated: "2022-08-12T15:49:14.6638891+03:00"

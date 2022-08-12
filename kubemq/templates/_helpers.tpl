@@ -44,3 +44,7 @@ Create the name of the service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{- define "kubemq.crbName" -}}
+{{- printf "kubemq-operator-%s-crb" .Release.Namespace -}}
+{{- end -}}

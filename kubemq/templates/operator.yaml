@@ -1,3 +1,4 @@
+{{- if not (lookup "apps/v1" "Deployment" .Release.Namespace "kubemq-operator") }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -56,3 +57,4 @@ spec:
               value: "kubemq/kubemq-bridges:latest"
             - name: CONNECTOR_TASKS_IMAGE
               value: "kubemq/kubemq-tasks:latest"
+{{- end }}

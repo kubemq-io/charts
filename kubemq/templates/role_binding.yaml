@@ -1,3 +1,4 @@
+{{- if not (lookup "rbac.authorization.k8s.io/v1" "ClusterRoleBinding" .Release.Namespace (printf "kubemq-operator-%s-crb" .Release.Namespace)) }}
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -10,11 +11,13 @@ roleRef:
   kind: ClusterRole
   name: kubemq-operator
   apiGroup: rbac.authorization.k8s.io
+{{- end }}
 ---
+{{- if not (lookup "rbac.authorization.k8s.io/v1" "Role" .Release.Namespace "kubemq-cluster-role") }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ include "kubemq.fullname" . }}
+  name: kubemq-cluster-role
   namespace: {{ .Release.Namespace }}
 rules:
   - apiGroups:
@@ -31,16 +34,19 @@ rules:
       - watch
     resourceNames:
       - privileged
+{{- end }}
 ---
+{{- if not (lookup "rbac.authorization.k8s.io/v1" "RoleBinding" .Release.Namespace "kubemq-cluster-rb") }}
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ include "kubemq.fullname" . }}
+  name:  kubemq-cluster-rb
 subjects:
   - kind: ServiceAccount
-    name: {{ include "kubemq.fullname" . }}
+    name: kubemq-cluster
     namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role
-  name: {{ include "kubemq.fullname" . }}
+  name: kubemq-cluster-role
   apiGroup: rbac.authorization.k8s.io
+{{- end }}

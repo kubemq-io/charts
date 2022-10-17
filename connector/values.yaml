@@ -1,4 +1,4 @@
-replicase: 1
+replicas: 1
 type: bridges
 node_port: 0
 service_type: ClusterIP

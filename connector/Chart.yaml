@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 2.0.0
+appVersion: 2.3.0
 description: A Helm chart for KubeMQ Connectors
 type: application
 name: connector
-version: 0.2.0
+version: 0.3.0
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

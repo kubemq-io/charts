@@ -3,9 +3,9 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.3.0
-    created: "2022-10-17T11:24:40.2996413+03:00"
+    created: "2022-12-13T15:49:35.8601815+02:00"
     description: A Helm chart for KubeMQ Connectors
-    digest: eead1bd54185c2f53eb2378e95943917bb9ecbc37fb6fad4d281164feb40ec61
+    digest: bcf231694950bbf3b9d007a0138724f85794b29ef74e6521655dfc7d5c579eff
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -15,26 +15,12 @@ entries:
     urls:
     - connector-0.3.0.tgz
     version: 0.3.0
-  - apiVersion: v2
-    appVersion: 2.0.0
-    created: "2022-10-17T11:24:40.2996413+03:00"
-    description: A Helm chart for KubeMQ Connectors
-    digest: 3366e872f03bd42d3165d0c255dfebec91e27f375245cb008084497baccc03bd
-    maintainers:
-    - email: info@kubemq.io
-      name: KubeMQ
-      url: https://kubemq.io
-    name: connector
-    type: application
-    urls:
-    - connector-0.2.0.tgz
-    version: 0.2.0
   kubemq:
   - apiVersion: v2
-    appVersion: 2.3.0
-    created: "2022-10-17T11:24:40.3001666+03:00"
+    appVersion: 2.3.6
+    created: "2022-12-13T15:49:35.8628202+02:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: 89fe3ca19886f0d292dff936690a36b0f705257c3b303891b2c7b485f484fe7a
+    digest: 79a0946d61229c4e2702d18c0ede671f3c57137f0916e25c4204ffb8322ffe2b
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -42,14 +28,14 @@ entries:
     name: kubemq
     type: application
     urls:
-    - kubemq-2.3.0.tgz
-    version: 2.3.0
+    - kubemq-2.3.6.tgz
+    version: 2.3.6
   operator:
   - apiVersion: v2
-    appVersion: 2.3.0
-    created: "2022-10-17T11:24:40.3006949+03:00"
+    appVersion: 2.3.6
+    created: "2022-12-13T15:49:35.8653609+02:00"
     description: A Helm chart for KubeMQ Operator
-    digest: 51d60e40c135abcfaef8f990aa754e62df69e9157575279535846f1d4c514d4f
+    digest: fae9f281ce045404f2877d9496ea3a5783a511d04eadf95d093a1b62692c55c0
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -57,6 +43,6 @@ entries:
     name: operator
     type: application
     urls:
-    - operator-1.5.0.tgz
-    version: 1.5.0
-generated: "2022-10-17T11:24:40.2991181+03:00"
+    - operator-1.9.1.tgz
+    version: 1.9.1
+generated: "2022-12-13T15:49:35.8549341+02:00"

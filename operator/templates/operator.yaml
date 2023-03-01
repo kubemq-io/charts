@@ -1,7 +1,9 @@
+{{- if not (lookup "apps/v1" "Deployment" .Release.Namespace "kubemq-operator") }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kubemq-operator
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -21,7 +23,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-            - containerPort: 8090
           env:
             - name: WATCH_NAMESPACE
               valueFrom:
@@ -39,3 +40,5 @@ spec:
               value: "kubemq/kubemq-sources:latest"
             - name: CONNECTOR_BRIDGES_IMAGE
               value: "kubemq/kubemq-bridges:latest"
+
+{{- end }}

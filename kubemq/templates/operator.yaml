@@ -23,7 +23,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-            - containerPort: 8090
           env:
             - name: WATCH_NAMESPACE
               valueFrom:

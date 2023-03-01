@@ -1,9 +1,20 @@
+{{/* vim: set filetype=mustache: */}}
 
-{{- define "operator.chart" -}}
+
+{{/*{{- define "kubemq.name" -}}*/}}
+{{/*{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}*/}}
+{{/*{{- end -}}*/}}
+
+{{- define "kubemq.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "operator.fullname" -}}
+{{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If release name contains chart name it will be used as a full name.
+*/}}
+{{- define "kubemq.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -14,4 +25,26 @@
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Generate chart secret name
+*/}}
+{{- define "kubemq.secretName" -}}
+{{ default (include "kubemq.fullname" .) .Values.existingSecret }}
+{{- end -}}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "mychart.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "mychart.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{- define "kubemq.crbName" -}}
+{{- printf "kubemq-operator-%s-crb" .Release.Namespace -}}
 {{- end -}}

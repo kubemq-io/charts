@@ -1,44 +1,3 @@
-# KubeMQ Charts
-KubeMQ is a Cloud Native, enterprise grade message queue broker for distributed services architecture.
-
-KubeMQ is delivered as a small, lightweight Docker container, designed for any type of workload and architecture running in Kubernetes or any other containers orchestration system which support Docker.
-
-## HELM
-KubeMQ Helm charts required Helm v3. Please download/upgrade from [https://github.com/helm/helm](https://github.com/helm/helm)
-
-## Add KubeMQ Helm Repository
-
-``` 
-$ helm repo add kubemq-charts  https://kubemq-io.github.io/charts
-```
-
-Verify kubemq helm repository charts is properly configured by:
-
-## Update KubeMQ Helm Repository
-``` 
-$ helm repo update
-```
-
-## Install KubeMQ Chart
-To install KubeMQ chart with the release name kubemq-release:
-
-``` 
-$ helm install kubemq-cluster --set key={your-license-key} kubemq-charts/kubemq -n kubemq --create-namespace --wait
-```
-
-## Uninstall KubeMQ Chart
-
-To uninstall/delete the kubemq-release deployment:
-
-``` 
-$ helm delete kubemq-cluster
-```
-
-## Configuration
-
-The following table lists the configurable parameters of the KubeMQ chart and their default values.
-
-```yaml
 # Number of replicas of KubeMQ Nodes - https://docs.kubemq.io/configuration/cluster/default-template
 replicas: 3
 
@@ -155,14 +114,4 @@ tls:
   ca: ca data
   cert: cert data
   key: key data
-
-
-
-```
-
-## Documentation
-Please visit [https://docs.kubemq.io](https://docs.kubemq.io) for more information about KubeMQ.
-
-
-
 

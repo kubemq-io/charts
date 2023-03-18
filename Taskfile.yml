@@ -1,11 +1,12 @@
 version: '3'
 vars:
-  NAMESPACE: kubemq3
+  NAMESPACE: kubemq
   SOURCE: kubemq-charts
 
 tasks:
   release:
     cmds:
+      - task: update-dependencies
       - helm package kubemq-crds -d ./docs
       - helm package kubemq-controller -d ./docs
       - helm package kubemq-cluster -d ./docs
@@ -13,6 +14,10 @@ tasks:
       - helm package kubemq-targets -d ./docs
       - helm package kubemq-sources -d ./docs
       - helm repo index ./docs
+  update-dependencies:
+    dir: ./kubemq-cluster
+    cmds:
+      - helm dependency update
   install:
     cmds:
 #      - cmd: helm repo add kubemq-charts https://kubemq-io.github.io/charts

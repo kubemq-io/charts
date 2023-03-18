@@ -15,27 +15,11 @@ tasks:
       - helm repo index ./docs
   install:
     cmds:
-#      - cmd: helm repo add kubemq-charts https://kubemq-io.github.io/charts
-#        ignore_error: true
-      - cmd: helm repo update
-        ignore_error: true
-      - cmd: kubectl create ns {{.NAMESPACE}}
-        ignore_error: true
-      - cmd: helm install kubemq-operator {{.SOURCE}}/operator --namespace={{.NAMESPACE}}
-        ignore_error: true
-      - cmd: helm install kubemq-cluster {{.SOURCE}}/kubemq --namespace={{.NAMESPACE}}
-        ignore_error: true
-      - cmd: helm install kubemq-dashboard {{.SOURCE}}/dashboard --namespace={{.NAMESPACE}}
-        ignore_error: true
-      - cmd: helm install kubemq-bridges {{.SOURCE}}/connector --namespace={{.NAMESPACE}}
-        ignore_error: true
+      - cmd: helm install --create-namespace -n kubemq kubemq-crds ./kubemq-crds
+      - cmd: helm install --wait -n kubemq kubemq-controller ./kubemq-controller
+      - cmd: helm install --wait -n kubemq kubemq-cluster --set key=d7da1859-2924-4c45-8cf8-12c7e6b4b2c0 kubemq-charts/kubemq-cluster
   delete:
     cmds:
-      - cmd: helm delete kubemq-cluster --namespace={{.NAMESPACE}}
-        ignore_error: true
-      - cmd: helm delete kubemq-dashboard --namespace={{.NAMESPACE}}
-        ignore_error: true
-      - cmd: helm delete kubemq-bridges --namespace={{.NAMESPACE}}
-        ignore_error: true
-      - cmd: helm delete kubemq-operator --namespace={{.NAMESPACE}}
-        ignore_error: true
+      - cmd: helm uninstall -n kubemq kubemq-cluster
+      - cmd: helm uninstall -n kubemq kubemq-controller
+      - cmd: helm uninstall -n kubemq kubemq-crds

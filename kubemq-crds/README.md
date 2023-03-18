@@ -9,7 +9,7 @@ required by the KubeMQ stack. It should be installed before installing
 For example:
 ```console
 $ helm repo add kubemq-charts  https://kubemq-io.github.io/charts
-$ helm install kubemq-crds kubemq-charts/kubemq-crds
+$ helm install --create-namespace -n kubemq kubemq-crds kubemq-charts/kubemq-crds
 ```
 
 For a more comprehensive documentation about how to install the whole KubeMQ

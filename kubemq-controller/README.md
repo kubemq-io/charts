@@ -9,7 +9,7 @@ required by the KubeMQ stack. It should be installed before installing
 For example:
 ```console
 $ helm repo add kubemq-charts  https://kubemq-io.github.io/charts
-$ helm install --create-namespace -n kubemq kubemq-controller kubemq-charts/kubemq-controller
+$ helm install -n kubemq kubemq-controller kubemq-charts/kubemq-controller
 ```
 
 For a more comprehensive documentation about how to install the KubeMQ Cluster and KubeMQ Connector, check the `kubemq-cluster` and `kubemq-connector` charts documentation out.

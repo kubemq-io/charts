@@ -4,10 +4,6 @@ description: A Helm chart for KubeMQ Controller
 type: application
 name: kubemq-controller
 version: 1.9.3
-dependencies:
-  - name: kubemq-crds
-    version: "^2.3.7"
-    repository: https://kubemq-io.github.io/charts
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

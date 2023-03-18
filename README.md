@@ -27,7 +27,7 @@ $ helm install --wait --create-namespace -n kubemq kubemq-controller kubemq-char
 $ helm install --wait -n kubemq kubemq-cluster --set key={your-license-key} kubemq-charts/kubemq-cluster
 ```
 
-## Uninstall KubeMQ Chart
+## Uninstall KubeMQ Cluster Chart
 
 To uninstall/delete the kubemq-release deployment:
 

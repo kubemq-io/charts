@@ -4,6 +4,10 @@ description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
 type: application
 name: kubemq-cluster
 version: 2.3.7
+dependencies:
+  - name: kubemq-controller
+    version: "^1.9.3"
+    repository: https://kubemq-io.github.io/charts
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

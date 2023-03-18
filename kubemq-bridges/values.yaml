@@ -1,0 +1,5 @@
+replicas: 1
+node_port: 0
+service_type: ClusterIP
+config: |-
+  bindings: null

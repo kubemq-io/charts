@@ -1,0 +1,12 @@
+apiVersion: core.k8s.kubemq.io/v1beta1
+kind: KubemqConnector
+metadata:
+  name: {{ include "connector.fullname" . }}
+  labels:
+    app: {{ include "connector.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+spec:
+  type: bridges
+{{ toYaml .Values | indent 2 }}

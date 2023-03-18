@@ -1,9 +1,9 @@
 apiVersion: v2
 appVersion: 2.3.7
-description: A Helm chart for KubeMQ Operator
+description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
 type: application
-name: operator
-version: 1.9.3
+name: kubemq-cluster
+version: 2.3.7
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

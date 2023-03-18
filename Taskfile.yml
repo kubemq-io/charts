@@ -6,9 +6,12 @@ vars:
 tasks:
   release:
     cmds:
-      - helm package kubemq -d ./docs
-      - helm package connector -d ./docs
-      - helm package operator -d ./docs
+      - helm package kubemq-crds -d ./docs
+      - helm package kubemq-controller -d ./docs
+      - helm package kubemq-cluster -d ./docs
+      - helm package kubemq-bridges -d ./docs
+      - helm package kubemq-targets -d ./docs
+      - helm package kubemq-sources -d ./docs
       - helm repo index ./docs
   install:
     cmds:

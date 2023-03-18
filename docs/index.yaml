@@ -3,7 +3,7 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.3.0
-    created: "2023-03-14T15:39:28.6923211+02:00"
+    created: "2023-03-18T12:48:03.4719367+02:00"
     description: A Helm chart for KubeMQ Connectors
     digest: 895bb5c02500993805d676fef1b3354b845833569e0f1b33c6889966139229e2
     maintainers:
@@ -18,9 +18,9 @@ entries:
   kubemq:
   - apiVersion: v2
     appVersion: 2.3.7
-    created: "2023-03-14T15:39:28.6929457+02:00"
-    description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
-    digest: cb96d0cb265568843ac2c3df7d474d3b34858b31965451352428b291bf5b6da0
+    created: "2023-03-18T12:48:03.4725821+02:00"
+    description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
+    digest: 336fbb1ff953807574a0b695526aa0c57819f9cdd2adc73085dfd616f90b9429
     maintainers:
     - email: info@kubemq.io
       name: KubeMQ
@@ -30,10 +30,100 @@ entries:
     urls:
     - kubemq-2.3.7.tgz
     version: 2.3.7
+  kubemq-bridges:
+  - apiVersion: v2
+    appVersion: 1.4.0
+    created: "2023-03-18T12:48:03.4730879+02:00"
+    description: A Helm chart for KubeMQ Bridges Connector
+    digest: 6ab25493336454cbb42f1d37be8e4f80a28a5d7b46b369449ad75981e53206c5
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-bridges
+    type: application
+    urls:
+    - kubemq-bridges-1.4.0.tgz
+    version: 1.4.0
+  kubemq-cluster:
+  - apiVersion: v2
+    appVersion: 2.3.7
+    created: "2023-03-18T12:48:03.4736236+02:00"
+    description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
+    digest: cb838344023110828104832a512f5cd52627ab068138abfcae201df4212b85ca
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-cluster
+    type: application
+    urls:
+    - kubemq-cluster-2.3.7.tgz
+    version: 2.3.7
+  kubemq-crds:
+  - apiVersion: v2
+    appVersion: 2.3.7
+    created: "2023-03-18T12:48:03.4741611+02:00"
+    description: A Helm chart for KubeMQ CRD
+    digest: 274b6018ef1bc7c9cb2036e6cb1e6269ead1811a594ee1d05493e330196dc0af
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-crds
+    type: application
+    urls:
+    - kubemq-crds-2.3.7.tgz
+    version: 2.3.7
+  kubemq-operator:
+  - apiVersion: v2
+    appVersion: 1.9.3
+    created: "2023-03-18T12:48:03.4741611+02:00"
+    description: A Helm chart for KubeMQ Contoller
+    digest: 82b11b72bbe61764e653f16eecd8414b63208e0ae7a3917edcdfb923323113a5
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-operator
+    type: application
+    urls:
+    - kubemq-operator-1.9.3.tgz
+    version: 1.9.3
+  kubemq-sources:
+  - apiVersion: v2
+    appVersion: 1.4.1
+    created: "2023-03-18T12:48:03.474693+02:00"
+    description: A Helm chart for KubeMQ Sources Connector
+    digest: 52744522faf1755128c24575caa1e9c626ae1981f0c42c838673b68eaf59562d
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-sources
+    type: application
+    urls:
+    - kubemq-sources-1.4.1.tgz
+    version: 1.4.1
+  kubemq-targets:
+  - apiVersion: v2
+    appVersion: 1.5.1
+    created: "2023-03-18T12:48:03.474693+02:00"
+    description: A Helm chart for KubeMQ Targets Connector
+    digest: c9a8ccda45e7982b56c1ddccf96abeea660f683fe8dc9b05f78e94ade6b77663
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-targets
+    type: application
+    urls:
+    - kubemq-targets-1.5.1.tgz
+    version: 1.5.1
   operator:
   - apiVersion: v2
     appVersion: 2.3.7
-    created: "2023-03-14T15:39:28.6934971+02:00"
+    created: "2023-03-18T12:48:03.4752247+02:00"
     description: A Helm chart for KubeMQ Operator
     digest: 55e1e481bd9fda25aef5a54807adf164454743901900b4730b5ad076e8b710f7
     maintainers:
@@ -45,4 +135,4 @@ entries:
     urls:
     - operator-1.9.3.tgz
     version: 1.9.3
-generated: "2023-03-14T15:39:28.6918135+02:00"
+generated: "2023-03-18T12:48:03.4703231+02:00"

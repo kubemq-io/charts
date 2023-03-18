@@ -12,26 +12,31 @@ KubeMQ Helm charts required Helm v3. Please download/upgrade from [https://githu
 $ helm repo add kubemq-charts  https://kubemq-io.github.io/charts
 ```
 
-Verify kubemq helm repository charts is properly configured by:
+Verify KubeMQ helm repository charts is properly configured by:
 
 ## Update KubeMQ Helm Repository
 ``` 
 $ helm repo update
 ```
 
-## Install KubeMQ Chart
-To install KubeMQ chart with the release name kubemq-release:
+## Install KubeMQ Cluster Chart
 
-``` 
-$ helm install kubemq-cluster --set key={your-license-key} kubemq-charts/kubemq -n kubemq --create-namespace --wait
+``` console 
+$ helm install kubemq-crds kubemq-charts/kubemq-crds
+$ helm install --wait --create-namespace -n kubemq kubemq-controller kubemq-charts/kubemq-controller
+$ helm install --wait -n kubemq kubemq-cluster kubemq-charts/kubemq-cluster
 ```
 
 ## Uninstall KubeMQ Chart
 
 To uninstall/delete the kubemq-release deployment:
 
-``` 
-$ helm delete kubemq-cluster
+``` console
+$ helm uninstall -n kubemq kubemq-cluster
+$ helm uninstall -n kubemq kubemq-controller
+$ helm uninstall kubemq-crds
+```
+
 ```
 
 ## Configuration

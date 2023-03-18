@@ -1,8 +1,8 @@
 apiVersion: v2
 appVersion: 1.9.3
-description: A Helm chart for KubeMQ Contoller
+description: A Helm chart for KubeMQ Controller
 type: application
-name: kubemq-operator
+name: kubemq-controller
 version: 1.9.3
 maintainers:
   - name: KubeMQ

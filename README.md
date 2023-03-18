@@ -24,7 +24,7 @@ $ helm repo update
 ``` console 
 $ helm install kubemq-crds kubemq-charts/kubemq-crds
 $ helm install --wait --create-namespace -n kubemq kubemq-controller kubemq-charts/kubemq-controller
-$ helm install --wait -n kubemq kubemq-cluster kubemq-charts/kubemq-cluster
+$ helm install --wait -n kubemq kubemq-cluster --set key={your-license-key} kubemq-charts/kubemq-cluster
 ```
 
 ## Uninstall KubeMQ Chart

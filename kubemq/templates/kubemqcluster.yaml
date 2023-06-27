@@ -1,4 +1,4 @@
-apiVersion: core.k8s.kubemq.io/v1beta1
+apiVersion: core.k8s.kubemq.io/v1alpha1
 kind: KubemqCluster
 metadata:
   name: {{ include "kubemq.fullname" . }}

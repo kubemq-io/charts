@@ -17,7 +17,7 @@ tasks:
     cmds:
       - cmd: helm install --create-namespace -n kubemq kubemq-crds ./kubemq-crds
       - cmd: helm install --wait -n kubemq kubemq-controller ./kubemq-controller
-      - cmd: helm install --wait -n kubemq kubemq-cluster --set key=d7da1859-2924-4c45-8cf8-12c7e6b4b2c0 kubemq-charts/kubemq-cluster
+      - cmd: helm install --wait -n kubemq kubemq-cluster --set key=d7da1859-2924-4c45-8cf8-12c7e6b4b2c0 ./kubemq-cluster
   delete:
     cmds:
       - cmd: helm uninstall -n kubemq kubemq-cluster

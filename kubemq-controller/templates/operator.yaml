@@ -16,7 +16,7 @@ spec:
       serviceAccountName: kubemq-operator
       containers:
         - name: kubemq-operator
-          image: docker.io/kubemq/kubemq-operator:latest
+          image: {{ .Values.operatorImage | default "docker.io/kubemq/kubemq-operator:latest" }}
           command:
             - kubemq-operator
           imagePullPolicy: Always
@@ -32,10 +32,10 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: RELATED_IMAGE_KUBEMQ_CLUSTER
-              value: "docker.io/kubemq/kubemq:latest"
+              value: {{ .Values.kubemqImage | default "docker.io/kubemq/kubemq:latest" | quote }}
             - name: CONNECTOR_TARGETS_IMAGE
-              value: "kubemq/kubemq-targets:latest"
+              value: {{ .Values.connectorTargetsImage | default "kubemq/kubemq-targets:latest" | quote }}
             - name: CONNECTOR_SOURCES_IMAGE
-              value: "kubemq/kubemq-sources:latest"
+              value: {{ .Values.connectorSourcesImage | default "kubemq/kubemq-sources:latest" | quote }}
             - name: CONNECTOR_BRIDGES_IMAGE
-              value: "kubemq/kubemq-bridges:latest"
+              value: {{ .Values.connectorBridgesImage | default "kubemq/kubemq-bridges:latest" | quote }}

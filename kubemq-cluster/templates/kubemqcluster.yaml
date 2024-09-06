@@ -9,8 +9,13 @@ metadata:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
 spec:
-  key: {{ required "A valid kubemq is required!" .Values.key }}
+  {{- if or .Values.key .Values.license }}
+  {{- if .Values.key }}
+  key: {{ .Values.key }}
+  {{- else if .Values.license }}
+  license: {{ .Values.license }}
+  {{- end }}
+  {{- else }}
+  {{- fail "Either .Values.key or .Values.license must be provided" }}
+  {{- end }}
 {{ toYaml .Values | indent 2 }}
-
-
-

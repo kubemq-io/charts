@@ -7,6 +7,21 @@ key: kubemq license key
 # KubeMQ license data - https://docs.kubemq.io/configuration/cluster/set-license
 license: kubemq license data
 
+# Private Registry Configuration
+# Reference existing docker registry secrets for pulling images from private registries
+# Create secrets first using:
+#   kubectl create secret docker-registry my-registry-secret \
+#     --docker-server=my-private-registry.com \
+#     --docker-username=myuser \
+#     --docker-password=mypassword \
+#     --docker-email=myemail@example.com \
+#     --namespace=kubemq
+imagePullSecrets: []
+# Example:
+#   imagePullSecrets:
+#     - name: my-registry-secret
+#     - name: another-registry-secret  # Multiple secrets supported
+
 # KubeMQ Volume Configuration - https://docs.kubemq.io/configuration/cluster/set-persistence-volume
 volume:
   size: 10Gi

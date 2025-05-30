@@ -14,6 +14,41 @@ $ helm install -n kubemq kubemq-controller kubemq-charts/kubemq-controller
 
 For a more comprehensive documentation about how to install the KubeMQ Cluster and KubeMQ Connector, check the `kubemq-cluster` and `kubemq-connector` charts documentation out.
 
+## Using Private Container Registries
+
+KubeMQ Controller supports pulling images from private container registries. To use private registries:
+
+1. **Create a registry secret:**
+
+```console
+$ kubectl create secret docker-registry my-registry-secret \
+  --docker-server=my-private-registry.com \
+  --docker-username=myuser \
+  --docker-password=mypassword \
+  --docker-email=myemail@example.com \
+  --namespace=kubemq
+```
+
+2. **Install the controller with the registry secret:**
+
+```console
+$ helm install -n kubemq kubemq-controller kubemq-charts/kubemq-controller \
+  --set imagePullSecrets[0].name=my-registry-secret
+```
+
+3. **Using values file:**
+
+Create a `values.yaml` file:
+```yaml
+imagePullSecrets:
+  - name: my-registry-secret
+```
+
+Then install:
+```console
+$ helm install -n kubemq kubemq-controller kubemq-charts/kubemq-controller -f values.yaml
+```
+
 ## Upgrading the charts
 
 Please refer to the release notes of each version of the helm charts.

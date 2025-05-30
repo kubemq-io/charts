@@ -27,6 +27,58 @@ $ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controlle
 $ helm install --wait -n kubemq kubemq-cluster --set key={your-license-key} kubemq-charts/kubemq-cluster
 ```
 
+## Using Private Container Registries
+
+Both KubeMQ Controller and KubeMQ Cluster charts support pulling images from private container registries. To use private registries, you need to:
+
+1. **Create a registry secret:**
+
+``` console
+$ kubectl create secret docker-registry my-registry-secret \
+  --docker-server=my-private-registry.com \
+  --docker-username=myuser \
+  --docker-password=mypassword \
+  --docker-email=myemail@example.com \
+  --namespace=kubemq
+```
+
+2. **Install the controller with the registry secret:**
+
+``` console
+$ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller \
+  --set imagePullSecrets[0].name=my-registry-secret
+```
+
+**For kubemq-cluster:**
+
+``` console
+$ helm install --wait -n kubemq kubemq-cluster kubemq-charts/kubemq-cluster \
+  --set key={your-license-key} \
+  --set imagePullSecrets[0].name=my-registry-secret
+```
+
+3. **Multiple registry secrets (if needed):**
+
+``` console
+$ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller \
+  --set imagePullSecrets[0].name=registry-secret-1 \
+  --set imagePullSecrets[1].name=registry-secret-2
+```
+
+4. **Using values file:**
+
+Create a `values.yaml` file:
+```yaml
+imagePullSecrets:
+  - name: my-registry-secret
+  - name: another-registry-secret
+```
+
+Then install:
+``` console
+$ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller -f values.yaml
+```
+
 ## Uninstall KubeMQ Cluster Chart
 
 To uninstall/delete the kubemq-release deployment:
@@ -37,11 +89,11 @@ $ helm uninstall -n kubemq kubemq-controller
 $ helm uninstall -n kubemq kubemq-crds
 ```
 
-```
-
 ## Configuration
 
 The following table lists the configurable parameters of the KubeMQ chart and their default values.
+
+### KubeMQ Cluster Configuration
 
 ```yaml
 # Number of replicas of KubeMQ Nodes - https://docs.kubemq.io/configuration/cluster/default-template
@@ -52,6 +104,13 @@ key: kubemq license key
 
 # KubeMQ license data - https://docs.kubemq.io/configuration/cluster/set-license
 license: kubemq license data
+
+# Private Registry Configuration - Reference existing secrets for pulling images from private registries
+imagePullSecrets: []
+# Example:
+#   imagePullSecrets:
+#     - name: my-registry-secret
+#     - name: another-registry-secret
 
 # KubeMQ Volume Configuration - https://docs.kubemq.io/configuration/cluster/set-persistence-volume
 volume:
@@ -160,9 +219,24 @@ tls:
   ca: ca data
   cert: cert data
   key: key data
+```
 
+### KubeMQ Controller Configuration
 
+```yaml
+# KubeMQ Controller Image Configuration
+operatorImage: docker.io/kubemq/kubemq-operator:latest
+kubemqImage: docker.io/kubemq/kubemq:latest
+connectorTargetsImage: kubemq/kubemq-targets:latest
+connectorSourcesImage: kubemq/kubemq-sources:latest
+connectorBridgesImage: kubemq/kubemq-bridges:latest
 
+# Private Registry Configuration - Reference existing secrets for pulling images from private registries
+imagePullSecrets: []
+# Example:
+#   imagePullSecrets:
+#     - name: my-registry-secret
+#     - name: another-registry-secret
 ```
 
 ## Documentation

@@ -55,6 +55,38 @@ rest:
   nodePort: 32090
   port: 9090
 
+# KubeMQ MCP (Model Context Protocol) connector — enabled by default server-side.
+# Omit a field to use the server default; set "disabled: true" to turn the connector off.
+# NOTE: MCP/Agents/CE share the REST HTTP port (9090). External exposure is controlled by
+# the rest.expose / rest.nodePort settings above; keep REST enabled to expose them.
+mcp:
+  disabled: false
+  # toolTimeoutSeconds: 300
+  # trustedOrigins:
+  #   - "auto"
+
+# KubeMQ Agents (A2A) platform connector — enabled by default server-side.
+agents:
+  disabled: false
+  # agentTtlSeconds: 300
+  # defaultTimeoutSeconds: 300
+  # maxTimeoutSeconds: 3600
+  # maxAgents: 0
+  # maxSseIdleSeconds: 300
+  # trustedOrigins:
+  #   - "auto"
+  # agentMaxResponseBytes: 10485760
+  # agentTlsSkipVerify: false
+  # agentMaxConcurrency: 100
+
+# KubeMQ CloudEvents (CE) connector — enabled by default server-side.
+ce:
+  disabled: false
+  # timeoutSeconds: 60
+  # subBuffSize: 100
+  # maxSseIdleSeconds: 300
+  # maxSseConnections: 0
+
 # KubeMQ Authentication Configuration - https://docs.kubemq.io/configuration/cluster/set-authentication
 authentication:
   key: jwt

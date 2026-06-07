@@ -52,6 +52,45 @@ spec:
                       format: int32
                       type: integer
                   type: object
+                agents:
+                  properties:
+                    agentMaxConcurrency:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    agentMaxResponseBytes:
+                      format: int64
+                      minimum: 0
+                      type: integer
+                    agentTlsSkipVerify:
+                      type: boolean
+                    agentTtlSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    defaultTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    disabled:
+                      type: boolean
+                    maxAgents:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxSseIdleSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    maxTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    trustedOrigins:
+                      items:
+                        type: string
+                      type: array
+                  type: object
                 authentication:
                   properties:
                     key:
@@ -68,6 +107,28 @@ spec:
                       type: string
                     url:
                       type: string
+                  type: object
+                ce:
+                  properties:
+                    disabled:
+                      type: boolean
+                    maxSseConnections:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxSseIdleSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    subBuffSize:
+                      format: int32
+                      maximum: 10000
+                      minimum: 1
+                      type: integer
+                    timeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
                   type: object
                 configData:
                   type: string
@@ -134,6 +195,19 @@ spec:
                     level:
                       format: int32
                       type: integer
+                  type: object
+                mcp:
+                  properties:
+                    disabled:
+                      type: boolean
+                    toolTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    trustedOrigins:
+                      items:
+                        type: string
+                      type: array
                   type: object
                 nodeSelectors:
                   properties:

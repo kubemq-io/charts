@@ -91,6 +91,123 @@ spec:
                         type: string
                       type: array
                   type: object
+                amqp:
+                  properties:
+                    channelMax:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    deadLetterMaxHops:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    defaultVhost:
+                      minLength: 1
+                      type: string
+                    disabled:
+                      type: boolean
+                    frameMax:
+                      format: int32
+                      minimum: 4096
+                      type: integer
+                    getBatchSize:
+                      format: int32
+                      maximum: 1024
+                      minimum: 1
+                      type: integer
+                    heartbeatSeconds:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxBodySize:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    maxConnections:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxReceiveCount:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    tlsPort:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                  type: object
+                amqp10:
+                  properties:
+                    defaultPattern:
+                      enum:
+                        - queues
+                        - events
+                        - events-store
+                        - commands
+                        - queries
+                      type: string
+                    defaultRpcTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    disabled:
+                      type: boolean
+                    getBatchSize:
+                      format: int32
+                      maximum: 1024
+                      minimum: 1
+                      type: integer
+                    idleTimeoutSeconds:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxConnections:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxFrameSize:
+                      format: int32
+                      minimum: 512
+                      type: integer
+                    maxLinksPerSession:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    maxMessageSize:
+                      format: int64
+                      minimum: 1
+                      type: integer
+                    maxUnsettledPerLink:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    rpcMaxPending:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    sessionMax:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    tlsPort:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                  type: object
                 authentication:
                   properties:
                     key:
@@ -106,6 +223,39 @@ spec:
                     policy:
                       type: string
                     url:
+                      type: string
+                  type: object
+                aws:
+                  properties:
+                    accountId:
+                      pattern: ^[0-9]{12}$
+                      type: string
+                    advertisedUrl:
+                      type: string
+                    bodyLimit:
+                      minLength: 1
+                      type: string
+                    disabled:
+                      type: boolean
+                    maxConcurrentPolls:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    maxInflightPerQueue:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    readTimeout:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    region:
+                      minLength: 1
                       type: string
                   type: object
                 ce:
@@ -209,6 +359,91 @@ spec:
                         type: string
                       type: array
                   type: object
+                mqtt:
+                  properties:
+                    capabilities:
+                      properties:
+                        maxClients:
+                          format: int64
+                          minimum: 0
+                          type: integer
+                        maxInflight:
+                          format: int32
+                          maximum: 65535
+                          minimum: 0
+                          type: integer
+                        maxMessageExpirySeconds:
+                          format: int64
+                          minimum: 0
+                          type: integer
+                        maxPacketSizeBytes:
+                          format: int64
+                          maximum: 4294967295
+                          minimum: 0
+                          type: integer
+                        maxQos:
+                          format: int32
+                          maximum: 2
+                          minimum: 0
+                          type: integer
+                        maxSessionExpirySeconds:
+                          format: int64
+                          maximum: 4294967295
+                          minimum: 0
+                          type: integer
+                        minProtocolVersion:
+                          enum:
+                            - 4
+                            - 5
+                          format: int32
+                          type: integer
+                        receiveMaximum:
+                          format: int32
+                          maximum: 65535
+                          minimum: 0
+                          type: integer
+                      type: object
+                    defaultPattern:
+                      enum:
+                        - events
+                        - store
+                        - none
+                      type: string
+                    disabled:
+                      type: boolean
+                    port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    queueAckTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    rpcMaxPending:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    rpcTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    subBuffSize:
+                      format: int32
+                      maximum: 10000
+                      minimum: 1
+                      type: integer
+                    tlsPort:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    wsPort:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                  type: object
                 nodeSelectors:
                   properties:
                     keys:
@@ -308,6 +543,57 @@ spec:
                       type: string
                     url:
                       type: string
+                  type: object
+                stomp:
+                  properties:
+                    defaultPattern:
+                      enum:
+                        - events
+                        - queues
+                        - store
+                        - none
+                      type: string
+                    disabled:
+                      type: boolean
+                    heartbeatMs:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxBodySize:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    maxConnections:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    queueAckTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    rpcMaxPending:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    rpcTimeoutSeconds:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    subBuffSize:
+                      format: int32
+                      maximum: 10000
+                      minimum: 1
+                      type: integer
+                    tlsPort:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
                   type: object
                 store:
                   properties:

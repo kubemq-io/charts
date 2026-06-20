@@ -87,6 +87,90 @@ ce:
   # maxSseIdleSeconds: 300
   # maxSseConnections: 0
 
+# KubeMQ MQTT connector — enabled by default server-side.
+# Exposes ports 1883 (mqtt), 8883 (mqtt-tls), 8083 (mqtt-ws) via a ClusterIP Service.
+mqtt:
+  disabled: false
+  # port: 1883
+  # tlsPort: 8883
+  # wsPort: 8083
+  # defaultPattern: events
+  # subBuffSize: 100
+  # queueAckTimeoutSeconds: 30
+  # rpcTimeoutSeconds: 30
+  # rpcMaxPending: 1024
+  # capabilities:
+  #   maxClients: 0
+  #   maxPacketSizeBytes: 4194304
+  #   receiveMaximum: 1024
+  #   maxInflight: 8192
+  #   maxSessionExpirySeconds: 3600
+  #   maxMessageExpirySeconds: 86400
+  #   maxQos: 2
+  #   minProtocolVersion: 4
+
+# KubeMQ AMQP 0.9.1 (RabbitMQ) connector — enabled by default server-side.
+# Shares the amqp Service ports 5672 (amqp), 5671 (amqp-tls) with the AMQP 1.0 connector.
+amqp:
+  disabled: false
+  # port: 5672
+  # tlsPort: 5671
+  # heartbeatSeconds: 60
+  # frameMax: 131072
+  # channelMax: 2047
+  # maxConnections: 1000
+  # maxBodySize: 104857600
+  # defaultVhost: default
+  # getBatchSize: 32
+  # deadLetterMaxHops: 16
+  # maxReceiveCount: 0
+
+# KubeMQ AMQP 1.0 connector — enabled by default server-side.
+# Shares the amqp Service ports 5672 (amqp), 5671 (amqp-tls) with the AMQP 0.9.1 connector.
+amqp10:
+  disabled: false
+  # port: 5672
+  # tlsPort: 5671
+  # maxFrameSize: 131072
+  # maxMessageSize: 104857600
+  # sessionMax: 256
+  # maxLinksPerSession: 256
+  # maxConnections: 1000
+  # idleTimeoutSeconds: 120
+  # defaultPattern: queues
+  # getBatchSize: 32
+  # maxUnsettledPerLink: 1024
+  # defaultRpcTimeoutSeconds: 30
+  # rpcMaxPending: 512
+
+# KubeMQ STOMP connector — enabled by default server-side.
+# Exposes ports 61613 (stomp), 61614 (stomp-tls) via a ClusterIP Service.
+stomp:
+  disabled: false
+  # port: 61613
+  # tlsPort: 61614
+  # defaultPattern: events
+  # subBuffSize: 100
+  # maxConnections: 1000
+  # maxBodySize: 104857600
+  # heartbeatMs: 10000
+  # queueAckTimeoutSeconds: 30
+  # rpcTimeoutSeconds: 30
+  # rpcMaxPending: 1024
+
+# KubeMQ AWS (SQS/SNS) connector — enabled by default server-side.
+# Exposes port 4566 (aws-http) via a ClusterIP Service. AWS credentials are not set via the CR.
+aws:
+  disabled: false
+  # port: 4566
+  # region: kubemq
+  # accountId: "000000000000"
+  # advertisedUrl: ""
+  # maxInflightPerQueue: 20000
+  # maxConcurrentPolls: 1024
+  # readTimeout: 60
+  # bodyLimit: 2M
+
 # KubeMQ Authentication Configuration - https://docs.kubemq.io/configuration/cluster/set-authentication
 authentication:
   key: jwt

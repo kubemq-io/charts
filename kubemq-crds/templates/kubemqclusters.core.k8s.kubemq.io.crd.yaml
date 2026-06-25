@@ -40,6 +40,10 @@ spec:
               properties:
                 api:
                   properties:
+                    allowOrigins:
+                      items:
+                        type: string
+                      type: array
                     disabled:
                       type: boolean
                     expose:
@@ -208,9 +212,41 @@ spec:
                       minimum: 1
                       type: integer
                   type: object
+                audit:
+                  properties:
+                    cleanupIntervalMinutes:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    enable:
+                      type: boolean
+                    retentionHours:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                  type: object
                 authentication:
                   properties:
+                    enable:
+                      type: boolean
                     key:
+                      type: string
+                    oidc:
+                      properties:
+                        clientID:
+                          type: string
+                        insecureSkipSignatureCheck:
+                          type: boolean
+                        issuer:
+                          type: string
+                        skipClientIDCheck:
+                          type: boolean
+                        skipExpiryCheck:
+                          type: boolean
+                        skipIssuerCheck:
+                          type: boolean
+                      type: object
+                    signatureType:
                       type: string
                     type:
                       type: string
@@ -235,6 +271,8 @@ spec:
                     bodyLimit:
                       minLength: 1
                       type: string
+                    credentialsData:
+                      type: string
                     disabled:
                       type: boolean
                     maxConcurrentPolls:
@@ -245,6 +283,8 @@ spec:
                       format: int32
                       minimum: 1
                       type: integer
+                    messageSigning:
+                      type: boolean
                     port:
                       format: int32
                       maximum: 65535
@@ -257,6 +297,10 @@ spec:
                     region:
                       minLength: 1
                       type: string
+                    signingCertTtlHours:
+                      format: int32
+                      minimum: 1
+                      type: integer
                   type: object
                 ce:
                   properties:
@@ -282,6 +326,47 @@ spec:
                   type: object
                 configData:
                   type: string
+                gcp:
+                  properties:
+                    advertisedEndpoint:
+                      type: string
+                    defaultAckDeadlineSeconds:
+                      format: int32
+                      type: integer
+                    deliveryShards:
+                      format: int32
+                      type: integer
+                    disabled:
+                      type: boolean
+                    enableReflection:
+                      type: boolean
+                    maxAckExtensionSeconds:
+                      format: int32
+                      type: integer
+                    maxConcurrentPolls:
+                      format: int32
+                      type: integer
+                    maxInflightPerSubscription:
+                      format: int32
+                      type: integer
+                    maxMessageBytes:
+                      format: int32
+                      type: integer
+                    maxOutstandingMessages:
+                      format: int32
+                      type: integer
+                    maxSeekReplay:
+                      format: int32
+                      type: integer
+                    port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    streamCloseSeconds:
+                      format: int32
+                      type: integer
+                  type: object
                 grpc:
                   properties:
                     bodyLimit:
@@ -291,6 +376,8 @@ spec:
                       format: int32
                       type: integer
                     disabled:
+                      type: boolean
+                    enableReflection:
                       type: boolean
                     expose:
                       pattern: (ClusterIP|NodePort|LoadBalancer)
@@ -322,6 +409,47 @@ spec:
                       format: int32
                       type: integer
                   type: object
+                http:
+                  properties:
+                    baseUrl:
+                      type: string
+                    bodyLimit:
+                      type: string
+                    cors:
+                      properties:
+                        allowCredentials:
+                          type: boolean
+                        allowHeaders:
+                          items:
+                            type: string
+                          type: array
+                        allowMethods:
+                          items:
+                            type: string
+                          type: array
+                        allowOrigins:
+                          items:
+                            type: string
+                          type: array
+                        exposeHeaders:
+                          items:
+                            type: string
+                          type: array
+                        maxAge:
+                          format: int32
+                          minimum: 0
+                          type: integer
+                      type: object
+                    port:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    readTimeout:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                  type: object
                 image:
                   properties:
                     image:
@@ -340,10 +468,10 @@ spec:
                   type: boolean
                 log:
                   properties:
-                    file:
-                      type: string
                     level:
                       format: int32
+                      maximum: 5
+                      minimum: 0
                       type: integer
                   type: object
                 mcp:
@@ -464,35 +592,43 @@ spec:
                   properties:
                     defaultVisibilitySeconds:
                       format: int32
-                      minimum: 0
+                      minimum: 1
                       type: integer
                     defaultWaitTimeoutSeconds:
                       format: int32
-                      minimum: 0
+                      minimum: 1
                       type: integer
                     maxDelaySeconds:
                       format: int32
-                      minimum: 0
+                      minimum: 1
                       type: integer
                     maxExpirationSeconds:
                       format: int32
-                      minimum: 0
+                      minimum: 1
+                      type: integer
+                    maxInflight:
+                      format: int32
+                      minimum: 1
                       type: integer
                     maxReQueues:
                       format: int32
-                      minimum: 0
+                      minimum: 1
                       type: integer
                     maxReceiveMessagesRequest:
                       format: int32
-                      minimum: 0
+                      minimum: 1
                       type: integer
                     maxVisibilitySeconds:
                       format: int32
-                      minimum: 0
+                      minimum: 1
                       type: integer
                     maxWaitTimeoutSeconds:
                       format: int32
-                      minimum: 0
+                      minimum: 1
+                      type: integer
+                    pubAckWaitSeconds:
+                      format: int32
+                      minimum: 1
                       type: integer
                   type: object
                 replicas:
@@ -522,6 +658,31 @@ spec:
                     bufferSize:
                       format: int32
                       type: integer
+                    cors:
+                      properties:
+                        allowCredentials:
+                          type: boolean
+                        allowHeaders:
+                          items:
+                            type: string
+                          type: array
+                        allowMethods:
+                          items:
+                            type: string
+                          type: array
+                        allowOrigins:
+                          items:
+                            type: string
+                          type: array
+                        exposeHeaders:
+                          items:
+                            type: string
+                          type: array
+                        maxAge:
+                          format: int32
+                          minimum: 0
+                          type: integer
+                      type: object
                     disabled:
                       type: boolean
                     expose:
@@ -532,6 +693,14 @@ spec:
                       type: integer
                     port:
                       format: int32
+                      type: integer
+                    readTimeout:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                    writeTimeout:
+                      format: int32
+                      minimum: 1
                       type: integer
                   type: object
                 routing:
@@ -599,6 +768,10 @@ spec:
                   properties:
                     clean:
                       type: boolean
+                    idlePruneCutoffHours:
+                      format: int32
+                      minimum: 1
+                      type: integer
                     maxChannelSize:
                       format: int32
                       minimum: 0
@@ -625,6 +798,55 @@ spec:
                       format: int32
                       minimum: 0
                       type: integer
+                  type: object
+                telemetry:
+                  properties:
+                    enable:
+                      type: boolean
+                    exporter:
+                      properties:
+                        compression:
+                          enum:
+                            - gzip
+                            - none
+                          type: string
+                        endpoint:
+                          type: string
+                        insecure:
+                          type: boolean
+                        protocol:
+                          enum:
+                            - grpc
+                            - http
+                          type: string
+                        timeout:
+                          type: string
+                      type: object
+                    metrics:
+                      properties:
+                        enable:
+                          type: boolean
+                        exportInterval:
+                          type: string
+                      type: object
+                    serviceName:
+                      type: string
+                    traces:
+                      properties:
+                        enable:
+                          type: boolean
+                        sampler:
+                          enum:
+                            - always_on
+                            - always_off
+                            - trace_id_ratio
+                            - parent_based
+                          type: string
+                        samplingRatio:
+                          maximum: 1
+                          minimum: 0
+                          type: number
+                      type: object
                   type: object
                 tls:
                   properties:

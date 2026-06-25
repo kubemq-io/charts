@@ -39,6 +39,8 @@ api:
   expose: NodePort
   nodePort: 32080
   port: 8080
+  # allowOrigins:
+  #   - "https://app.example.com"
 
 # KubeMQ gRPC interface - https://docs.kubemq.io/configuration/cluster/set-grpc-interface
 grpc:
@@ -47,13 +49,45 @@ grpc:
   nodePort: 32000
   port: 50000
   bodyLimit: 10000000
+  # enableReflection: false
 # KubeMQ REST interface - https://docs.kubemq.io/configuration/cluster/set-rest-interface
 rest:
   bodyLimit: 1000000
-  disabled: true
+  disabled: false
   expose: NodePort
   nodePort: 32090
   port: 9090
+  # readTimeout: 30
+  # writeTimeout: 30
+  # cors:
+  #   allowOrigins:
+  #     - "https://app.example.com"
+  #   allowMethods:
+  #     - GET
+  #     - POST
+  #   allowHeaders:
+  #     - "*"
+  #   allowCredentials: false
+  #   exposeHeaders: []
+  #   maxAge: 300
+
+# KubeMQ shared HTTP server (HTTP-family connectors) and CORS policy
+http:
+  # port: 9090
+  # readTimeout: 30
+  # bodyLimit: 1M
+  # baseUrl: ""
+  # cors:
+  #   allowOrigins:
+  #     - "https://app.example.com"
+  #   allowMethods:
+  #     - GET
+  #     - POST
+  #   allowHeaders:
+  #     - "*"
+  #   allowCredentials: false
+  #   exposeHeaders: []
+  #   maxAge: 300
 
 # KubeMQ MCP (Model Context Protocol) connector — enabled by default server-side.
 # Omit a field to use the server default; set "disabled: true" to turn the connector off.
@@ -91,6 +125,7 @@ ce:
 # Exposes ports 1883 (mqtt), 8883 (mqtt-tls), 8083 (mqtt-ws) via a ClusterIP Service.
 mqtt:
   disabled: false
+  # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 1883
   # tlsPort: 8883
   # wsPort: 8083
@@ -113,6 +148,7 @@ mqtt:
 # Shares the amqp Service ports 5672 (amqp), 5671 (amqp-tls) with the AMQP 1.0 connector.
 amqp:
   disabled: false
+  # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 5672
   # tlsPort: 5671
   # heartbeatSeconds: 60
@@ -129,6 +165,7 @@ amqp:
 # Shares the amqp Service ports 5672 (amqp), 5671 (amqp-tls) with the AMQP 0.9.1 connector.
 amqp10:
   disabled: false
+  # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 5672
   # tlsPort: 5671
   # maxFrameSize: 131072
@@ -147,6 +184,7 @@ amqp10:
 # Exposes ports 61613 (stomp), 61614 (stomp-tls) via a ClusterIP Service.
 stomp:
   disabled: false
+  # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 61613
   # tlsPort: 61614
   # defaultPattern: events
@@ -162,6 +200,7 @@ stomp:
 # Exposes port 4566 (aws-http) via a ClusterIP Service. AWS credentials are not set via the CR.
 aws:
   disabled: false
+  # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 4566
   # region: kubemq
   # accountId: "000000000000"
@@ -171,10 +210,36 @@ aws:
   # readTimeout: 60
   # bodyLimit: 2M
 
+# Google Cloud Pub/Sub connector — enabled by default server-side.
+# Exposes port 8085 (pubsub-grpc) via a ClusterIP Service. gRPC-only.
+gcp:
+  disabled: false
+  # port: 8085
+  # advertisedEndpoint: ""
+  # maxMessageBytes: 10485760
+  # defaultAckDeadlineSeconds: 10
+  # maxOutstandingMessages: 1000
+  # maxInflightPerSubscription: 20000
+  # maxConcurrentPolls: 1024
+  # deliveryShards: 16
+  # maxAckExtensionSeconds: 600
+  # streamCloseSeconds: 1800
+  # maxSeekReplay: 1000000
+  # enableReflection: false
+
 # KubeMQ Authentication Configuration - https://docs.kubemq.io/configuration/cluster/set-authentication
 authentication:
   key: jwt
   type: jwt token type
+  # enable: true
+  # signatureType: HS256
+  # oidc:
+  #   issuer: "https://issuer.example.com"
+  #   clientID: "kubemq"
+  #   skipClientIDCheck: false
+  #   skipExpiryCheck: false
+  #   skipIssuerCheck: false
+  #   insecureSkipSignatureCheck: false
 
 # KubeMQ Authorization Configuration - https://docs.kubemq.io/configuration/cluster/set-authorization
 authorization:
@@ -191,8 +256,8 @@ health:
   timeoutSeconds: 10
 
 # KubeMQ Logging Configuration - https://docs.kubemq.io/configuration/cluster/set-logs
+# level: 0=Trace 1=Debug 2=Info 3=Warn 4=Error 5=Fatal
 log:
-  file: path to log file
   level: 1
 
 # KubeMQ NodeSelectors Configuration - https://docs.kubemq.io/configuration/cluster/set-node-selectors
@@ -202,14 +267,16 @@ nodeSelectors:
 
 # KubeMQ Queue Configuration - https://docs.kubemq.io/configuration/cluster/set-queues-settings
 queue:
-  defaultVisibilitySeconds: 0
-  defaultWaitTimeoutSeconds: 0
-  maxDelaySeconds: 0
-  maxExpirationSeconds: 0
-  maxReQueues: 0
-  maxReceiveMessagesRequest: 0
-  maxVisibilitySeconds: 0
-  maxWaitTimeoutSeconds: 0
+  defaultVisibilitySeconds: 1
+  defaultWaitTimeoutSeconds: 1
+  maxDelaySeconds: 1
+  maxExpirationSeconds: 1
+  maxReQueues: 1
+  maxReceiveMessagesRequest: 1
+  maxVisibilitySeconds: 1
+  maxWaitTimeoutSeconds: 1
+  # maxInflight: 1024
+  # pubAckWaitSeconds: 30
 
 # KubeMQ Resources Configuration - https://docs.kubemq.io/configuration/cluster/set-resources-limits
 resources:
@@ -239,6 +306,31 @@ store:
   messagesRetentionMinutes: 0
   path: path to store
   purgeInactiveMinutes: 0
+  # idlePruneCutoffHours: 24
+
+# KubeMQ Audit Configuration
+audit:
+  # enable: true
+  # retentionHours: 720
+  # cleanupIntervalMinutes: 60
+
+# KubeMQ Telemetry (OpenTelemetry) Configuration
+telemetry:
+  # enable: true
+  # serviceName: kubemq
+  # traces:
+  #   enable: true
+  #   samplingRatio: 1.0
+  #   sampler: parent_based
+  # metrics:
+  #   enable: true
+  #   exportInterval: 60s
+  # exporter:
+  #   protocol: grpc
+  #   endpoint: "otel-collector:4317"
+  #   insecure: false
+  #   compression: gzip
+  #   timeout: 10s
 
 # KubeMQ TLS Configuration - https://docs.kubemq.io/configuration/cluster/set-tls
 tls:

@@ -69,8 +69,10 @@ in the KubeMQ server repo, and the validating schema is the
 
 ### Connector blocks
 
-Each connector is enabled by default server-side; set `disabled: true` to turn one off, or
-set any sub-field to override its server default:
+Connectors fall into two groups with different opt-in semantics:
+
+**Always-on connectors** — enabled by default server-side. Set `disabled: true` to turn
+one off, or set any sub-field to override its server default:
 
 | Block | Connector |
 |---|---|
@@ -78,12 +80,6 @@ set any sub-field to override its server default:
 | `rest` | REST/WebSocket interface (also fronts the HTTP-family connectors below) |
 | `api` | API / dashboard interface |
 | `http` | Shared HTTP server + CORS policy for the HTTP-family connectors |
-| `mqtt` | MQTT |
-| `amqp` | AMQP 0.9.1 (RabbitMQ dialect) |
-| `amqp10` | AMQP 1.0 |
-| `stomp` | STOMP |
-| `aws` | AWS SQS/SNS |
-| `gcp` | Google Cloud Pub/Sub |
 | `mcp` | Model Context Protocol (shares the REST port) |
 | `agents` | Agents / A2A (shares the REST port) |
 | `ce` | CloudEvents (shares the REST port) |
@@ -91,6 +87,22 @@ set any sub-field to override its server default:
 > The `mcp`, `agents`, and `ce` connectors share the REST HTTP port. Their external
 > exposure is governed by the `rest.expose` / `rest.nodePort` settings — keep `rest`
 > enabled to reach them.
+
+**Opt-in connectors** — disabled by default server-side (no ports opened unless you
+explicitly opt in). Set `enabled: true` to activate a connector and open its port(s).
+Omitting the block entirely, or setting `enabled: false`, keeps the connector off:
+
+| Block | Connector | Ports |
+|---|---|---|
+| `mqtt` | MQTT | 1883 (mqtt), 8883 (mqtt-tls), 8083 (mqtt-ws) |
+| `amqp` | AMQP 0.9.1 (RabbitMQ dialect) | 5672 (amqp), 5671 (amqp-tls) — shared with amqp10 |
+| `amqp10` | AMQP 1.0 | 5672 (amqp), 5671 (amqp-tls) — shared with amqp |
+| `stomp` | STOMP | 61613 (stomp), 61614 (stomp-tls) |
+| `aws` | AWS SQS/SNS | 4566 (aws-http) |
+| `gcp` | Google Cloud Pub/Sub | 8085 (gcp-grpc, gRPC-only) |
+
+> The `amqp` and `amqp10` connectors share a single Kubernetes Service on ports 5672/5671.
+> The Service is kept as long as at least one of the two dialects is enabled.
 
 ### Core blocks
 
@@ -112,6 +124,44 @@ set any sub-field to override its server default:
 
 Please refer to the release notes of each version of the helm charts.
 These can be found [here](https://github.com/kubemq/helm-charts/releases).
+
+### v2.8.x → v2.9.0 — Wire-protocol connectors are now opt-in (BREAKING)
+
+**Lockstep requirement:** chart v2.9.0 must be installed together with the kubemq-crds
+v2.13.0 chart, the kubemq-operator v1.19.0 (or the kubemq-controller chart at its matching
+version), and the KubeMQ server image v3.0.0-b7+. **Do not upgrade charts alone** — the
+operator and server binary must move in lockstep.
+
+**What changed:** The six wire-protocol connectors (MQTT, AMQP 0-9-1, AMQP 1.0, STOMP,
+AWS, GCP Pub/Sub) are **disabled by default** in the server binary starting from v3. The
+CRD field for these connectors changed from `disabled: bool` to `enabled: *bool`. Any
+existing `KubemqCluster` CR block that tunes a connector without setting `enabled` will
+resolve **off** after the upgrade.
+
+**Migration — add `enabled: true` to each connector you need:**
+
+```yaml
+spec:
+  mqtt:
+    enabled: true   # was: disabled: false (or omitted)
+  amqp:
+    enabled: true
+  amqp10:
+    enabled: true
+  stomp:
+    enabled: true
+  aws:
+    enabled: true
+  gcp:
+    enabled: true
+```
+
+See the full upgrade guide at:
+[dev-center/content/docs/getting-started/installation/upgrade-v2-to-v3.mdx](https://github.com/kubemq-io/dev-center/blob/master/content/docs/getting-started/installation/upgrade-v2-to-v3.mdx)
+
+**No customer-facing publish** until all repositories are green and the user gate is
+satisfied. Lockstep: server flip must not be merged to a release branch until the k8s-lib
+tag + operator vendor (the `enabled` re-enable path) land.
 
 ## Uninstalling the charts
 

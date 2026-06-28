@@ -109,7 +109,7 @@ spec:
                     defaultVhost:
                       minLength: 1
                       type: string
-                    disabled:
+                    enabled:
                       type: boolean
                     frameMax:
                       format: int32
@@ -161,7 +161,7 @@ spec:
                       format: int32
                       minimum: 1
                       type: integer
-                    disabled:
+                    enabled:
                       type: boolean
                     getBatchSize:
                       format: int32
@@ -273,7 +273,7 @@ spec:
                       type: string
                     credentialsData:
                       type: string
-                    disabled:
+                    enabled:
                       type: boolean
                     maxConcurrentPolls:
                       format: int32
@@ -336,7 +336,7 @@ spec:
                     deliveryShards:
                       format: int32
                       type: integer
-                    disabled:
+                    enabled:
                       type: boolean
                     enableReflection:
                       type: boolean
@@ -537,7 +537,7 @@ spec:
                         - store
                         - none
                       type: string
-                    disabled:
+                    enabled:
                       type: boolean
                     port:
                       format: int32
@@ -722,7 +722,7 @@ spec:
                         - store
                         - none
                       type: string
-                    disabled:
+                    enabled:
                       type: boolean
                     heartbeatMs:
                       format: int32

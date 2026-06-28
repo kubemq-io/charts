@@ -74,8 +74,16 @@ http:
   #   exposeHeaders: []
   #   maxAge: 300
 
-# KubeMQ MCP (Model Context Protocol) connector — enabled by default server-side.
-# Omit a field to use the server default; set "disabled: true" to turn the connector off.
+# Connector framing note:
+#   Always-on connectors (gRPC/API/REST/MCP/Agents/CE) use "disabled: false" framing.
+#   Set "disabled: true" to turn them off.
+#
+#   Opt-in connectors (MQTT/AMQP/AMQP10/STOMP/AWS/GCP) are OFF by default server-side.
+#   They use "enabled: true" framing — you must explicitly set "enabled: true" to open
+#   their ports. Omitting the block or setting "enabled: false" keeps them closed.
+
+# KubeMQ MCP (Model Context Protocol) connector — always-on by default server-side.
+# Set "disabled: true" to turn this connector off.
 # NOTE: MCP/Agents/CE share the REST HTTP port (9090). External exposure is controlled by
 # the rest.expose / rest.nodePort settings above; keep REST enabled to expose them.
 mcp:
@@ -84,7 +92,8 @@ mcp:
   # trustedOrigins:
   #   - "auto"
 
-# KubeMQ Agents (A2A) platform connector — enabled by default server-side.
+# KubeMQ Agents (A2A) platform connector — always-on by default server-side.
+# Set "disabled: true" to turn this connector off.
 agents:
   disabled: false
   # agentTtlSeconds: 300
@@ -98,7 +107,8 @@ agents:
   # agentTlsSkipVerify: false
   # agentMaxConcurrency: 100
 
-# KubeMQ CloudEvents (CE) connector — enabled by default server-side.
+# KubeMQ CloudEvents (CE) connector — always-on by default server-side.
+# Set "disabled: true" to turn this connector off.
 ce:
   disabled: false
   # timeoutSeconds: 60
@@ -106,10 +116,10 @@ ce:
   # maxSseIdleSeconds: 300
   # maxSseConnections: 0
 
-# KubeMQ MQTT connector — enabled by default server-side.
-# Exposes ports 1883 (mqtt), 8883 (mqtt-tls), 8083 (mqtt-ws) via a ClusterIP Service.
+# KubeMQ MQTT connector — opt-in (disabled by default server-side).
+# Set "enabled: true" to open ports 1883 (mqtt), 8883 (mqtt-tls), 8083 (mqtt-ws) via a ClusterIP Service.
 mqtt:
-  disabled: false
+  enabled: true
   # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 1883
   # tlsPort: 8883
@@ -129,10 +139,11 @@ mqtt:
   #   maxQos: 2
   #   minProtocolVersion: 4
 
-# KubeMQ AMQP 0.9.1 (RabbitMQ) connector — enabled by default server-side.
-# Shares the amqp Service ports 5672 (amqp), 5671 (amqp-tls) with the AMQP 1.0 connector.
+# KubeMQ AMQP 0.9.1 (RabbitMQ) connector — opt-in (disabled by default server-side).
+# Set "enabled: true" to open the shared amqp Service ports 5672 (amqp), 5671 (amqp-tls).
+# The shared amqp Service is kept when either amqp or amqp10 is enabled.
 amqp:
-  disabled: false
+  enabled: true
   # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 5672
   # tlsPort: 5671
@@ -146,10 +157,11 @@ amqp:
   # deadLetterMaxHops: 16
   # maxReceiveCount: 0
 
-# KubeMQ AMQP 1.0 connector — enabled by default server-side.
-# Shares the amqp Service ports 5672 (amqp), 5671 (amqp-tls) with the AMQP 0.9.1 connector.
+# KubeMQ AMQP 1.0 connector — opt-in (disabled by default server-side).
+# Set "enabled: true" to open the shared amqp Service ports 5672 (amqp), 5671 (amqp-tls).
+# The shared amqp Service is kept when either amqp or amqp10 is enabled.
 amqp10:
-  disabled: false
+  enabled: true
   # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 5672
   # tlsPort: 5671
@@ -165,10 +177,10 @@ amqp10:
   # defaultRpcTimeoutSeconds: 30
   # rpcMaxPending: 512
 
-# KubeMQ STOMP connector — enabled by default server-side.
-# Exposes ports 61613 (stomp), 61614 (stomp-tls) via a ClusterIP Service.
+# KubeMQ STOMP connector — opt-in (disabled by default server-side).
+# Set "enabled: true" to open ports 61613 (stomp), 61614 (stomp-tls) via a ClusterIP Service.
 stomp:
-  disabled: false
+  enabled: true
   # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 61613
   # tlsPort: 61614
@@ -181,10 +193,10 @@ stomp:
   # rpcTimeoutSeconds: 30
   # rpcMaxPending: 1024
 
-# KubeMQ AWS (SQS/SNS) connector — enabled by default server-side.
-# Exposes port 4566 (aws-http) via a ClusterIP Service. AWS credentials are not set via the CR.
+# KubeMQ AWS (SQS/SNS) connector — opt-in (disabled by default server-side).
+# Set "enabled: true" to open port 4566 (aws-http) via a ClusterIP Service. AWS credentials are not set via the CR.
 aws:
-  disabled: false
+  enabled: true
   # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
   # port: 4566
   # region: kubemq
@@ -195,10 +207,10 @@ aws:
   # readTimeout: 60
   # bodyLimit: 2M
 
-# Google Cloud Pub/Sub connector — enabled by default server-side.
-# Exposes port 8085 (pubsub-grpc) via a ClusterIP Service. gRPC-only.
+# Google Cloud Pub/Sub connector — opt-in (disabled by default server-side).
+# Set "enabled: true" to open port 8085 (gcp-grpc) via a ClusterIP Service. gRPC-only.
 gcp:
-  disabled: false
+  enabled: true
   # port: 8085
   # advertisedEndpoint: ""
   # maxMessageBytes: 10485760

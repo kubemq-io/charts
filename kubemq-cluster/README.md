@@ -78,7 +78,7 @@ one off, or set any sub-field to override its server default:
 |---|---|
 | `grpc` | gRPC interface |
 | `rest` | REST/WebSocket interface (also fronts the HTTP-family connectors below) |
-| `api` | API / dashboard interface |
+| `api` | API / dashboard interface (incl. `api.auth` — opt-in dashboard authentication) |
 | `http` | Shared HTTP server + CORS policy for the HTTP-family connectors |
 | `mcp` | Model Context Protocol (shares the REST port) |
 | `agents` | Agents / A2A (shares the REST port) |
@@ -87,6 +87,14 @@ one off, or set any sub-field to override its server default:
 > The `mcp`, `agents`, and `ce` connectors share the REST HTTP port. Their external
 > exposure is governed by the `rest.expose` / `rest.nodePort` settings — keep `rest`
 > enabled to reach them.
+
+> **API authentication (`api.auth`)** — opt-in authentication for the management API and
+> dashboard (port 8080), off by default. Set `api.auth.enable: true` and provide a seed
+> admin: either reference an existing Secret via `api.auth.adminSecretRef` (key
+> `api.auth.adminSecretKey`, default `admin-password`), or omit it and the operator
+> generates a `<release>-api-admin` Secret once and retains it across upgrades. When
+> enabled, `api.allowOrigins` must be a concrete list (no `"*"` wildcard). See
+> [`values_example.yaml`](values_example.yaml) for the full field set.
 
 **Opt-in connectors** — disabled by default server-side (no ports opened unless you
 explicitly opt in). Set `enabled: true` to activate a connector and open its port(s).

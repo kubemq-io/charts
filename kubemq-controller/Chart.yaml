@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 1.15.0
+appVersion: 2.0.0-b1
 description: A Helm chart for KubeMQ Controller
 type: application
 name: kubemq-controller
-version: 1.13.0
+version: 2.0.0-next.0
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

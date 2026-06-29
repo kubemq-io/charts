@@ -41,6 +41,19 @@ api:
   port: 8080
   # allowOrigins:
   #   - "https://app.example.com"
+  # Opt-in management-API / dashboard authentication (default: off).
+  # When enabled, allowOrigins must be a concrete list (no "*" wildcard).
+  # auth:
+  #   enable: true
+  #   sessionIdleMinutes: 30
+  #   sessionAbsoluteHours: 8
+  #   trustedTLSProxy: false        # set true when TLS terminates at an upstream proxy
+  #   adminUsername: admin          # seed admin username (server default: admin)
+  #   # Reference an existing Secret holding the seed-admin password...
+  #   adminSecretRef: my-admin-secret
+  #   adminSecretKey: admin-password # key within the Secret (default: admin-password)
+  #   # ...or omit adminSecretRef and the operator generates a "<release>-api-admin"
+  #   # Secret once and retains it across upgrades.
 
 # KubeMQ gRPC interface - https://docs.kubemq.io/configuration/cluster/set-grpc-interface
 grpc:

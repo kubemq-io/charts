@@ -18,4 +18,6 @@ spec:
   {{- else }}
   {{- fail "Either .Values.key or .Values.license must be provided" }}
   {{- end }}
-{{ toYaml (omit .Values "imagePullSecrets" "key" "license") | indent 2 }}
+{{- with (omit .Values "imagePullSecrets" "key" "license") }}
+{{ toYaml . | indent 2 }}
+{{- end }}

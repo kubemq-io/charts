@@ -17,7 +17,7 @@ spec:
       serviceAccountName: kubemq-operator
       containers:
         - name: kubemq-operator
-          image: docker.io/kubemq/kubemq-operator:latest
+          image: europe-docker.pkg.dev/kubemq/images/kubemq-operator:next
           command:
             - kubemq-operator
           imagePullPolicy: Always
@@ -33,7 +33,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: RELATED_IMAGE_KUBEMQ_CLUSTER
-              value: "docker.io/kubemq/kubemq:latest"
+              value: "europe-docker.pkg.dev/kubemq/images/kubemq:next"
             - name: CONNECTOR_TARGETS_IMAGE
               value: "kubemq/kubemq-targets:latest"
             - name: CONNECTOR_SOURCES_IMAGE

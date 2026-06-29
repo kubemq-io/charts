@@ -3,7 +3,7 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 2.3.0
-    created: "2025-05-30T14:56:46.998476+03:00"
+    created: "2026-06-29T18:33:48.268915+03:00"
     description: A Helm chart for KubeMQ Connectors
     digest: df21c17bb7867b4139766af25545e0386b0e50ced542e4ed08a1a2e1a37c026f
     maintainers:
@@ -17,8 +17,22 @@ entries:
     version: 0.3.0
   kubemq:
   - apiVersion: v2
+    appVersion: 3.0.0-b7
+    created: "2026-06-29T18:33:48.26961+03:00"
+    description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
+    digest: 6069a778b9bf123d0c1d64db0d59d1e0b7279ee4fbd44ef73795c27e12b0d568
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq
+    type: application
+    urls:
+    - https://kubemq-io.github.io/charts/kubemq-3.0.0-next.0.tgz
+    version: 3.0.0-next.0
+  - apiVersion: v2
     appVersion: 2.9.3
-    created: "2025-05-30T14:56:46.998769+03:00"
+    created: "2026-06-29T18:33:48.269415+03:00"
     description: A Helm chart for KubeMQ server, Kubernetes Message Queue Broker
     digest: 6c8384807da8f34d79f2684d179b38f577528345cb79c30a6bc7a893fd535cd9
     maintainers:
@@ -32,7 +46,7 @@ entries:
     version: 2.9.3
   - apiVersion: v2
     appVersion: 2.3.7
-    created: "2025-05-30T14:56:46.998615+03:00"
+    created: "2026-06-29T18:33:48.269132+03:00"
     description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
     digest: 336fbb1ff953807574a0b695526aa0c57819f9cdd2adc73085dfd616f90b9429
     maintainers:
@@ -47,7 +61,7 @@ entries:
   kubemq-bridges:
   - apiVersion: v2
     appVersion: 1.4.0
-    created: "2025-05-30T14:56:46.998852+03:00"
+    created: "2026-06-29T18:33:48.269816+03:00"
     description: A Helm chart for KubeMQ Bridges Connector
     digest: 498e9b0528dc491c7dda3f7e9498bf9637e6d02dc3587728c8f7f52fe0401a8c
     maintainers:
@@ -61,8 +75,22 @@ entries:
     version: 1.4.0
   kubemq-cluster:
   - apiVersion: v2
+    appVersion: 3.0.0-b7
+    created: "2026-06-29T18:33:48.271551+03:00"
+    description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
+    digest: 514b40c66cc4c8880ff272cdc938777d0c656c75738ec7e87342cb0461e1e256
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-cluster
+    type: application
+    urls:
+    - https://kubemq-io.github.io/charts/kubemq-cluster-3.0.0-next.0.tgz
+    version: 3.0.0-next.0
+  - apiVersion: v2
     appVersion: 2.9.9
-    created: "2025-05-30T14:56:46.999377+03:00"
+    created: "2026-06-29T18:33:48.271342+03:00"
     description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
     digest: 331405b6ed82861496e7736bf01ed01a81bf238dd590d51836abe69bcd6ad367
     maintainers:
@@ -76,7 +104,7 @@ entries:
     version: 2.5.0
   - apiVersion: v2
     appVersion: 2.9.3
-    created: "2025-05-30T14:56:46.999245+03:00"
+    created: "2026-06-29T18:33:48.271121+03:00"
     description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
     digest: 381afd29ab4ea5683f32458d0f259dba6fb8202453ba68ba7df3dec1e786f071
     maintainers:
@@ -90,7 +118,7 @@ entries:
     version: 2.4.0
   - apiVersion: v2
     appVersion: 2.3.7
-    created: "2025-05-30T14:56:46.999111+03:00"
+    created: "2026-06-29T18:33:48.270452+03:00"
     description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
     digest: 6218e1b19f8f1e8699a65a74944e50f36562f0ecadce700bdcdbbc8d17d2bac7
     maintainers:
@@ -104,7 +132,7 @@ entries:
     version: 2.3.8
   - apiVersion: v2
     appVersion: 2.3.7
-    created: "2025-05-30T14:56:46.998994+03:00"
+    created: "2026-06-29T18:33:48.270026+03:00"
     description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
     digest: 64d19e8e53ac94e6763ce5ed3275bb158947770cdb60f1a4fe17f64639693741
     maintainers:
@@ -118,8 +146,22 @@ entries:
     version: 2.3.7
   kubemq-controller:
   - apiVersion: v2
+    appVersion: 2.0.0-b1
+    created: "2026-06-29T18:33:48.272761+03:00"
+    description: A Helm chart for KubeMQ Controller
+    digest: de0b555b227573ee3f86ebfae2f9ca2b821acebbccd6cc3eb6300e0ea995f6cd
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-controller
+    type: application
+    urls:
+    - https://kubemq-io.github.io/charts/kubemq-controller-2.0.0-next.0.tgz
+    version: 2.0.0-next.0
+  - apiVersion: v2
     appVersion: 1.15.0
-    created: "2025-05-30T14:56:46.999613+03:00"
+    created: "2026-06-29T18:33:48.272042+03:00"
     description: A Helm chart for KubeMQ Controller
     digest: bc366e8a19f3c06208a869e254000ed3e7d692feb60493afbd687071f741f0f3
     maintainers:
@@ -133,7 +175,7 @@ entries:
     version: 1.13.0
   - apiVersion: v2
     appVersion: 1.12.0
-    created: "2025-05-30T14:56:46.999491+03:00"
+    created: "2026-06-29T18:33:48.271794+03:00"
     description: A Helm chart for KubeMQ Controller
     digest: c8b4cf9ef1bf1ac14e65dd021bd5b41dff60d47e6f78efa1b6427342fd7a7329
     maintainers:
@@ -147,7 +189,7 @@ entries:
     version: 1.12.0
   - apiVersion: v2
     appVersion: 1.9.3
-    created: "2025-05-30T14:56:46.999882+03:00"
+    created: "2026-06-29T18:33:48.272599+03:00"
     description: A Helm chart for KubeMQ Controller
     digest: 14f439b9922b365d53e04b2003eef615a7f8fbcc41cd24e41c751111284b66bc
     maintainers:
@@ -161,7 +203,7 @@ entries:
     version: 1.9.5
   - apiVersion: v2
     appVersion: 1.9.3
-    created: "2025-05-30T14:56:46.999796+03:00"
+    created: "2026-06-29T18:33:48.27238+03:00"
     description: A Helm chart for KubeMQ Controller
     digest: 1bcf1c77118d5264c5a9cac8df891a70bba51965d70b895d028e7d344f76348b
     maintainers:
@@ -175,7 +217,7 @@ entries:
     version: 1.9.4
   - apiVersion: v2
     appVersion: 1.9.3
-    created: "2025-05-30T14:56:46.999703+03:00"
+    created: "2026-06-29T18:33:48.272215+03:00"
     description: A Helm chart for KubeMQ Controller
     digest: 012d73f6444e2d388ca4d464077b92c4b7d61955e36b0c3ea8506bcdcdc4adc0
     maintainers:
@@ -189,8 +231,22 @@ entries:
     version: 1.9.3
   kubemq-crds:
   - apiVersion: v2
+    appVersion: 3.0.0-b7
+    created: "2026-06-29T18:33:48.273596+03:00"
+    description: A Helm chart for KubeMQ CRD
+    digest: 8968f88cef963e409e03a4460646a38e6ef7a12c0428495d59491fa2dff3c774
+    maintainers:
+    - email: info@kubemq.io
+      name: KubeMQ
+      url: https://kubemq.io
+    name: kubemq-crds
+    type: application
+    urls:
+    - https://kubemq-io.github.io/charts/kubemq-crds-3.0.0-next.0.tgz
+    version: 3.0.0-next.0
+  - apiVersion: v2
     appVersion: 2.9.3
-    created: "2025-05-30T14:56:47.000077+03:00"
+    created: "2026-06-29T18:33:48.273351+03:00"
     description: A Helm chart for KubeMQ CRD
     digest: a1cc970ceeb221bcc72304ba04e6eb9491eedc27211d657a154f999460d8973e
     maintainers:
@@ -204,7 +260,7 @@ entries:
     version: 2.9.3
   - apiVersion: v2
     appVersion: 2.3.7
-    created: "2025-05-30T14:56:46.99998+03:00"
+    created: "2026-06-29T18:33:48.273039+03:00"
     description: A Helm chart for KubeMQ CRD
     digest: 759e85b4163ec213cc523b2acd423c01fb50dedc3edb31a8bff5507371715645
     maintainers:
@@ -219,7 +275,7 @@ entries:
   kubemq-sources:
   - apiVersion: v2
     appVersion: 1.4.1
-    created: "2025-05-30T14:56:47.000149+03:00"
+    created: "2026-06-29T18:33:48.273808+03:00"
     description: A Helm chart for KubeMQ Sources Connector
     digest: 7664eba0c01b645ace98ce47cca9d749b44195bad8d77558b9f3c0162d0c944a
     maintainers:
@@ -234,7 +290,7 @@ entries:
   kubemq-targets:
   - apiVersion: v2
     appVersion: 1.5.1
-    created: "2025-05-30T14:56:47.001098+03:00"
+    created: "2026-06-29T18:33:48.273969+03:00"
     description: A Helm chart for KubeMQ Targets Connector
     digest: c576885a6bd7a9c26bfab6d1621934280b89702cc9ea9ab2aafc844e3a108900
     maintainers:
@@ -249,7 +305,7 @@ entries:
   operator:
   - apiVersion: v2
     appVersion: 2.3.7
-    created: "2025-05-30T14:56:47.001247+03:00"
+    created: "2026-06-29T18:33:48.274236+03:00"
     description: A Helm chart for KubeMQ Operator
     digest: 55e1e481bd9fda25aef5a54807adf164454743901900b4730b5ad076e8b710f7
     maintainers:
@@ -261,4 +317,4 @@ entries:
     urls:
     - https://kubemq-io.github.io/charts/operator-1.9.3.tgz
     version: 1.9.3
-generated: "2025-05-30T14:56:46.998055+03:00"
+generated: "2026-06-29T18:33:48.268505+03:00"

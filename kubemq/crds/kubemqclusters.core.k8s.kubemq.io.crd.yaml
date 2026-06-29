@@ -44,6 +44,27 @@ spec:
                       items:
                         type: string
                       type: array
+                    auth:
+                      properties:
+                        adminSecretKey:
+                          type: string
+                        adminSecretRef:
+                          type: string
+                        adminUsername:
+                          type: string
+                        enable:
+                          type: boolean
+                        sessionAbsoluteHours:
+                          format: int32
+                          type: integer
+                        sessionIdleMinutes:
+                          format: int32
+                          type: integer
+                        storePath:
+                          type: string
+                        trustedTLSProxy:
+                          type: boolean
+                      type: object
                     disabled:
                       type: boolean
                     expose:

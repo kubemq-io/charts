@@ -3,7 +3,7 @@ appVersion: 3.0.0-b7
 description: A Helm chart for KubeMQ Cluster, Kubernetes Message Queue Broker
 type: application
 name: kubemq-cluster
-version: 2.9.0
+version: 3.0.0-next.0
 maintainers:
   - name: KubeMQ
     email: info@kubemq.io

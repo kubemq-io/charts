@@ -108,9 +108,14 @@ Omitting the block entirely, or setting `enabled: false`, keeps the connector of
 | `stomp` | STOMP | 61613 (stomp), 61614 (stomp-tls) |
 | `aws` | AWS SQS/SNS | 4566 (aws-http) |
 | `gcp` | Google Cloud Pub/Sub | 8085 (gcp-grpc, gRPC-only) |
+| `kafka` | Kafka | 9092 (kafka), 9093 (kafka-tls) |
 
 > The `amqp` and `amqp10` connectors share a single Kubernetes Service on ports 5672/5671.
 > The Service is kept as long as at least one of the two dialects is enabled.
+
+> The `kafka` connector requires **kubemq-server v3.1+** (the Kafka drop-in connector was
+> integrated into the default server build starting with v3.1; earlier server images do not
+> recognize the `CONNECTORS_KAFKA_*` env vars).
 
 ### Core blocks
 

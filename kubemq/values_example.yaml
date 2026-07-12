@@ -91,7 +91,7 @@ http:
 #   Always-on connectors (gRPC/API/REST/MCP/Agents/CE) use "disabled: false" framing.
 #   Set "disabled: true" to turn them off.
 #
-#   Opt-in connectors (MQTT/AMQP/AMQP10/STOMP/AWS/GCP) are OFF by default server-side.
+#   Opt-in connectors (MQTT/AMQP/AMQP10/STOMP/AWS/GCP/Kafka) are OFF by default server-side.
 #   They use "enabled: true" framing — you must explicitly set "enabled: true" to open
 #   their ports. Omitting the block or setting "enabled: false" keeps them closed.
 
@@ -114,6 +114,7 @@ agents:
   # maxTimeoutSeconds: 3600
   # maxAgents: 0
   # maxSseIdleSeconds: 300
+  # metricsRetentionHours: 168
   # trustedOrigins:
   #   - "auto"
   # agentMaxResponseBytes: 10485760
@@ -142,6 +143,8 @@ mqtt:
   # queueAckTimeoutSeconds: 30
   # rpcTimeoutSeconds: 30
   # rpcMaxPending: 1024
+  # detailHistoryEnabled: true
+  # detailHistoryMaxEntities: 5000
   # capabilities:
   #   maxClients: 0
   #   maxPacketSizeBytes: 4194304
@@ -151,6 +154,7 @@ mqtt:
   #   maxMessageExpirySeconds: 86400
   #   maxQos: 2
   #   minProtocolVersion: 4
+  #   maxSubscriptionsPerClient: 1000
 
 # KubeMQ AMQP 0.9.1 (RabbitMQ) connector — opt-in (disabled by default server-side).
 # Set "enabled: true" to open the shared amqp Service ports 5672 (amqp), 5671 (amqp-tls).
@@ -231,11 +235,24 @@ gcp:
   # maxOutstandingMessages: 1000
   # maxInflightPerSubscription: 20000
   # maxConcurrentPolls: 1024
+  # maxConcurrentStreams: 1024
   # deliveryShards: 16
   # maxAckExtensionSeconds: 600
   # streamCloseSeconds: 1800
   # maxSeekReplay: 1000000
   # enableReflection: false
+
+# KubeMQ Kafka connector — opt-in (disabled by default server-side). Requires kubemq-server v3.1+.
+# Set "enabled: true" to open ports 9092 (kafka), 9093 (kafka-tls) via a ClusterIP Service.
+kafka:
+  enabled: true
+  # NOTE: a custom port is honored end-to-end on K8s — the ClusterIP Service follows it.
+  # port: "9092"
+  # tlsPort: "9093"
+  # advertisedHost: ""      # REQUIRED for out-of-cluster clients (external LB DNS / NodePort); empty → external clients hang
+  # advertisedPort: 9092
+  # maxConnections: 1000
+  # maxMessageBytes: 1048576   # 1 MiB (1..1073741824)
 
 # KubeMQ Authentication Configuration - https://docs.kubemq.io/configuration/cluster/set-authentication
 authentication:

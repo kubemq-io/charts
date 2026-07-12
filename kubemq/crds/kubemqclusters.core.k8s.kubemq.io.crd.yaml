@@ -111,6 +111,10 @@ spec:
                       format: int32
                       minimum: 1
                       type: integer
+                    metricsRetentionHours:
+                      format: int32
+                      minimum: 1
+                      type: integer
                     trustedOrigins:
                       items:
                         type: string
@@ -367,6 +371,11 @@ spec:
                     maxConcurrentPolls:
                       format: int32
                       type: integer
+                    maxConcurrentStreams:
+                      format: int32
+                      maximum: 65536
+                      minimum: 0
+                      type: integer
                     maxInflightPerSubscription:
                       format: int32
                       type: integer
@@ -479,6 +488,31 @@ spec:
                       pattern: (IfNotPresent|Always|Never)
                       type: string
                   type: object
+                kafka:
+                  properties:
+                    advertisedHost:
+                      type: string
+                    advertisedPort:
+                      format: int32
+                      maximum: 65535
+                      minimum: 1
+                      type: integer
+                    enabled:
+                      type: boolean
+                    maxConnections:
+                      format: int32
+                      minimum: 0
+                      type: integer
+                    maxMessageBytes:
+                      format: int64
+                      maximum: 1073741824
+                      minimum: 1
+                      type: integer
+                    port:
+                      type: string
+                    tlsPort:
+                      type: string
+                  type: object
                 license:
                   type: string
                 key:
@@ -540,6 +574,10 @@ spec:
                           maximum: 4294967295
                           minimum: 0
                           type: integer
+                        maxSubscriptionsPerClient:
+                          format: int32
+                          minimum: 0
+                          type: integer
                         minProtocolVersion:
                           enum:
                             - 4
@@ -558,6 +596,12 @@ spec:
                         - store
                         - none
                       type: string
+                    detailHistoryEnabled:
+                      type: boolean
+                    detailHistoryMaxEntities:
+                      format: int32
+                      minimum: 0
+                      type: integer
                     enabled:
                       type: boolean
                     port:

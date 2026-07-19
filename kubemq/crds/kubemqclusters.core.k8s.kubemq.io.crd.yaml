@@ -136,6 +136,12 @@ spec:
                       type: string
                     enabled:
                       type: boolean
+                    expose:
+                      enum:
+                        - ClusterIP
+                        - NodePort
+                        - LoadBalancer
+                      type: string
                     frameMax:
                       format: int32
                       minimum: 4096
@@ -188,6 +194,12 @@ spec:
                       type: integer
                     enabled:
                       type: boolean
+                    expose:
+                      enum:
+                        - ClusterIP
+                        - NodePort
+                        - LoadBalancer
+                      type: string
                     getBatchSize:
                       format: int32
                       maximum: 1024
@@ -300,6 +312,12 @@ spec:
                       type: string
                     enabled:
                       type: boolean
+                    expose:
+                      enum:
+                        - ClusterIP
+                        - NodePort
+                        - LoadBalancer
+                      type: string
                     maxConcurrentPolls:
                       format: int32
                       minimum: 1
@@ -351,6 +369,14 @@ spec:
                   type: object
                 configData:
                   type: string
+                env:
+                  additionalProperties:
+                    type: string
+                  type: object
+                envFromSecrets:
+                  items:
+                    type: string
+                  type: array
                 gcp:
                   properties:
                     advertisedEndpoint:
@@ -365,6 +391,12 @@ spec:
                       type: boolean
                     enableReflection:
                       type: boolean
+                    expose:
+                      enum:
+                        - ClusterIP
+                        - NodePort
+                        - LoadBalancer
+                      type: string
                     maxAckExtensionSeconds:
                       format: int32
                       type: integer
@@ -499,6 +531,12 @@ spec:
                       type: integer
                     enabled:
                       type: boolean
+                    expose:
+                      enum:
+                        - ClusterIP
+                        - NodePort
+                        - LoadBalancer
+                      type: string
                     maxConnections:
                       format: int32
                       minimum: 0
@@ -604,6 +642,12 @@ spec:
                       type: integer
                     enabled:
                       type: boolean
+                    expose:
+                      enum:
+                        - ClusterIP
+                        - NodePort
+                        - LoadBalancer
+                      type: string
                     port:
                       format: int32
                       maximum: 65535
@@ -697,6 +741,7 @@ spec:
                       type: integer
                   type: object
                 replicas:
+                  default: 3
                   format: int32
                   minimum: 0
                   type: integer
@@ -789,6 +834,12 @@ spec:
                       type: string
                     enabled:
                       type: boolean
+                    expose:
+                      enum:
+                        - ClusterIP
+                        - NodePort
+                        - LoadBalancer
+                      type: string
                     heartbeatMs:
                       format: int32
                       minimum: 0
@@ -833,6 +884,11 @@ spec:
                   properties:
                     clean:
                       type: boolean
+                    engine:
+                      enum:
+                        - legacy
+                        - next
+                      type: string
                     idlePruneCutoffHours:
                       format: int32
                       minimum: 1
@@ -864,6 +920,9 @@ spec:
                       minimum: 0
                       type: integer
                   type: object
+                  x-kubernetes-validations:
+                    - message: "store.engine is immutable once set (born-one-mode); create a new cluster to change engines"
+                      rule: "!has(oldSelf.engine) || !has(self.engine) || self.engine == oldSelf.engine"
                 telemetry:
                   properties:
                     enable:
@@ -930,10 +989,54 @@ spec:
                       type: string
                   type: object
               type: object
+              x-kubernetes-validations:
+                - message: "replicas is immutable when store.engine is 'next' (day-2 scale-out unsupported)"
+                  rule: "!(has(self.store) && has(self.store.engine) && self.store.engine == 'next') || self.replicas == oldSelf.replicas"
             status:
               description: KubemqClusterStatus defines the observed state of KubemqCluster
               properties:
                 api:
+                  type: string
+                conditions:
+                  items:
+                    properties:
+                      lastTransitionTime:
+                        format: date-time
+                        type: string
+                      message:
+                        maxLength: 32768
+                        type: string
+                      observedGeneration:
+                        format: int64
+                        minimum: 0
+                        type: integer
+                      reason:
+                        maxLength: 1024
+                        minLength: 1
+                        pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                        type: string
+                      status:
+                        enum:
+                          - "True"
+                          - "False"
+                          - "Unknown"
+                        type: string
+                      type:
+                        maxLength: 316
+                        pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$
+                        type: string
+                    required:
+                      - lastTransitionTime
+                      - message
+                      - reason
+                      - status
+                      - type
+                    type: object
+                  type: array
+                  x-kubernetes-list-map-keys:
+                    - type
+                  x-kubernetes-list-type: map
+                engine:
                   type: string
                 grpc:
                   type: string

@@ -52,9 +52,11 @@ $ helm install --create-namespace -n kubemq kubemq-cluster kubemq-charts/kubemq-
 This chart is a thin passthrough over the `KubemqCluster` custom resource. Every key you
 set under the chart's values (except `key`, `license`, and `imagePullSecrets`, which are
 handled specially) is rendered verbatim into `spec:` of the generated `KubemqCluster` — so
-**any `KubemqCluster.spec.*` field is a Helm value of the same name**. The full, annotated
-catalog of supported values lives in
-[`values_example.yaml`](values_example.yaml); the authoritative field reference is
+**any `KubemqCluster.spec.*` field is a Helm value of the same name**.
+[`values_example.yaml`](values_example.yaml) is a small set of **copy-and-adapt starter
+recipes** (plain cluster, the connector one-liner, external Kafka, `expose`, the
+`env`/`envFromSecrets` overlay, and the Docker single-node recipes) — not an exhaustive
+list. The **full field catalog** (every field, its default, and the matching env var) is
 [`docs/10-configuration-reference.md`](https://github.com/kubemq-io/kubemq-server/blob/master/docs/10-configuration-reference.md)
 in the KubeMQ server repo, and the validating schema is the
 [`KubemqCluster` CRD](../kubemq-crds/templates/kubemqclusters.core.k8s.kubemq.io.crd.yaml).
@@ -64,8 +66,43 @@ in the KubeMQ server repo, and the validating schema is the
 > CR. The server default for that field then no longer applies — the chart value wins, even
 > across upgrades. Keep your `values.yaml` minimal (license + only the fields you truly need
 > to override) and leave everything else commented so the server defaults stay in effect.
-> Use `values_example.yaml` as a reference for what *can* be set, not as a file to copy
-> wholesale.
+> Treat `values_example.yaml` as **starter recipes** to copy-and-adapt one at a time, and
+> [`docs/10-configuration-reference.md`](https://github.com/kubemq-io/kubemq-server/blob/master/docs/10-configuration-reference.md)
+> as the full catalog of what *can* be set.
+
+### LEAN-CRD escape hatch (`spec.env` / `spec.envFromSecrets`)
+
+The CRD types only the **day-1** surface of each connector (enable, port(s),
+advertised endpoint, `expose`, credentials ref). Every other current or future server
+tunable is reachable from the CR **without a CRD/operator/chart upgrade** through two
+overlay fields:
+
+- **`spec.env`** — a `map[string]string` of server env keys → values. It is applied
+  **last-wins** over all typed emits, keys are **uppercased**, empty values are **dropped**
+  (you cannot unset a key this way), and changing it **rolls the pods**. Example:
+
+  ```yaml
+  env:
+    CONNECTORS_KAFKA_FETCH_MAX_BYTES: "10485760"
+    CONNECTORS_KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "3000"
+  ```
+
+  Operator-owned identity keys are **rejected** with a `ReconcileError` (no env change,
+  pods untouched): `STORE_ENGINE`, `CLUSTER_ENABLE`, `CLUSTER_NAME`, `CLUSTER_ROUTES`,
+  `API_BIND_ADDRESS`, `CHECKSUM`, `POD_NAME`, and any `CLUSTER_REPLICATION_*` key. Use the
+  typed fields (`store.engine`, replicas, etc.) for those. **`spec.env` is not for
+  secrets.**
+
+- **`spec.envFromSecrets`** — a list of existing Secret names whose keys are injected as
+  container env (`envFrom`). Secret **values never transit the operator**; standard
+  Kubernetes `envFrom` precedence applies; secret-**content** changes do **not** roll the
+  pods (roll them yourself if you rotate in place). This is the credentials path.
+
+  ```yaml
+  envFromSecrets:
+    - my-kafka-credentials
+    - my-tls-passwords
+  ```
 
 ### Connector blocks
 
@@ -94,7 +131,8 @@ one off, or set any sub-field to override its server default:
 > `api.auth.adminSecretKey`, default `admin-password`), or omit it and the operator
 > generates a `<release>-api-admin` Secret once and retains it across upgrades. When
 > enabled, `api.allowOrigins` must be a concrete list (no `"*"` wildcard). See
-> [`values_example.yaml`](values_example.yaml) for the full field set.
+> [`docs/10-configuration-reference.md`](https://github.com/kubemq-io/kubemq-server/blob/master/docs/10-configuration-reference.md)
+> for the full `api.auth` field set.
 
 **Opt-in connectors** — disabled by default server-side (no ports opened unless you
 explicitly opt in). Set `enabled: true` to activate a connector and open its port(s).
@@ -137,6 +175,55 @@ Omitting the block entirely, or setting `enabled: false`, keeps the connector of
 
 Please refer to the release notes of each version of the helm charts.
 These can be found [here](https://github.com/kubemq/helm-charts/releases).
+
+### Upgrading CRDs (read this first)
+
+**The PRIMARY way to upgrade a CRD is `kubectl apply -f <canonical>`** — Helm **never
+upgrades CRDs** that ship in a chart's `crds/` directory (Helm installs them once on first
+install and leaves them untouched on every subsequent `helm upgrade`). Apply the canonical
+CRD directly:
+
+```console
+$ kubectl apply -f https://raw.githubusercontent.com/.../kubemqclusters.core.k8s.kubemq.io.crd.yaml
+```
+
+The `kubemq-crds` chart path is for **fresh installs / chart-managed CRDs**. Adopting an
+already-installed CRD into the `kubemq-crds` chart requires Helm adoption annotations;
+without them, chart adoption fails. When a release note (below) says "upgrade CRDs", it
+means run the `kubectl apply` above — not `helm upgrade`.
+
+### Zero-config coherence — engine auto-select, `spec.env`/`expose`, write-back
+
+This release makes `kafka.enabled: true` a one-flag story (auto-selected `next` engine on a
+fresh cluster, defaulted in-cluster advertised host), adds the `spec.env` /
+`spec.envFromSecrets` overlay and per-connector `expose`, and records the established engine
+in a CR annotation with best-effort spec write-back.
+
+**Upgrade order: CRDs + operator as ONE step → server images → charts.** The
+CRD-upgraded / operator-old window is transient, not a resting state. Read these
+release notes before upgrading:
+
+1. **Old operator strips new fields.** Do not add `spec.env`/`spec.envFromSecrets`/`expose`/
+   `nodePort` (or rely on engine write-back) until the operator is upgraded — the old
+   operator permanently strips unknown new fields from the CR on its first reconcile
+   (full-object update on the finalizer path); re-apply the fields after the operator
+   upgrade to restore them.
+
+2. **Operator rollback is not engine-safe.** Pin `spec.store.engine: next` explicitly
+   BEFORE rolling back the operator; clustered next CRs crashloop under the old operator
+   (peers elided). The `core.k8s.kubemq.io/established-engine` annotation survives the old
+   operator (untyped metadata), so re-upgrade re-derives the engine correctly.
+
+3. **Explicit-legacy CRs get one checksum roll.** A CR with `spec.store.engine: legacy`
+   explicitly set now emits `STORE_ENGINE=legacy` (previously elided). This changes the
+   ConfigMap checksum once, causing a single rolling restart on the first reconcile after
+   upgrade. Auto-selected and unset CRs are unaffected.
+
+4. **Write-back arms the replicas freeze.** A successful engine write-back inserts
+   `engine: next` into formerly-unset CRs, which retroactively arms the existing CEL
+   replicas-freeze rule — replica changes on kafka / auto-next clusters now reject at
+   admission. Scale next-engine clusters per the next-engine scaling docs, not by editing
+   `replicas`.
 
 ### v2.8.x → v2.9.0 — Wire-protocol connectors are now opt-in (BREAKING)
 

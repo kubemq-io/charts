@@ -140,7 +140,7 @@ notes before upgrading:
    `replicas`.
 
 Please also refer to the release notes of each version of the helm charts.
-These can be found [here](https://github.com/kubemq/helm-charts/releases).
+These can be found [here](https://github.com/kubemq-io/charts/releases).
 
 ## Uninstalling
 

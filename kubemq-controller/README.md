@@ -52,7 +52,7 @@ $ helm install -n kubemq kubemq-controller kubemq-charts/kubemq-controller -f va
 ## Upgrading the charts
 
 Please refer to the release notes of each version of the helm charts.
-These can be found [here](https://github.com/kubemq/helm-charts/releases).
+These can be found [here](https://github.com/kubemq-io/charts/releases).
 
 ## Uninstalling the charts
 

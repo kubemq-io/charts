@@ -174,7 +174,7 @@ Omitting the block entirely, or setting `enabled: false`, keeps the connector of
 ## Upgrading the charts
 
 Please refer to the release notes of each version of the helm charts.
-These can be found [here](https://github.com/kubemq/helm-charts/releases).
+These can be found [here](https://github.com/kubemq-io/charts/releases).
 
 ### Upgrading CRDs (read this first)
 
@@ -229,7 +229,7 @@ release notes before upgrading:
 
 **Lockstep requirement:** chart v2.9.0 must be installed together with the kubemq-crds
 v2.13.0 chart, the kubemq-operator v1.19.0 (or the kubemq-controller chart at its matching
-version), and the KubeMQ server image v3.0.0-b7+. **Do not upgrade charts alone** — the
+version), and the KubeMQ server image v3.0.0+. **Do not upgrade charts alone** — the
 operator and server binary must move in lockstep.
 
 **What changed:** The six wire-protocol connectors (MQTT, AMQP 0-9-1, AMQP 1.0, STOMP,

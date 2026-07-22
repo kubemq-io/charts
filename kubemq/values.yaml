@@ -1,1 +1,16 @@
 key:
+
+# Health / liveness probe.
+# Enabling this also binds the management API to 0.0.0.0 (instead of loopback),
+# so the dashboard/API is reachable via the Service and `kubectl port-forward`.
+# Probe timings are left to the operator defaults; override here if the server
+# cold-start is slow (e.g. health.initialDelaySeconds).
+health:
+  enabled: true
+
+# Image pull secrets for private registries
+# Reference existing secrets created by kubectl or other methods
+# Example:
+#   imagePullSecrets:
+#     - name: my-registry-secret
+imagePullSecrets: []

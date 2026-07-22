@@ -35,7 +35,7 @@ Adopting an already-installed CRD into this chart requires Helm **adoption annot
 release note says "upgrade CRDs", it means run the `kubectl apply` above.
 
 Please also refer to the release notes of each version of the helm charts.
-These can be found [here](https://github.com/kubemq/helm-charts/releases).
+These can be found [here](https://github.com/kubemq-io/charts/releases).
 
 ## Uninstalling the charts
 

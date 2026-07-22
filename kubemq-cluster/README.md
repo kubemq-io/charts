@@ -47,6 +47,26 @@ Then install:
 $ helm install --create-namespace -n kubemq kubemq-cluster kubemq-charts/kubemq-cluster -f values.yaml
 ```
 
+## Supplying the license from a Secret (optional)
+
+By default the license is a literal value (`--set key=…` or `key:` in values), which Helm
+stores in its release data and which lands in the `KubemqCluster` object — readable via
+`helm get values` / `kubectl get kubemqcluster -o yaml`. To keep the raw token out of both,
+create a Secret first and reference it instead:
+
+```console
+$ kubectl create secret generic my-kubemq-license -n kubemq --from-literal=key=<your-license-key>
+$ helm install --create-namespace -n kubemq kubemq-cluster kubemq-charts/kubemq-cluster \
+  --set keySecretRef=my-kubemq-license
+```
+
+The operator resolves the value from the Secret at reconcile time. `keySecretKey` overrides the
+data key (default `key`); `licenseSecretRef`/`licenseSecretKey` do the same for license data
+(default key `license`). A ref and its literal are **mutually exclusive** — set only one. This
+is the recommended path for GitOps, where the manifest lives in git and the Secret is managed
+separately (sealed-secrets, external-secrets, Vault). Requires the operator image that supports
+these fields (v3 `:next`).
+
 ## Configuration
 
 This chart is a thin passthrough over the `KubemqCluster` custom resource. Every key you

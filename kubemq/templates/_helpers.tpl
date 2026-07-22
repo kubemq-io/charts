@@ -28,13 +28,6 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{/*
-Generate chart secret name
-*/}}
-{{- define "kubemq.secretName" -}}
-{{ default (include "kubemq.fullname" .) .Values.existingSecret }}
-{{- end -}}
-
-{{/*
 Create the name of the service account to use
 */}}
 {{- define "mychart.serviceAccountName" -}}

@@ -15,7 +15,24 @@ $ helm install --create-namespace -n kubemq kubemq kubemq-charts/kubemq \
   --set key={your-license-key}
 ```
 
-A license `key` is **required** — the render fails without it.
+A license is **required** — the render fails without one. Supply it as a literal `key`/`license`,
+or reference an existing Secret (see below).
+
+### Supplying the license from a Secret (optional)
+
+A literal `--set key=…` is stored by Helm (`helm get values`) and lands in the `KubemqCluster`
+object. To keep the raw token out of both, create a Secret and reference it instead:
+
+```console
+$ kubectl create secret generic my-kubemq-license -n kubemq --from-literal=key=<your-license-key>
+$ helm install --create-namespace -n kubemq kubemq kubemq-charts/kubemq \
+  --set keySecretRef=my-kubemq-license
+```
+
+The operator resolves the value from the Secret at reconcile time. `keySecretKey` overrides the
+data key (default `key`); `licenseSecretRef`/`licenseSecretKey` do the same for license data
+(default key `license`). A ref and its literal are **mutually exclusive**. Recommended for
+GitOps. Requires the operator image that supports these fields (v3 `:next`).
 
 ## Configuration
 

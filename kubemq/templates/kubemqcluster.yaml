@@ -9,14 +9,14 @@ metadata:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
 spec:
-  {{- if or .Values.key .Values.license }}
   {{- if .Values.key }}
   key: {{ .Values.key }}
   {{- else if .Values.license }}
   license: {{ .Values.license }}
-  {{- end }}
+  {{- else if or .Values.keySecretRef .Values.licenseSecretRef }}
+  {{- /* license sourced from a Secret (keySecretRef/licenseSecretRef); emitted via the passthrough below */}}
   {{- else }}
-  {{- fail "Either .Values.key or .Values.license must be provided" }}
+  {{- fail "A license is required: set key or license, or reference a Secret via keySecretRef/licenseSecretRef" }}
   {{- end }}
 {{- with (omit .Values "imagePullSecrets" "key" "license") }}
 {{ toYaml . | indent 2 }}

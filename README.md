@@ -6,9 +6,7 @@ KubeMQ is delivered as a small, lightweight Docker container, designed for any t
 ## Requirements
 KubeMQ Helm charts require **Helm v3.8+ or Helm v4**. Please download/upgrade from [https://github.com/helm/helm](https://github.com/helm/helm).
 
-> **Prerelease channel.** The v3 generation of the charts is published on the `-next` prerelease
-> channel, so every command below includes `--devel`. Without `--devel`, Helm skips prerelease
-> versions and the install will not resolve a v3 chart.
+> **Versions.** The current v3 charts are published as stable releases (`kubemq`/`kubemq-cluster`/`kubemq-crds` `3.0.0`, `kubemq-controller` `2.0.0`) — a plain `helm install` resolves them, no flags needed. Prerelease/dev builds are still published on the `-next` channel and require `helm install --devel`.
 
 ## Add KubeMQ Helm Repository
 
@@ -22,9 +20,9 @@ $ helm repo update
 Install the CRDs, then the controller (operator), then a cluster:
 
 ``` console
-$ helm install --devel --create-namespace -n kubemq kubemq-crds kubemq-charts/kubemq-crds
-$ helm install --devel --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller
-$ helm install --devel --wait -n kubemq kubemq-cluster --set key={your-license-key} kubemq-charts/kubemq-cluster
+$ helm install --create-namespace -n kubemq kubemq-crds kubemq-charts/kubemq-crds
+$ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller
+$ helm install --wait -n kubemq kubemq-cluster --set key={your-license-key} kubemq-charts/kubemq-cluster
 ```
 
 ## Install KubeMQ (umbrella — one release)
@@ -33,7 +31,7 @@ The `kubemq` umbrella chart bundles the CRDs, the operator, and a single `Kubemq
 single release:
 
 ``` console
-$ helm install --devel --create-namespace --wait -n kubemq kubemq kubemq-charts/kubemq --set key={your-license-key}
+$ helm install --create-namespace --wait -n kubemq kubemq kubemq-charts/kubemq --set key={your-license-key}
 ```
 
 ## Using Private Container Registries
@@ -54,14 +52,14 @@ $ kubectl create secret docker-registry my-registry-secret \
 2. **Install the controller with the registry secret:**
 
 ``` console
-$ helm install --devel --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller \
+$ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller \
   --set imagePullSecrets[0].name=my-registry-secret
 ```
 
 **For kubemq-cluster:**
 
 ``` console
-$ helm install --devel --wait -n kubemq kubemq-cluster kubemq-charts/kubemq-cluster \
+$ helm install --wait -n kubemq kubemq-cluster kubemq-charts/kubemq-cluster \
   --set key={your-license-key} \
   --set imagePullSecrets[0].name=my-registry-secret
 ```
@@ -69,7 +67,7 @@ $ helm install --devel --wait -n kubemq kubemq-cluster kubemq-charts/kubemq-clus
 3. **Multiple registry secrets (if needed):**
 
 ``` console
-$ helm install --devel --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller \
+$ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller \
   --set imagePullSecrets[0].name=registry-secret-1 \
   --set imagePullSecrets[1].name=registry-secret-2
 ```
@@ -85,7 +83,7 @@ imagePullSecrets:
 
 Then install:
 ``` console
-$ helm install --devel --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller -f values.yaml
+$ helm install --wait -n kubemq kubemq-controller kubemq-charts/kubemq-controller -f values.yaml
 ```
 
 ## Uninstall KubeMQ Cluster Chart

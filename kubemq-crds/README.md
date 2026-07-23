@@ -49,3 +49,21 @@ The commands remove all the Kubernetes components associated with the chart.
 Keep in mind that the chart is required by the `kubemq-controller`, `kubemq-cluster` and `kubemq-connector` charts.
 
 If you want to keep the history use `--keep-history` flag.
+
+> **The CRDs are NOT deleted by `helm uninstall`** (they ship in the chart's `crds/`
+> directory, which Helm never deletes). This is deliberate: deleting a CRD garbage-collects
+> **every** `KubemqCluster` / `KubemqConnector` on the cluster. To remove the CRDs — and, with
+> them, all remaining KubeMQ resources — do it explicitly:
+> ```console
+> $ kubectl delete crd kubemqclusters.core.k8s.kubemq.io kubemqconnectors.core.k8s.kubemq.io
+> ```
+>
+> **Migration note (chart versions where the CRDs previously shipped under `templates/`,
+> i.e. `< 3.0.1`):** those versions had the CRDs Helm-managed. A `helm upgrade` across the
+> move to `crds/` would otherwise let Helm delete them (they leave the templated manifest and
+> `crds/` is not applied on upgrade). Before that one upgrade, pin them so Helm keeps them:
+> ```console
+> $ kubectl annotate crd kubemqclusters.core.k8s.kubemq.io kubemqconnectors.core.k8s.kubemq.io \
+>     helm.sh/resource-policy=keep --overwrite
+> ```
+> Fresh installs of `>= 3.0.1` need nothing — the CRDs are install-once in `crds/`.

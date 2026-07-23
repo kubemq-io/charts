@@ -18,6 +18,14 @@ key:
 health:
   enabled: true
 
+# Operator deployment. The umbrella bundles the KubeMQ operator by default. Set to false
+# to skip the operator + its RBAC (Deployment/ServiceAccount/ClusterRole/ClusterRoleBinding)
+# — e.g. when a cluster-wide operator is already installed via the kubemq-controller chart.
+# The resources always render (Helm owns them idempotently across install and upgrade);
+# this is an explicit opt-out, not a self-referential lookup.
+operator:
+  enabled: true
+
 # Image pull secrets for private registries
 # Reference existing secrets created by kubectl or other methods
 # Example:

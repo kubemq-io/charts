@@ -26,6 +26,15 @@ health:
 operator:
   enabled: true
 
+# Pre-delete hook (avoids the `helm uninstall` finalizer deadlock): on uninstall it deletes
+# the KubemqCluster while the operator is still up — letting the operator drain the finalizer —
+# BEFORE Helm tears the operator down. Requires a kubectl-capable image reachable from this
+# cluster (pulled with imagePullSecrets below). VERIFY `image` points at a real ref in your
+# registry — if it can't pull, the hook will block `helm uninstall`. Set enabled=false to opt out.
+preDelete:
+  enabled: true
+  image: europe-docker.pkg.dev/kubemq/images/kubectl:latest
+
 # Image pull secrets for private registries
 # Reference existing secrets created by kubectl or other methods
 # Example:

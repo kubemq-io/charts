@@ -18,7 +18,7 @@ spec:
   {{- else }}
   {{- fail "A license is required: set key or license, or reference a Secret via keySecretRef/licenseSecretRef" }}
   {{- end }}
-{{- with (omit .Values "imagePullSecrets" "key" "license") }}
+{{- with (omit .Values "imagePullSecrets" "key" "license" "operator" "preDelete") }}
 {{ toYaml . | indent 2 }}
 {{- end }}
 

@@ -137,7 +137,6 @@ spec:
                     enabled:
                       type: boolean
                     expose:
-                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -211,7 +210,6 @@ spec:
                     enabled:
                       type: boolean
                     expose:
-                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -345,7 +343,6 @@ spec:
                     enabled:
                       type: boolean
                     expose:
-                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -435,7 +432,6 @@ spec:
                     enableReflection:
                       type: boolean
                     expose:
-                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -586,7 +582,6 @@ spec:
                     enabled:
                       type: boolean
                     expose:
-                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -739,7 +734,6 @@ spec:
                     enabled:
                       type: boolean
                     expose:
-                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -952,7 +946,6 @@ spec:
                     enabled:
                       type: boolean
                     expose:
-                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort

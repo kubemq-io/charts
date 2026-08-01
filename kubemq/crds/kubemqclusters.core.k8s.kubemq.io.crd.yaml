@@ -137,6 +137,7 @@ spec:
                     enabled:
                       type: boolean
                     expose:
+                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -167,10 +168,25 @@ spec:
                       format: int32
                       minimum: 0
                       type: integer
+                    nodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
                     port:
                       format: int32
                       maximum: 65535
                       minimum: 1
+                      type: integer
+                    sessionAffinity:
+                      enum:
+                        - None
+                        - ClientIP
+                      type: string
+                    tlsNodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
                       type: integer
                     tlsPort:
                       format: int32
@@ -195,6 +211,7 @@ spec:
                     enabled:
                       type: boolean
                     expose:
+                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -229,6 +246,11 @@ spec:
                       format: int32
                       minimum: 1
                       type: integer
+                    nodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
                     port:
                       format: int32
                       maximum: 65535
@@ -238,10 +260,20 @@ spec:
                       format: int32
                       minimum: 1
                       type: integer
+                    sessionAffinity:
+                      enum:
+                        - None
+                        - ClientIP
+                      type: string
                     sessionMax:
                       format: int32
                       maximum: 65535
                       minimum: 1
+                      type: integer
+                    tlsNodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
                       type: integer
                     tlsPort:
                       format: int32
@@ -313,6 +345,7 @@ spec:
                     enabled:
                       type: boolean
                     expose:
+                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -328,6 +361,11 @@ spec:
                       type: integer
                     messageSigning:
                       type: boolean
+                    nodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
                     port:
                       format: int32
                       maximum: 65535
@@ -339,6 +377,11 @@ spec:
                       type: integer
                     region:
                       minLength: 1
+                      type: string
+                    sessionAffinity:
+                      enum:
+                        - None
+                        - ClientIP
                       type: string
                     signingCertTtlHours:
                       format: int32
@@ -392,6 +435,7 @@ spec:
                     enableReflection:
                       type: boolean
                     expose:
+                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -420,11 +464,21 @@ spec:
                     maxSeekReplay:
                       format: int32
                       type: integer
+                    nodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
                     port:
                       format: int32
                       maximum: 65535
                       minimum: 1
                       type: integer
+                    sessionAffinity:
+                      enum:
+                        - None
+                        - ClientIP
+                      type: string
                     streamCloseSeconds:
                       format: int32
                       type: integer
@@ -532,6 +586,7 @@ spec:
                     enabled:
                       type: boolean
                     expose:
+                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -546,8 +601,25 @@ spec:
                       maximum: 1073741824
                       minimum: 1
                       type: integer
+                    nodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
+                    peers:
+                      type: string
                     port:
                       type: string
+                    sessionAffinity:
+                      enum:
+                        - None
+                        - ClientIP
+                      type: string
+                    tlsNodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
                     tlsPort:
                       type: string
                   type: object
@@ -563,6 +635,22 @@ spec:
                   type: string
                 licenseSecretKey:
                   type: string
+                podAntiAffinity:
+                  properties:
+                    enabled:
+                      type: boolean
+                    required:
+                      type: boolean
+                  type: object
+                podDisruptionBudget:
+                  properties:
+                    enabled:
+                      type: boolean
+                    minAvailable:
+                      format: int32
+                      minimum: 1
+                      type: integer
+                  type: object
                 statefulsetConfigData:
                   type: string
                 standalone:
@@ -651,11 +739,17 @@ spec:
                     enabled:
                       type: boolean
                     expose:
+                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
                         - LoadBalancer
                       type: string
+                    nodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
                     port:
                       format: int32
                       maximum: 65535
@@ -673,15 +767,30 @@ spec:
                       format: int32
                       minimum: 1
                       type: integer
+                    sessionAffinity:
+                      enum:
+                        - None
+                        - ClientIP
+                      type: string
                     subBuffSize:
                       format: int32
                       maximum: 10000
                       minimum: 1
                       type: integer
+                    tlsNodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
+                      type: integer
                     tlsPort:
                       format: int32
                       maximum: 65535
                       minimum: 1
+                      type: integer
+                    wsNodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
                       type: integer
                     wsPort:
                       format: int32
@@ -843,6 +952,7 @@ spec:
                     enabled:
                       type: boolean
                     expose:
+                      default: ClusterIP
                       enum:
                         - ClusterIP
                         - NodePort
@@ -859,6 +969,11 @@ spec:
                     maxConnections:
                       format: int32
                       minimum: 0
+                      type: integer
+                    nodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
                       type: integer
                     port:
                       format: int32
@@ -877,10 +992,20 @@ spec:
                       format: int32
                       minimum: 1
                       type: integer
+                    sessionAffinity:
+                      enum:
+                        - None
+                        - ClientIP
+                      type: string
                     subBuffSize:
                       format: int32
                       maximum: 10000
                       minimum: 1
+                      type: integer
+                    tlsNodePort:
+                      format: int32
+                      maximum: 32767
+                      minimum: 30000
                       type: integer
                     tlsPort:
                       format: int32
@@ -980,6 +1105,10 @@ spec:
                           type: number
                       type: object
                   type: object
+                terminationGracePeriodSeconds:
+                  format: int32
+                  minimum: 1
+                  type: integer
                 tls:
                   properties:
                     ca:

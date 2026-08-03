@@ -1,2 +1,6 @@
 # Default ignored files
 /workspace.xml
+# Shelved changes are snapshots of work that was never committed. A shelf under a
+# tracked .idea keeps answering greps with an older generation of the charts long
+# after it stops being true — documentation was once written from one.
+/shelf/

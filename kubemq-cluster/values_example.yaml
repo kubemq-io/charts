@@ -128,9 +128,11 @@ kafka:
 # ============================================================================
 
 # ---- Recipe: store engine (persistence) ------------------------------------
-# KubeMQ Store Configuration - https://docs.kubemq.io/configuration/cluster/set-store-settings
+# KubeMQ Store Configuration - https://docs.kubemq.io/docs/configure/reference/storage-queues
 # store:
-  # engine selects the persistence engine: "legacy" (default) or "next".
+  # engine selects the persistence engine: "legacy" or "next". Leave it unset and the
+  # SERVER picks: it probes the store directory and resolves an existing store to the
+  # engine that wrote it, or a clean store to "next". Set it only to pin a cluster.
   # next-ness is immutable (born-one-mode). engine=next requires spec.volume.size.
   #
   # Clustered next (standalone: false, replicas > 1) runs the Dragonboat raft

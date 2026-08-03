@@ -318,6 +318,9 @@ spec:
                     type:
                       type: string
                   type: object
+                  x-kubernetes-validations:
+                    - message: "authentication: pick one mode - either oidc, or the JWT fields (key/signatureType) - not both"
+                      rule: "!has(self.oidc) || (!has(self.key) && !has(self.signatureType))"
                 authorization:
                   properties:
                     autoReload:

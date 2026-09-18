@@ -1,3 +1,10 @@
+> **Old-name artifact line.** These charts install the old-name KubeMQ artifact line (images `kubemq`, `kubemq-operator`; API group `core.k8s.kubemq.io`). That line now receives security and critical fixes only. New installations use the next line: https://github.com/kubemq-io/charts-next
+>
+> ```
+> helm repo add kubemq-next https://kubemq-io.github.io/charts-next
+> helm install kubemq-next kubemq-next/kubemq-next -n kubemq --create-namespace --set key=<license-key>
+> ```
+
 # KubeMQ Charts
 KubeMQ is a Cloud Native, enterprise grade message queue broker for distributed services architecture.
 
